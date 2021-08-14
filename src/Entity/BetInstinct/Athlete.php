@@ -60,10 +60,16 @@ class Athlete
      */
     private $affiches_challenger;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Tournoi::class, mappedBy="tenant_titre")
+     */
+    private $titres;
+
     public function __construct()
     {
         $this->affiches_favori = new ArrayCollection();
         $this->affiches_challenger = new ArrayCollection();
+        $this->titres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +203,36 @@ class Athlete
             // set the owning side to null (unless already changed)
             if ($affichesChallenger->getChallenger() === $this) {
                 $affichesChallenger->setChallenger(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tournoi[]
+     */
+    public function getTitres(): Collection
+    {
+        return $this->titres;
+    }
+
+    public function addTitre(Tournoi $titre): self
+    {
+        if (!$this->titres->contains($titre)) {
+            $this->titres[] = $titre;
+            $titre->setTenantTitre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTitre(Tournoi $titre): self
+    {
+        if ($this->titres->removeElement($titre)) {
+            // set the owning side to null (unless already changed)
+            if ($titre->getTenantTitre() === $this) {
+                $titre->setTenantTitre(null);
             }
         }
 

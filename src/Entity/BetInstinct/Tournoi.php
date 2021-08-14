@@ -61,6 +61,11 @@ class Tournoi
      */
     private $affiches;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Athlete::class, inversedBy="titres")
+     */
+    private $tenant_titre;
+
     public function __construct()
     {
         $this->affiches = new ArrayCollection();
@@ -181,6 +186,18 @@ class Tournoi
                 $affich->setTournoi(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTenantTitre(): ?Athlete
+    {
+        return $this->tenant_titre;
+    }
+
+    public function setTenantTitre(?Athlete $tenant_titre): self
+    {
+        $this->tenant_titre = $tenant_titre;
 
         return $this;
     }
