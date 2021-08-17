@@ -1,0 +1,12 @@
+
+{{ include('head.html.twig') }}
+
+{% block body %}
+    <h1>Create new Pays</h1>
+
+    {{ include('bet_instinct/pays/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_pays_index') }}">Retour</a>
+
+    {{ include('end.html.twig') }}
+{% endblock %}

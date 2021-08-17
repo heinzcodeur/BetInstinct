@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Surface{% endblock %}
+
+{% block body %}
+    <h1>Edit Surface</h1>
+
+    {{ include('bet_instinct_surface/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_surface_index') }}">back to list</a>
+
+    {{ include('bet_instinct_surface/_delete_form.html.twig') }}
+{% endblock %}

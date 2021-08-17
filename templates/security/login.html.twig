@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Log in!{% endblock %}
 
 {% block body %}
+
+    {{ include ('head.html.twig') }}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,7 +14,7 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
@@ -34,9 +34,13 @@
             </label>
         </div>
     #}
+<div class="col text-center mt-2">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    <button class="btn btn-lg btn-primary justify-content-center" type="submit">
+ok    </button>
+</div>
 </form>
+    <h5 class="text-center"><a href="{{ path('app_register') }}" style="text-decoration: none">Inscription</a></h5>
+
+    {{ include('end.html.twig') }}
 {% endblock %}

@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Create new Affiche</h1>
+
+    {{ include('bet_instinct/affiche/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_affiche_index') }}" class="btn btn-primary">retour</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

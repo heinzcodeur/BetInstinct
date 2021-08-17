@@ -1,0 +1,40 @@
+{{include('head.html.twig')}}
+{% block body %}
+    <h1>Athlete index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Birthdate</th>
+                <th>Taille</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for athlete in athletes %}
+            <tr>
+                <td>{{ athlete.id }}</td>
+                <td>{{ athlete.nom }}</td>
+                <td>{{ athlete.prenom }}</td>
+                <td>{{ athlete.birthdate ? athlete.birthdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ athlete.taille }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_athlete_show', {'id': athlete.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_athlete_edit', {'id': athlete.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_athlete_new') }}" class="btn btn-primary">nouveau</a>
+    {{include('end.html.twig')}}
+
+{% endblock %}

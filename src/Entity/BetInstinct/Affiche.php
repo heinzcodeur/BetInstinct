@@ -45,6 +45,16 @@ class Affiche
      */
     private $score;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote_favorite;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote_outsider;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +116,30 @@ class Affiche
     public function setScore(string $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getCoteFavorite(): ?float
+    {
+        return $this->cote_favorite;
+    }
+
+    public function setCoteFavorite(?float $cote_favorite): self
+    {
+        $this->cote_favorite = $cote_favorite;
+
+        return $this;
+    }
+
+    public function getCoteOutsider(): ?float
+    {
+        return $this->cote_outsider;
+    }
+
+    public function setCoteOutsider(?float $cote_outsider): self
+    {
+        $this->cote_outsider = $cote_outsider;
 
         return $this;
     }

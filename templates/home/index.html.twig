@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +6,36 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            {{ include('head.html.twig') }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/BetInstinct/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/BetInstinct/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+<h2 class="text-center">affiches</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <th>tournoi</th>
+        <th>favori</th>
+        <th>cote1</th>
+        <th>outsider</th>
+        <th>cote2</th>
+        <th>date</th>
+        <th>score</th>
+        </thead>
+        <tbody>
+        {% for m in matchs %}
+            <tr>
+                <td>{{ m.tournoi }}</td>
+                <td>{{ m.favori }}</td>
+                <td>{{ m.coteFavorite }}</td>
+                <td>{{ m.coteOutsider }}</td>
+                <td>{{ m.challenger }}</td>
+                <td>{{ m.schedule|date('d-m-Y')}}</td>
+                <td>{{ m.score ? m.score:'???' }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ include('end.html.twig') }}
+
 {% endblock %}

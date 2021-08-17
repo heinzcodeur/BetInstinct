@@ -1,0 +1,41 @@
+{{ include('head.html.twig') }}
+
+{% block body %}
+    <h1>Tournoi</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>tournoi</th>
+                <td>{{ tournoi.city }}</td>
+            </tr>
+            <tr>
+                <th>Debut</th>
+                <td>{{ tournoi.debut ? tournoi.debut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin</th>
+                <td>{{ tournoi.fin ? tournoi.fin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ tournoi.dateCreation ? tournoi.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Siteweb</th>
+                <td>{{ tournoi.siteweb }}</td>
+            </tr>
+            <tr>
+                <th>Dotation</th>
+                <td>{{ tournoi.dotation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
+
+    <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-success">edit</a>
+
+    {{ include('end.html.twig') }}
+
+{% endblock %}

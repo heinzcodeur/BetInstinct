@@ -1,0 +1,42 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Affiche index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Schedule</th>
+                <th>Score</th>
+                <th>Cote_favorite</th>
+                <th>Cote_outsider</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for affiche in affiches %}
+            <tr>
+                <td>{{ affiche.id }}</td>
+                <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ affiche.score }}</td>
+                <td>{{ affiche.coteFavorite }}</td>
+                <td>{{ affiche.coteOutsider }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_affiche_show', {'id': affiche.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_affiche_new') }}">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

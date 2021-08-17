@@ -1,0 +1,10 @@
+{{include ('head.html.twig')}}
+
+{% block body %}
+    <h1>Edit City</h1>
+
+    {{ include('bet_instinct/city/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_city_index') }}" class="btn btn-primary">retour</a>
+
+{% endblock %}

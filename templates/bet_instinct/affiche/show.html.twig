@@ -1,0 +1,37 @@
+{{include('head.html.twig')}}
+{% block body %}
+    <h1>Affiche</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ affiche.id }}</td>
+            </tr>
+            <tr>
+                <th>Schedule</th>
+                <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ affiche.score }}</td>
+            </tr>
+            <tr>
+                <th>Cote_favorite</th>
+                <td>{{ affiche.coteFavorite }}</td>
+            </tr>
+            <tr>
+                <th>Cote_outsider</th>
+                <td>{{ affiche.coteOutsider }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_affiche_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}">edit</a>
+
+    {{ include('bet_instinct_affiche/_delete_form.html.twig') }}
+
+    {{ include('end.html.twig') }}
+{% endblock %}

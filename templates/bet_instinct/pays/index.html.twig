@@ -1,0 +1,37 @@
+{{ include('head.html.twig') }}
+
+{% block body %}
+    <h1 class="text-center">Pays index</h1>
+
+    <a href="{{ path('bet_instinct_pays_new') }}" class="btn btn-primary">nouveau pays</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Shortcut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pay in pays %}
+            <tr>
+                <td>{{ pay.id }}</td>
+                <td>{{ pay.name }}</td>
+                <td>{{ pay.shortcut }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_pays_show', {'id': pay.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_pays_edit', {'id': pay.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ include('end.html.twig') }}
+
+{% endblock %}

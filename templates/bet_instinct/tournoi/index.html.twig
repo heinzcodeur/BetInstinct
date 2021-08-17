@@ -1,0 +1,44 @@
+{{include('head.html.twig')}}
+{% block body %}
+    <h2 class="text-center">Index des Tournois</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>nom</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Date_creation</th>
+                <th>Siteweb</th>
+                <th>Dotation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tournoi in tournois %}
+            <tr>
+                <td><b>{{ tournoi.city.name }}</b></td>
+                <td>{{ tournoi.debut ? tournoi.debut|date('d-m-Y') : '' }}</td>
+                <td>{{ tournoi.fin ? tournoi.fin|date('d-m-Y') : '' }}</td>
+                <td>{{ tournoi.dateCreation ? tournoi.dateCreation|date('Y') : '' }}</td>
+                <td><a href=" {{ tournoi.siteweb }}">lien</a></td>
+                <td><b>{{ tournoi.dotation }} $</b></td>
+                <td>
+                    <a href="{{ path('bet_instinct_tournoi_show', {'id': tournoi.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-primary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col text-center mb-2">
+
+    <a href="{{ path('bet_instinct_tournoi_new') }}" class="btn btn-outline-primary justify-content-center">nouveau tournoi</a>
+    </div>
+    {{ include('end.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>new City
+    <a href="{{ path('bet_instinct_city_index') }}" class="btn btn-primary">retour</a>
+    </h1>
+    {{ include('bet_instinct/city/_form.html.twig') }}
+
+
+    {{ include('end.html.twig')}}
+{% endblock %}

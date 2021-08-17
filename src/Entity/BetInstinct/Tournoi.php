@@ -71,6 +71,11 @@ class Tournoi
         $this->affiches = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+return $this->city->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
