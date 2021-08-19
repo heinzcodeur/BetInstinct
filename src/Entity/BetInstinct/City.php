@@ -36,6 +36,11 @@ class City
      */
     private $tournois;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="cities2")
+     */
+    private $pays;
+
     public function __construct()
     {
         $this->tournois = new ArrayCollection();
@@ -101,6 +106,18 @@ return $this->name;
                 $tournoi->setCity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
 
         return $this;
     }

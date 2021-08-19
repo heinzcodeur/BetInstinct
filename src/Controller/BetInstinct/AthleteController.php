@@ -53,6 +53,7 @@ class AthleteController extends AbstractController
      */
     public function show(Athlete $athlete): Response
     {
+        dump($athlete);
         return $this->render('bet_instinct/athlete/show.html.twig', [
             'athlete' => $athlete,
         ]);

@@ -4,11 +4,15 @@ doctrine:
         connections:
             betInstinct:
                 url: '%env(resolve:DATABASE_URL)%'
+                mapping_types:
+                  enum: string
                 driver: 'pdo_mysql'
                 server_version: '5.7'
                 charset: utf8mb4
             betResultat:
                 url: '%env(resolve:DATABASE_RESULTAT_URL)%'
+                mapping_types:
+                  enum: string
                 driver: 'pdo_mysql'
                 server_version: '5.7'
                 charset: utf8mb4

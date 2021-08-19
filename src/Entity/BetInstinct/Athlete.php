@@ -65,6 +65,11 @@ class Athlete
      */
     private $titres;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Classement::class, inversedBy="joueurs")
+     */
+    private $ranking;
+
     public function __construct()
     {
         $this->affiches_favori = new ArrayCollection();
@@ -240,6 +245,18 @@ class Athlete
                 $titre->setTenantTitre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRanking(): ?Classement
+    {
+        return $this->ranking;
+    }
+
+    public function setRanking(?Classement $ranking): self
+    {
+        $this->ranking = $ranking;
 
         return $this;
     }

@@ -2,15 +2,15 @@
 
 namespace App\Entity\BetInstinct;
 
-use App\Repository\BetInstinct\FormuleRepository;
+use App\Repository\BetInstinct\TypePariRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=FormuleRepository::class)
+ * @ORM\Entity(repositoryClass=TypePariRepository::class)
  */
-class Formule
+class TypePari
 {
     /**
      * @ORM\Id
@@ -25,7 +25,17 @@ class Formule
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="formule")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $cotes = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="type")
      */
     private $paris;
 
@@ -51,6 +61,30 @@ class Formule
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCotes(): ?array
+    {
+        return $this->cotes;
+    }
+
+    public function setCotes(array $cotes): self
+    {
+        $this->cotes = $cotes;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Pari[]
      */
@@ -63,7 +97,7 @@ class Formule
     {
         if (!$this->paris->contains($pari)) {
             $this->paris[] = $pari;
-            $pari->setFormule($this);
+            $pari->setType($this);
         }
 
         return $this;
@@ -73,8 +107,8 @@ class Formule
     {
         if ($this->paris->removeElement($pari)) {
             // set the owning side to null (unless already changed)
-            if ($pari->getFormule() === $this) {
-                $pari->setFormule(null);
+            if ($pari->getType() === $this) {
+                $pari->setType(null);
             }
         }
 

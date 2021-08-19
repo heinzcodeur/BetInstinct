@@ -1,0 +1,12 @@
+{{include('head.html.twig')}}
+{% block title %}New Association{% endblock %}
+
+{% block body %}
+    <h1>Create new Association</h1>
+
+    {{ include('bet_instinct/association/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_association_index') }}" class="btn btn-primary">back to list</a>
+    {{include('end.html.twig')}}
+
+{% endblock %}

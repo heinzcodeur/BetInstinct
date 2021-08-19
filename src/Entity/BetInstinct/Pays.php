@@ -45,6 +45,12 @@ class Pays
      */
     private $athletes_origine;
 
+    /**
+     * @ORM\OneToOne(targetEntity=City::class, cascade={"persist", "remove"})
+     */
+    private $capitale;
+
+
     public function __construct()
     {
         $this->cities = new ArrayCollection();
@@ -175,4 +181,18 @@ class Pays
 
         return $this;
     }
+
+    public function getCapitale(): ?City
+    {
+        return $this->capitale;
+    }
+
+    public function setCapitale(?City $capitale): self
+    {
+        $this->capitale = $capitale;
+
+        return $this;
+    }
+
+
 }

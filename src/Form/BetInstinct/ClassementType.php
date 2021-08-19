@@ -2,24 +2,21 @@
 
 namespace App\Form\BetInstinct;
 
-use App\Entity\BetInstinct\Athlete;
+use App\Entity\BetInstinct\Association;
+use App\Entity\BetInstinct\Classement;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AthleteType extends AbstractType
+class ClassementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('birthdate', DateType::class,                ['widget' => 'single_text']
-)
-            ->add('taille')
-            ->add('pays')
-            ->add('origine')
+            ->add('association',EntityType::class,[
+                'class'=>Association::class
+            ])
             ->add('ranking')
         ;
     }
@@ -27,7 +24,7 @@ class AthleteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Athlete::class,
+            'data_class' => Classement::class,
         ]);
     }
 }

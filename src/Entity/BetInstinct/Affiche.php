@@ -3,6 +3,8 @@
 namespace App\Entity\BetInstinct;
 
 use App\Repository\BetInstinct\AfficheRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +56,16 @@ class Affiche
      * @ORM\Column(type="float", nullable=true)
      */
     private $cote_outsider;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="affiche")
+     */
+    private $paris;
+
+    public function __construct()
+    {
+        $this->paris = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +152,36 @@ class Affiche
     public function setCoteOutsider(?float $cote_outsider): self
     {
         $this->cote_outsider = $cote_outsider;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pari[]
+     */
+    public function getParis(): Collection
+    {
+        return $this->paris;
+    }
+
+    public function addPari(Pari $pari): self
+    {
+        if (!$this->paris->contains($pari)) {
+            $this->paris[] = $pari;
+            $pari->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removePari(Pari $pari): self
+    {
+        if ($this->paris->removeElement($pari)) {
+            // set the owning side to null (unless already changed)
+            if ($pari->getAffiche() === $this) {
+                $pari->setAffiche(null);
+            }
+        }
 
         return $this;
     }
