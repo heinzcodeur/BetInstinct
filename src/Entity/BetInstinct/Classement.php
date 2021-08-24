@@ -24,10 +24,6 @@ class Classement
      */
     private $ranking;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Athlete::class, mappedBy="ranking")
-     */
-    private $joueurs;
 
     /**
      * @ORM\ManyToOne(targetEntity=Association::class, inversedBy="classements")
@@ -35,14 +31,15 @@ class Classement
      */
     private $association;
 
-    public function __construct()
-    {
-        $this->joueurs = new ArrayCollection();
-    }
+    /**
+     * @ORM\OneToOne(targetEntity=Athlete::class, mappedBy="ranking", cascade={"persist", "remove"})
+     */
+    private $joueur;
+
 
     public function __toString()
     {
-        return (string)$this->ranking.' '.$this->association->getName();
+        return (string)$this->ranking;
     }
 
     public function getId(): ?int
@@ -62,36 +59,7 @@ class Classement
         return $this;
     }
 
-    /**
-     * @return Collection|Athlete[]
-     */
-    public function getJoueurs(): Collection
-    {
-        return $this->joueurs;
-    }
-
-    public function addJoueur(Athlete $joueur): self
-    {
-        if (!$this->joueurs->contains($joueur)) {
-            $this->joueurs[] = $joueur;
-            $joueur->setRanking($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJoueur(Athlete $joueur): self
-    {
-        if ($this->joueurs->removeElement($joueur)) {
-            // set the owning side to null (unless already changed)
-            if ($joueur->getRanking() === $this) {
-                $joueur->setRanking(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getAssociation(): ?Association
     {
         return $this->association;
@@ -103,4 +71,27 @@ class Classement
 
         return $this;
     }
+
+    public function getJoueur(): ?Athlete
+    {
+        return $this->joueur;
+    }
+
+    public function setJoueur(?Athlete $joueur): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($joueur === null && $this->joueur !== null) {
+            $this->joueur->setRanking(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($joueur !== null && $joueur->getRanking() !== $this) {
+            $joueur->setRanking($this);
+        }
+
+        $this->joueur = $joueur;
+
+        return $this;
+    }
+
 }

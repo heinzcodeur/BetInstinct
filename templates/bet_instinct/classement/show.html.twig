@@ -11,20 +11,23 @@
             </tr>
             <tr>
                 <th>Association</th>
-                <td>{{ classement.association }}</td>
+                <td>{{ classement.association.name }}</td>
             </tr>
             <tr>
                 <th>Ranking</th>
                 <td>{{ classement.ranking }}</td>
             </tr>
+            <tr>
+                <th>joueur</th>
+                <td>{{ classement.joueur }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('bet_instinct_classement_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_classement_index') }}" class="btn btn-primary">retour</a>
 
-    <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}">edit</a>
+    <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">modifier</a>
 
-    {{ include('bet_instinct/classement/_delete_form.html.twig') }}
 
     {{include('end.html.twig')}}
 

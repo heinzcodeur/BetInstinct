@@ -1,0 +1,12 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Create new Formule</h1>
+
+    {{ include('bet_instinct/formule/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_formule_index') }}" class="btn btn-primary">back to list</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

@@ -66,9 +66,10 @@ class Athlete
     private $titres;
 
     /**
-     * @ORM\OneToOne(targetEntity=Classement::class, inversedBy="joueurs")
+     * @ORM\OneToOne(targetEntity=Classement::class, inversedBy="joueur", cascade={"persist", "remove"})
      */
     private $ranking;
+
 
     public function __construct()
     {
@@ -260,4 +261,5 @@ class Athlete
 
         return $this;
     }
+
 }

@@ -39,7 +39,7 @@ class AthleteController extends AbstractController
             $entityManager->persist($athlete);
             $entityManager->flush();
 
-            return $this->redirectToRoute('bet_instinct_athlete_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bet_instinct_athlete_show', ['id'=>$athlete->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('bet_instinct/athlete/new.html.twig', [

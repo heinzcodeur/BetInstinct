@@ -2,6 +2,7 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Athlete;
 use App\Entity\BetInstinct\Classement;
 use App\Form\BetInstinct\ClassementType;
 use App\Repository\BetInstinct\ClassementRepository;
@@ -35,6 +36,7 @@ class ClassementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($classement);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($classement);
             $entityManager->flush();

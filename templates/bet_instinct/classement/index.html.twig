@@ -20,8 +20,8 @@
                 <td>{{ classement.association.name }}</td>
                 <td>{{ classement.ranking }}</td>
                 <td>
-                    <a href="{{ path('bet_instinct_classement_show', {'id': classement.id}) }}">show</a>
-                    <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}">edit</a>
+                    <a href="{{ path('bet_instinct_classement_show', {'id': classement.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">edit</a>
                 </td>
             </tr>
         {% else %}
