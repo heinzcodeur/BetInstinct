@@ -1,0 +1,14 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Edit nombre2sets</h1>
+
+    {{ include('bet_instinct/nombre2sets/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_nombre2sets_index') }}">back to list</a>
+
+    {{include('end.html.twig')}}
+
+
+{% endblock %}

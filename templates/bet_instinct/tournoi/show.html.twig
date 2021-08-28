@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <th>Dotation</th>
-                <td>{{ tournoi.dotation }}</td>
+                <td>{{ tournoi.dotation|number_format(0,' ',' ',' ') }} $</td>
             </tr>
         </tbody>
     </table>

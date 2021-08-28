@@ -1,0 +1,29 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>{{ les2joueurs_win1set.affiche }} gagnent 1 set</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ les2joueurs_win1set.id }}</td>
+            </tr>
+            <tr>
+                <th>Oui</th>
+                <td>{{ les2joueurs_win1set.oui ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Non</th>
+                <td>{{ les2joueurs_win1set.non ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_les2joueurs_win1set_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_les2joueurs_win1set_edit', {'id': les2joueurs_win1set.id}) }}">edit</a>
+
+
+    {{ include('end.html.twig') }}
+{% endblock %}

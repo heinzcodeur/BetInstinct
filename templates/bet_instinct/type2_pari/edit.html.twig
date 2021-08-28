@@ -1,0 +1,14 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Edit Type2Pari</h1>
+
+    {{ include('bet_instinct_type2_pari/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_type2_pari_index') }}">back to list</a>
+
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

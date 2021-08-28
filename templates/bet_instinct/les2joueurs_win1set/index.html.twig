@@ -1,0 +1,39 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Les2joueursWin1set index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Oui</th>
+                <th>Non</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for les2joueurs_win1set in les2joueurs_win1sets %}
+            <tr>
+                <td>{{ les2joueurs_win1set.id }}</td>
+                <td>{{ les2joueurs_win1set.oui ? 'Yes' : 'No' }}</td>
+                <td>{{ les2joueurs_win1set.non ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_les2joueurs_win1set_show', {'id': les2joueurs_win1set.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_les2joueurs_win1set_edit', {'id': les2joueurs_win1set.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_les2joueurs_win1set_new') }}" class="btn btn-primary">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

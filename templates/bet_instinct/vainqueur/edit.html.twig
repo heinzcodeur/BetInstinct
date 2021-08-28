@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Vainqueur{% endblock %}
+
+{% block body %}
+    <h1>Edit Vainqueur</h1>
+
+    {{ include('bet_instinct_vainqueur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_vainqueur_index') }}">back to list</a>
+
+    {{ include('bet_instinct_vainqueur/_delete_form.html.twig') }}
+{% endblock %}

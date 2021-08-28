@@ -26,12 +26,6 @@ class Pari
     private $affiche;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="paris")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $formule;
-
-    /**
      * @ORM\ManyToOne(targetEntity=TypePari::class, inversedBy="paris")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -42,9 +36,15 @@ class Pari
      */
     private $pronostics;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Choix::class, mappedBy="pari")
+     */
+    private $choix;
+
     public function __construct()
     {
         $this->pronostics = new ArrayCollection();
+        $this->choix = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,18 +60,6 @@ class Pari
     public function setAffiche(?Affiche $affiche): self
     {
         $this->affiche = $affiche;
-
-        return $this;
-    }
-
-    public function getFormule(): ?Formule
-    {
-        return $this->formule;
-    }
-
-    public function setFormule(?Formule $formule): self
-    {
-        $this->formule = $formule;
 
         return $this;
     }
@@ -112,6 +100,36 @@ class Pari
             // set the owning side to null (unless already changed)
             if ($pronostic->getPari() === $this) {
                 $pronostic->setPari(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Choix[]
+     */
+    public function getChoix(): Collection
+    {
+        return $this->choix;
+    }
+
+    public function addChoix(Choix $choix): self
+    {
+        if (!$this->choix->contains($choix)) {
+            $this->choix[] = $choix;
+            $choix->setPari($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChoix(Choix $choix): self
+    {
+        if ($this->choix->removeElement($choix)) {
+            // set the owning side to null (unless already changed)
+            if ($choix->getPari() === $this) {
+                $choix->setPari(null);
             }
         }
 

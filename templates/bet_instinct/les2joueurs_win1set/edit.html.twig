@@ -1,0 +1,12 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Edit Les2joueursWin1set</h1>
+
+    {{ include('bet_instinct/les2joueurs_win1set/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_les2joueurs_win1set_index') }}" class="btn btn-secondary">back to list</a>
+
+    {{ include('end.html.twig') }}
+
+{% endblock %}

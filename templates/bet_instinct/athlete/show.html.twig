@@ -7,19 +7,19 @@
         <tbody>
             <tr>
                 <th>Nom</th>
-                <td>{{ athlete.nom }}</td>
+                <td class="font-weight-bold">{{ athlete.nom|upper }}</td>
             </tr>
             <tr>
                 <th>Prenom</th>
-                <td>{{ athlete.prenom }}</td>
+                <td>{{ athlete.prenom|capitalize }}</td>
             </tr>
             <tr>
                 <th>Birthdate</th>
-                <td>{{ athlete.birthdate ? athlete.birthdate|date('Y-m-d') : '' }}</td>
+                <td>{{ athlete.birthdate ? athlete.birthdate|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Taille</th>
-                <td>{{ athlete.taille }}</td>
+                <td>{{ athlete.taille }} m</td>
             </tr>
             <tr>
                 <th>ranking</th>

@@ -2,11 +2,11 @@
 {{ include('head.html.twig') }}
 
 {% block body %}
-    <h1>Create new Pays</h1>
+    <h2 class="text-center">nouveau pays</h2>
 
     {{ include('bet_instinct/pays/_form.html.twig') }}
 
-    <a href="{{ path('bet_instinct_pays_index') }}">Retour</a>
+    <a href="{{ path('bet_instinct_pays_index') }}" class="btn btn-primary">Retour</a>
 
     {{ include('end.html.twig') }}
 {% endblock %}

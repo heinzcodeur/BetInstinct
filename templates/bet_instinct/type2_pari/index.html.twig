@@ -1,0 +1,42 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Type2Pari index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Choix2</th>
+                <th>Choix3</th>
+                <th>Choix4</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type2_pari in type2_paris %}
+            <tr>
+                <td>{{ type2_pari.id }}</td>
+                <td>{{ type2_pari.name }}</td>
+                <td>{{ type2_pari.choix2 }}</td>
+                <td>{{ type2_pari.choix3 }}</td>
+                <td>{{ type2_pari.choix4 }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_type2_pari_show', {'id': type2_pari.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_type2_pari_edit', {'id': type2_pari.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_type2_pari_new') }}">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

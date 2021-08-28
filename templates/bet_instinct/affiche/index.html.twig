@@ -23,8 +23,7 @@
                 <td>{{ affiche.coteFavorite }}</td>
                 <td>{{ affiche.coteOutsider }}</td>
                 <td>
-                    <a href="{{ path('bet_instinct_affiche_show', {'id': affiche.id}) }}">show</a>
-                    <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}">edit</a>
+                    <a href="{{ path('bet_instinct_affiche_show', {'id': affiche.id}) }}" class="btn btn-info">voir</a>
                 </td>
             </tr>
         {% else %}
@@ -35,7 +34,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('bet_instinct_affiche_new') }}">Create new</a>
+    <a href="{{ path('bet_instinct_affiche_new') }}" class="btn btn-primary mb-2">nouveau</a>
 
     {{include('end.html.twig')}}
 

@@ -3,20 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Formule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Formule.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/TypePari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/TypePari.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/formule/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/formule/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/pays/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/pays/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/pays/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/pays/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +228,7 @@
       <workItem from="1629118326097" duration="1093000" />
       <workItem from="1629129011504" duration="14700000" />
       <workItem from="1629323676488" duration="6262000" />
-      <workItem from="1629657827111" duration="8635000" />
+      <workItem from="1629657827111" duration="37813000" />
     </task>
     <servers />
   </component>
@@ -233,6 +236,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1630079615019">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1280.760@0.0.1280.760" timestamp="1630079615019" />
     <state x="394" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1628800089840">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
@@ -249,10 +256,14 @@
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1280.760@0.0.1280.760" timestamp="1629195603067" />
-    <state x="336" y="112" width="607" height="536" key="find.popup" timestamp="1629130219550">
+    <state x="232" y="114" key="Vcs.Push.Dialog.v2" timestamp="1629801160762">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="336" y="112" width="607" height="536" key="find.popup/0.0.1280.760@0.0.1280.760" timestamp="1629130219550" />
+    <state x="232" y="114" key="Vcs.Push.Dialog.v2/0.0.1280.760@0.0.1280.760" timestamp="1629801160762" />
+    <state x="336" y="112" width="607" height="536" key="find.popup" timestamp="1629917793118">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="336" y="112" width="607" height="536" key="find.popup/0.0.1280.760@0.0.1280.760" timestamp="1629917793118" />
     <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1629196707312">
       <screen x="0" y="0" width="1280" height="760" />
     </state>

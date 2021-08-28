@@ -39,7 +39,7 @@ class Classement
 
     public function __toString()
     {
-        return (string)$this->ranking;
+        return (string)$this->ranking.$this->association;
     }
 
     public function getId(): ?int

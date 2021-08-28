@@ -22,10 +22,10 @@
                 <td>{{ tournoi.fin ? tournoi.fin|date('d-m-Y') : '' }}</td>
                 <td>{{ tournoi.dateCreation ? tournoi.dateCreation|date('Y') : '' }}</td>
                 <td><a href=" {{ tournoi.siteweb }}">lien</a></td>
-                <td><b>{{ tournoi.dotation }} $</b></td>
+                <td><b>{{ tournoi.dotation|number_format(2,',' ,' ',',') }} $</b></td>
                 <td>
                     <a href="{{ path('bet_instinct_tournoi_show', {'id': tournoi.id}) }}" class="btn btn-info">show</a>
-                    <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-primary">edit</a>
+                    <!--<a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-primary">edit</a>-->
                 </td>
             </tr>
         {% else %}

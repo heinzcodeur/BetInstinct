@@ -19,12 +19,12 @@
         </thead>
         <tbody>
         {% for m in matchs %}
-            <tr>
+            <tr onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':m.id}) }}'">
                 <td>{{ m.tournoi }}</td>
-                <td>{{ m.favori }}</td>
-                <td>{{ m.coteFavorite }}</td>
-                <td>{{ m.coteOutsider }}</td>
-                <td>{{ m.challenger }}</td>
+                <td>{{ m.favori|upper }}</td>
+                <td class="bg-success">{{ m.coteFavorite }}</td>
+                <td class="bg-danger">{{ m.coteOutsider }}</td>
+                <td>{{ m.challenger|upper }}</td>
                 <td>{{ m.schedule|date('d-m-Y')}}</td>
                 <td>{{ m.score ? m.score:'???' }}</td>
             </tr>

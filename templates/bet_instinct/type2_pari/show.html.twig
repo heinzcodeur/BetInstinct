@@ -1,0 +1,39 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Type2Pari</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type2_pari.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ type2_pari.name }}</td>
+            </tr>
+            <tr>
+                <th>Choix2</th>
+                <td>{{ type2_pari.choix2 }}</td>
+            </tr>
+            <tr>
+                <th>Choix3</th>
+                <td>{{ type2_pari.choix3 }}</td>
+            </tr>
+            <tr>
+                <th>Choix4</th>
+                <td>{{ type2_pari.choix4 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_type2_pari_index') }}" class="btn btn-secondary">back to list</a>
+
+    <a href="{{ path('bet_instinct_type2_pari_edit', {'id': type2_pari.id}) }}" class="btn btn-primary">edit</a>
+
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

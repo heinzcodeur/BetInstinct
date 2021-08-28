@@ -1,0 +1,14 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Edit TypoPari</h1>
+
+    {{ include('bet_instinct/typo_pari/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_typo_pari_index') }}">retour</a>
+
+    {{include('end.html.twig')}}
+
+
+{% endblock %}

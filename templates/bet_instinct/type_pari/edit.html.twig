@@ -1,0 +1,16 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Edit TypePari</h1>
+
+    {{ include('bet_instinct/type_pari/_form.html.twig', {'button_label': 'modifier'}) }}
+
+    <a href="{{ path('bet_instinct_type_pari_index') }}" class="btn btn-primary">retour</a>
+
+    {{ include('bet_instinct/type_pari/_delete_form.html.twig') }}
+
+    </div>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

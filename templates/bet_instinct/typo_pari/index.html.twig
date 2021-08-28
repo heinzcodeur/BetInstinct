@@ -1,0 +1,44 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>TypoPari index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Score_2_0</th>
+                <th>Score_2_1</th>
+                <th>Score_0_2</th>
+                <th>Score_1_2</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typo_pari in typo_paris %}
+            <tr>
+                <td>{{ typo_pari.id }}</td>
+                <td>{{ typo_pari.nom }}</td>
+                <td>{{ typo_pari.score20 }}</td>
+                <td>{{ typo_pari.score21 }}</td>
+                <td>{{ typo_pari.score02 }}</td>
+                <td>{{ typo_pari.score12 }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_typo_pari_show', {'id': typo_pari.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_typo_pari_edit', {'id': typo_pari.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_typo_pari_new') }}" class="btn btn-secondary">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Create new Type2Pari</h1>
+
+    {{ include('bet_instinct/type2_pari/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_type2_pari_index') }}" class="btn btn-primary">retour</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

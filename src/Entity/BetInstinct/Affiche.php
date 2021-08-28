@@ -62,9 +62,38 @@ class Affiche
      */
     private $paris;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TypoPari::class, mappedBy="affiche")
+     */
+    private $typoParis;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vainqueur::class, mappedBy="affiche")
+     */
+    private $vainqueurs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=nombre2sets::class, mappedBy="affiche")
+     */
+    private $nombre2sets;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Les2joueursWin1set::class, mappedBy="affiche")
+     */
+    private $les2joueursWin1sets;
+
     public function __construct()
     {
         $this->paris = new ArrayCollection();
+        $this->typoParis = new ArrayCollection();
+        $this->vainqueurs = new ArrayCollection();
+        $this->nombre2sets = new ArrayCollection();
+        $this->les2joueursWin1sets = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->challenger.' '.$this->favori;
     }
 
     public function getId(): ?int
@@ -180,6 +209,126 @@ class Affiche
             // set the owning side to null (unless already changed)
             if ($pari->getAffiche() === $this) {
                 $pari->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TypoPari[]
+     */
+    public function getTypoParis(): Collection
+    {
+        return $this->typoParis;
+    }
+
+    public function addTypoPari(TypoPari $typoPari): self
+    {
+        if (!$this->typoParis->contains($typoPari)) {
+            $this->typoParis[] = $typoPari;
+            $typoPari->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTypoPari(TypoPari $typoPari): self
+    {
+        if ($this->typoParis->removeElement($typoPari)) {
+            // set the owning side to null (unless already changed)
+            if ($typoPari->getAffiche() === $this) {
+                $typoPari->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vainqueur[]
+     */
+    public function getVainqueurs(): Collection
+    {
+        return $this->vainqueurs;
+    }
+
+    public function addVainqueur(Vainqueur $vainqueur): self
+    {
+        if (!$this->vainqueurs->contains($vainqueur)) {
+            $this->vainqueurs[] = $vainqueur;
+            $vainqueur->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVainqueur(Vainqueur $vainqueur): self
+    {
+        if ($this->vainqueurs->removeElement($vainqueur)) {
+            // set the owning side to null (unless already changed)
+            if ($vainqueur->getAffiche() === $this) {
+                $vainqueur->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|nombre2sets[]
+     */
+    public function getNombre2sets(): Collection
+    {
+        return $this->nombre2sets;
+    }
+
+    public function addNombre2set(nombre2sets $nombre2set): self
+    {
+        if (!$this->nombre2sets->contains($nombre2set)) {
+            $this->nombre2sets[] = $nombre2set;
+            $nombre2set->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNombre2set(nombre2sets $nombre2set): self
+    {
+        if ($this->nombre2sets->removeElement($nombre2set)) {
+            // set the owning side to null (unless already changed)
+            if ($nombre2set->getAffiche() === $this) {
+                $nombre2set->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Les2joueursWin1set[]
+     */
+    public function getLes2joueursWin1sets(): Collection
+    {
+        return $this->les2joueursWin1sets;
+    }
+
+    public function addLes2joueursWin1set(Les2joueursWin1set $les2joueursWin1set): self
+    {
+        if (!$this->les2joueursWin1sets->contains($les2joueursWin1set)) {
+            $this->les2joueursWin1sets[] = $les2joueursWin1set;
+            $les2joueursWin1set->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLes2joueursWin1set(Les2joueursWin1set $les2joueursWin1set): self
+    {
+        if ($this->les2joueursWin1sets->removeElement($les2joueursWin1set)) {
+            // set the owning side to null (unless already changed)
+            if ($les2joueursWin1set->getAffiche() === $this) {
+                $les2joueursWin1set->setAffiche(null);
             }
         }
 

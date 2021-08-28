@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1 class="text-center">nouveau Pari</h1>
+
+    {{ include('bet_instinct/pari/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_pari_index') }}" class="btn btn-primary">retour</a>
+    </div>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

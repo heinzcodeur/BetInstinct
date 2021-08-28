@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Create new Vainqueur</h1>
+
+    {{ include('bet_instinct/vainqueur/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_vainqueur_index') }}" class="btn btn-secondary">back to list</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

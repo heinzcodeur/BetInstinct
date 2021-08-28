@@ -1,0 +1,41 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Vainqueur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Favori</th>
+                <th>Outsider</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vainqueur in vainqueurs %}
+            <tr>
+                <td>{{ vainqueur.id }}</td>
+                <td>{{ vainqueur.favori }}</td>
+                <td>{{ vainqueur.outsider }}</td>
+                <td>{{ vainqueur.name }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_vainqueur_show', {'id': vainqueur.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_vainqueur_edit', {'id': vainqueur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_vainqueur_new') }}">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

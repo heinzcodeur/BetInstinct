@@ -1,0 +1,43 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>TypoPari</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ typo_pari.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ typo_pari.nom }}</td>
+            </tr>
+            <tr>
+                <th>Score_2_0</th>
+                <td>{{ typo_pari.score20 }}</td>
+            </tr>
+            <tr>
+                <th>Score_2_1</th>
+                <td>{{ typo_pari.score21 }}</td>
+            </tr>
+            <tr>
+                <th>Score_0_2</th>
+                <td>{{ typo_pari.score02 }}</td>
+            </tr>
+            <tr>
+                <th>Score_1_2</th>
+                <td>{{ typo_pari.score12 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_typo_pari_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_typo_pari_edit', {'id': typo_pari.id}) }}">edit</a>
+
+    {{ include('bet_instinct/typo_pari/_delete_form.html.twig') }}
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

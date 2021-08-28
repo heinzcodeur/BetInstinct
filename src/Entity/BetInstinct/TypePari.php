@@ -30,18 +30,26 @@ class TypePari
     private $description;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $cotes = [];
-
-    /**
      * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="type")
      */
     private $paris;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Choix::class, mappedBy="name")
+     */
+    private $choixes;
+
+
+
     public function __construct()
     {
         $this->paris = new ArrayCollection();
+        $this->choixes = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+return $this->name;
     }
 
     public function getId(): ?int
@@ -73,17 +81,6 @@ class TypePari
         return $this;
     }
 
-    public function getCotes(): ?array
-    {
-        return $this->cotes;
-    }
-
-    public function setCotes(array $cotes): self
-    {
-        $this->cotes = $cotes;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Pari[]
@@ -114,4 +111,36 @@ class TypePari
 
         return $this;
     }
+
+    /**
+     * @return Collection|Choix[]
+     */
+    public function getChoixes(): Collection
+    {
+        return $this->choixes;
+    }
+
+    public function addChoix(Choix $choix): self
+    {
+        if (!$this->choixes->contains($choix)) {
+            $this->choixes[] = $choix;
+            $choix->setName($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChoix(Choix $choix): self
+    {
+        if ($this->choixes->removeElement($choix)) {
+            // set the owning side to null (unless already changed)
+            if ($choix->getName() === $this) {
+                $choix->setName(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

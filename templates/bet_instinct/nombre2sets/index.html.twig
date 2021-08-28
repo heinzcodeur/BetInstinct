@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nombre2sets index{% endblock %}
+
+{% block body %}
+    <h1>nombre2sets index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nb2set</th>
+                <th>Nb3set</th>
+                <th>Nb4set</th>
+                <th>Nb5set</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nombre2set in nombre2sets %}
+            <tr>
+                <td>{{ nombre2set.id }}</td>
+                <td>{{ nombre2set.nb2set }}</td>
+                <td>{{ nombre2set.nb3set }}</td>
+                <td>{{ nombre2set.nb4set }}</td>
+                <td>{{ nombre2set.nb5set }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_nombre2sets_show', {'id': nombre2set.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_nombre2sets_edit', {'id': nombre2set.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_nombre2sets_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,40 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>nombre2sets</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ nombre2set.id }}</td>
+            </tr>
+            <tr>
+                <th>Nb2set</th>
+                <td>{{ nombre2set.nb2set }}</td>
+            </tr>
+            <tr>
+                <th>Nb3set</th>
+                <td>{{ nombre2set.nb3set }}</td>
+            </tr>
+            <tr>
+                <th>Nb4set</th>
+                <td>{{ nombre2set.nb4set }}</td>
+            </tr>
+            <tr>
+                <th>Nb5set</th>
+                <td>{{ nombre2set.nb5set }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_nombre2sets_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_nombre2sets_edit', {'id': nombre2set.id}) }}">edit</a>
+
+    {{ include('bet_instinct/nombre2sets/_delete_form.html.twig') }}
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

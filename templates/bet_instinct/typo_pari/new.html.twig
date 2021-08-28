@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Score exact du Match</h1>
+
+    {{ include('bet_instinct/typo_pari/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_typo_pari_index') }}" class="btn btn-secondary">back to list</a>
+
+        {{include('end.html.twig')}}
+
+        {% endblock %}
