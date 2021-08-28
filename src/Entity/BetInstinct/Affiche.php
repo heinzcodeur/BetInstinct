@@ -82,6 +82,11 @@ class Affiche
      */
     private $les2joueursWin1sets;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Bet::class, mappedBy="affiche")
+     */
+    private $bet;
+
     public function __construct()
     {
         $this->paris = new ArrayCollection();
@@ -89,6 +94,7 @@ class Affiche
         $this->vainqueurs = new ArrayCollection();
         $this->nombre2sets = new ArrayCollection();
         $this->les2joueursWin1sets = new ArrayCollection();
+        $this->bet = new ArrayCollection();
     }
 
     public function __toString()
@@ -329,6 +335,36 @@ class Affiche
             // set the owning side to null (unless already changed)
             if ($les2joueursWin1set->getAffiche() === $this) {
                 $les2joueursWin1set->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bet[]
+     */
+    public function getBet(): Collection
+    {
+        return $this->bet;
+    }
+
+    public function addBet(Bet $bet): self
+    {
+        if (!$this->bet->contains($bet)) {
+            $this->bet[] = $bet;
+            $bet->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBet(Bet $bet): self
+    {
+        if ($this->bet->removeElement($bet)) {
+            // set the owning side to null (unless already changed)
+            if ($bet->getAffiche() === $this) {
+                $bet->setAffiche(null);
             }
         }
 

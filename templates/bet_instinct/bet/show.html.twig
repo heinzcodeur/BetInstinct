@@ -1,0 +1,50 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Bet</h1>
+{{ dump(bet) }}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bet.id }}</td>
+            </tr>
+            <tr>
+                <th>type</th>
+                <td>{{ bet.TypedePari.type2choix }}</td>
+            </tr>
+            <tr>
+                <th>match</th>
+                <td>{{ bet.affiche}}</td>
+            </tr>
+
+                    <tr>
+                        <td>{{ bet.TypedePari.type2choix.choix1 }}</td>
+                    </tr>
+                    <tr><td>
+
+                        {{ bet.TypedePari.type2choix.choix2 }}</tr>
+                        </td>
+                    <tr>
+                        <td>
+
+                        {{ bet.TypedePari.type2choix.choix3 }}</tr>
+                        </td>
+                    <tr>
+                        <td>
+
+                        {{ bet.TypedePari.type2choix.choix4 }}
+                        </td>
+                    </tr>
+    </table>
+
+
+    <a href="{{ path('bet_instinct_bet_index') }}" class="btn btn-secondary">back to list</a>
+
+    <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}">edit</a>
+
+    {{include('end.html.twig')}}
+
+
+{% endblock %}

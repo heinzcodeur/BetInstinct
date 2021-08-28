@@ -1,0 +1,13 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Create new Type2choix</h1>
+
+    {{ include('bet_instinct/type2choix/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_type2choix_index') }}" class="btn btn-secondary">back to list</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

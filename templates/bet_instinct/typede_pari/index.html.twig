@@ -1,0 +1,35 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>TypedePari index</h1>
+{{ dump(typede_paris) }}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typede_pari in typede_paris %}
+            <tr>
+                <td>{{ typede_pari.type2choix.name }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_typede_pari_show', {'id': typede_pari.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_typede_pari_edit', {'id': typede_pari.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_typede_pari_new') }}" class="btn btn-secondary">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}

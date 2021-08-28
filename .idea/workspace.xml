@@ -4,21 +4,8 @@
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Formule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Formule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/TypePari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/TypePari.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Type2Pari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Type2Pari.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/formule/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/formule/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/pays/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/pays/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/pays/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/pays/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -228,7 +215,7 @@
       <workItem from="1629118326097" duration="1093000" />
       <workItem from="1629129011504" duration="14700000" />
       <workItem from="1629323676488" duration="6262000" />
-      <workItem from="1629657827111" duration="37813000" />
+      <workItem from="1629657827111" duration="44726000" />
     </task>
     <servers />
   </component>
@@ -236,10 +223,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1630079615019">
+    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1630151304718">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1280.760@0.0.1280.760" timestamp="1630079615019" />
+    <state x="433" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1280.760@0.0.1280.760" timestamp="1630151304718" />
     <state x="394" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1628800089840">
       <screen x="0" y="0" width="1280" height="760" />
     </state>

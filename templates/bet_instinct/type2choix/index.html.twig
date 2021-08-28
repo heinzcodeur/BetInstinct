@@ -1,0 +1,76 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Type2choix index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>name</th>
+                <th>Choix1</th>
+                <th>Choix2</th>
+                <th>Choix3</th>
+                <th>Choix4</th>
+                <th>Choix5</th>
+                <th>Choix6</th>
+                <th>Choix7</th>
+                <th>Choix8</th>
+                <th>Choix9</th>
+                <th>Choix10</th>
+                <th>Choix11</th>
+                <th>Choix12</th>
+                <th>Choix13</th>
+                <th>Choix14</th>
+                <th>Choix15</th>
+                <th>Choix16</th>
+                <th>Choix17</th>
+                <th>Choix18</th>
+                <th>Choix19</th>
+                <th>Choix20</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type2choix in type2choixes %}
+            <tr>
+                <td>{{ type2choix.id }}</td>
+                <td>{{ type2choix.name }}</td>
+                <td>{{ type2choix.choix1 }}</td>
+                <td>{{ type2choix.choix2 }}</td>
+                <td>{{ type2choix.choix3 }}</td>
+                <td>{{ type2choix.choix4 }}</td>
+                <td>{{ type2choix.choix5 }}</td>
+                <td>{{ type2choix.choix6 }}</td>
+                <td>{{ type2choix.choix7 }}</td>
+                <td>{{ type2choix.choix8 }}</td>
+                <td>{{ type2choix.choix9 }}</td>
+                <td>{{ type2choix.choix10 }}</td>
+                <td>{{ type2choix.choix11 }}</td>
+                <td>{{ type2choix.choix12 }}</td>
+                <td>{{ type2choix.choix13 }}</td>
+                <td>{{ type2choix.choix14 }}</td>
+                <td>{{ type2choix.choix15 }}</td>
+                <td>{{ type2choix.choix16 }}</td>
+                <td>{{ type2choix.choix17 }}</td>
+                <td>{{ type2choix.choix18 }}</td>
+                <td>{{ type2choix.choix19 }}</td>
+                <td>{{ type2choix.choix20 }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_type2choix_show', {'id': type2choix.id}) }}">show</a>
+                    <a href="{{ path('bet_instinct_type2choix_edit', {'id': type2choix.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="23">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_type2choix_new') }}">Create new</a>
+
+    {{include('end.html.twig')}}
+
+{% endblock %}
