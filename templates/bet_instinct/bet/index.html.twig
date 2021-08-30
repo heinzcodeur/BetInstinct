@@ -7,14 +7,16 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>type</th>
+                <th>affiche</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for bet in bets %}
             <tr>
-                <td>{{ bet.id }}</td>
+                <td>{{ bet.TypedePari.type2choix }}</td>
+                <td style="cursor: pointer" onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':bet.affiche.id}) }}'">{{ bet.affiche}}</td>
                 <td>
                     <a href="{{ path('bet_instinct_bet_show', {'id': bet.id}) }}">show</a>
                     <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}">edit</a>

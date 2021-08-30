@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pronostic{% endblock %}
+
+{% block body %}
+    <h1>Pronostic</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pronostic.id }}</td>
+            </tr>
+            <tr>
+                <th>Choix</th>
+                <td>{{ pronostic.choix }}</td>
+            </tr>
+            <tr>
+                <th>Cote</th>
+                <td>{{ pronostic.cote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_pronostic_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_pronostic_edit', {'id': pronostic.id}) }}">edit</a>
+
+    {{ include('bet_instinct/pronostic/_delete_form.html.twig') }}
+{% endblock %}

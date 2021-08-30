@@ -1,13 +1,12 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Type2choix{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
-    <h1>Edit Type2choix</h1>
+    <h1>modifier {{ type2choix.name }} - {{ type2choix.sport }} </h1>
+{{ dump(type2choix) }}
+    {{ include('bet_instinct/type2choix/_form.html.twig', {'button_label': 'modifier'}) }}
 
-    {{ include('bet_instinct_type2choix/_form.html.twig', {'button_label': 'Update'}) }}
+    <a href="{{ path('bet_instinct_type2choix_index') }}" class="btn btn-secondary">retour</a>
 
-    <a href="{{ path('bet_instinct_type2choix_index') }}">back to list</a>
+    {{ include('end.html.twig') }}
 
-    {{ include('bet_instinct_type2choix/_delete_form.html.twig') }}
 {% endblock %}

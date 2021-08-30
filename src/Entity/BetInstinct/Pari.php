@@ -20,58 +20,35 @@ class Pari
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Affiche::class, inversedBy="paris")
+     * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="paris")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $affiche;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=TypePari::class, inversedBy="paris")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
+    private $formule;
 
     /**
      * @ORM\OneToMany(targetEntity=Pronostic::class, mappedBy="pari")
      */
-    private $pronostics;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Choix::class, mappedBy="pari")
-     */
-    private $choix;
+    private $pronostic;
 
     public function __construct()
     {
-        $this->pronostics = new ArrayCollection();
-        $this->choix = new ArrayCollection();
+        $this->pronostic = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAffiche(): ?Affiche
+    public function getFormule(): ?Formule
     {
-        return $this->affiche;
+        return $this->formule;
     }
 
-    public function setAffiche(?Affiche $affiche): self
+    public function setFormule(?Formule $formule): self
     {
-        $this->affiche = $affiche;
-
-        return $this;
-    }
-
-    public function getType(): ?TypePari
-    {
-        return $this->type;
-    }
-
-    public function setType(?TypePari $type): self
-    {
-        $this->type = $type;
+        $this->formule = $formule;
 
         return $this;
     }
@@ -79,15 +56,15 @@ class Pari
     /**
      * @return Collection|Pronostic[]
      */
-    public function getPronostics(): Collection
+    public function getPronostic(): Collection
     {
-        return $this->pronostics;
+        return $this->pronostic;
     }
 
     public function addPronostic(Pronostic $pronostic): self
     {
-        if (!$this->pronostics->contains($pronostic)) {
-            $this->pronostics[] = $pronostic;
+        if (!$this->pronostic->contains($pronostic)) {
+            $this->pronostic[] = $pronostic;
             $pronostic->setPari($this);
         }
 
@@ -96,7 +73,7 @@ class Pari
 
     public function removePronostic(Pronostic $pronostic): self
     {
-        if ($this->pronostics->removeElement($pronostic)) {
+        if ($this->pronostic->removeElement($pronostic)) {
             // set the owning side to null (unless already changed)
             if ($pronostic->getPari() === $this) {
                 $pronostic->setPari(null);
@@ -106,33 +83,5 @@ class Pari
         return $this;
     }
 
-    /**
-     * @return Collection|Choix[]
-     */
-    public function getChoix(): Collection
-    {
-        return $this->choix;
-    }
 
-    public function addChoix(Choix $choix): self
-    {
-        if (!$this->choix->contains($choix)) {
-            $this->choix[] = $choix;
-            $choix->setPari($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChoix(Choix $choix): self
-    {
-        if ($this->choix->removeElement($choix)) {
-            // set the owning side to null (unless already changed)
-            if ($choix->getPari() === $this) {
-                $choix->setPari(null);
-            }
-        }
-
-        return $this;
-    }
 }

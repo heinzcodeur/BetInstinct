@@ -12,6 +12,8 @@ class Type2choixType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
+            ->add('sport')
             ->add('choix1')
             ->add('choix2')
             ->add('choix3')
@@ -32,7 +34,6 @@ class Type2choixType extends AbstractType
             ->add('choix18')
             ->add('choix19')
             ->add('choix20')
-            ->add('name')
         ;
     }
 

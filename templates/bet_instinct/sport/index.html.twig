@@ -1,0 +1,37 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <a href="{{ path('bet_instinct_sport_new') }}" class="btn btn-primary">nouveau sport</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sport in sports %}
+            <tr>
+                <td>{{ sport.id }}</td>
+                <td>{{ sport.name }}</td>
+                <td>{{ sport.type }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_sport_show', {'id': sport.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_sport_edit', {'id': sport.id}) }}" class="btn btn-success">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {{include('end.html.twig')}}
+
+
+{% endblock %}

@@ -360,6 +360,11 @@ return $this->name;
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="type2choix")
+     */
+    private $sport;
+
     public function __construct()
     {
         $this->typedeParis = new ArrayCollection();
@@ -468,6 +473,18 @@ return $this->name;
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSport(): ?Sport
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?Sport $sport): self
+    {
+        $this->sport = $sport;
 
         return $this;
     }

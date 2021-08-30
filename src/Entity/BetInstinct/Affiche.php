@@ -87,6 +87,7 @@ class Affiche
      */
     private $bet;
 
+
     public function __construct()
     {
         $this->paris = new ArrayCollection();
@@ -370,4 +371,5 @@ class Affiche
 
         return $this;
     }
-}
+
+    }

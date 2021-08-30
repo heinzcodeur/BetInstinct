@@ -1,0 +1,14 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Create new Pronostic</h1>
+
+    {{ include('bet_instinct/pronostic/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_pronostic_index') }}" class="btn btn-secondary">retour</a>
+    </div>
+
+    {{include('end.html.twig')}}
+
+
+{% endblock %}

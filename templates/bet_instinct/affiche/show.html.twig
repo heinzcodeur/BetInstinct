@@ -4,7 +4,10 @@
     <table class="table">
         <tbody>
 
-
+        <tr>
+            <td>nombre de paris</td>
+            <td>{{ affiche.bet|length}}</td>
+        </tr>
         {% for b in affiche.bet %}
             <tr>
                 <td>
@@ -13,10 +16,7 @@
                 </td>
             </tr>
         {% endfor %}
-            <tr>
-                <th>Id</th>
-                <td>{{ affiche.id }}</td>
-            </tr>
+
             <tr>
                 <th>Schedule</th>
                 <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>
@@ -28,51 +28,20 @@
             <tr>
                 <th>Favori</th>
                 <td>{{ affiche.favori }}</td>
-            </tr><tr>
-                <th>Cote_favorite</th>
-                <td>{{ affiche.coteFavorite }}</td>
             </tr>
-            <tr>
-                <th>Cote_outsider</th>
-                <td>{{ affiche.coteOutsider }}</td>
-            </tr>
+
             <tr>
                 <th>Outsider</th>
                 <td>{{ affiche.challenger }}</td>
             </tr>
-            <tr>
-                <th> paris</th>
-                <td>paris</td>
-            {% for t in affiche.typoParis %}
-                <tr>
-                <th>type</th>
-                <td><a href="{{path( 'bet_instinct_typo_pari_show',{'id':t.id})}}">{{ t.nom }}</a></td>
-            </tr>
-            {% endfor %}
-{% for v in affiche.vainqueurs %}
-                <tr>
-                <th>type</th>
-                <td><a href="{{path( 'bet_instinct_vainqueur_show',{'id':v.id})}}">{{ v.name }}</a></td>
-            </tr>
-            {% endfor %}
-{% for n in affiche.nombre2sets %}
-                <tr>
-                <th>type</th>
-                <td><a href="{{path( 'bet_instinct_nombre2sets_show',{'id':n.id}) }}">nombre de sets</a></td>
-            </tr>
-            {% endfor %}
-{% for l in affiche.les2joueursWin1sets %}
-                <tr>
-                <th>type</th>
-                <td><a href="{{path( 'bet_instinct_les2joueurs_win1set_show',{'id':l.id}) }}">les 2 joueurs win 1 set</a></td>
-            </tr>
-            {% endfor %}
+
 
         </tbody>
     </table>
 <div class="col text-center mb-2">
     <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}" class="btn btn-success">modifier</a>
     <a href="{{ path('bet_instinct_affiche_index') }}" class="btn btn-primary">retour</a>
+    <a href="{{ path('bet_instinct_bet_new') }}" class="btn btn-info">ajouter 1 pari</a>
 
 
 </div>

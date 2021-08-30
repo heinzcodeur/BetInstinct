@@ -3,21 +3,20 @@
 
 {% block body %}
     <h1>TypedePari</h1>
-
+{{ dump(typede_pari) }}
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ typede_pari.id }}</td>
+                <th>nom</th>
+                <td>{{ typede_pari.type2choix }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('bet_instinct/typede_pari_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_typede_pari_index') }}" class="btn btn-secondary">retour</a>
 
-    <a href="{{ path('bet_instinct_typede_pari_edit', {'id': typede_pari.id}) }}">edit</a>
+    <a href="{{ path('bet_instinct_typede_pari_edit', {'id': typede_pari.id}) }}" class="btn btn-success">edit</a>
 
-    {{ include('bet_instinct/typede_pari/_delete_form.html.twig') }}
 
     {{include('end.html.twig')}}
 
