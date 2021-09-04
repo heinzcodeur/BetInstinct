@@ -41,9 +41,15 @@ class City
      */
     private $pays;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Athlete::class, mappedBy="birth_place")
+     */
+    private $athletes;
+
     public function __construct()
     {
         $this->tournois = new ArrayCollection();
+        $this->athletes = new ArrayCollection();
     }
 
     public function __toString()
@@ -118,6 +124,36 @@ return $this->name;
     public function setPays(?Pays $pays): self
     {
         $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Athlete[]
+     */
+    public function getAthletes(): Collection
+    {
+        return $this->athletes;
+    }
+
+    public function addAthlete(Athlete $athlete): self
+    {
+        if (!$this->athletes->contains($athlete)) {
+            $this->athletes[] = $athlete;
+            $athlete->setBirthPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAthlete(Athlete $athlete): self
+    {
+        if ($this->athletes->removeElement($athlete)) {
+            // set the owning side to null (unless already changed)
+            if ($athlete->getBirthPlace() === $this) {
+                $athlete->setBirthPlace(null);
+            }
+        }
 
         return $this;
     }

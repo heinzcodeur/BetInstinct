@@ -6,7 +6,14 @@ use App\Repository\BetInstinct\AthleteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
 /**
  * @ORM\Entity(repositoryClass=AthleteRepository::class)
  */
@@ -18,6 +25,19 @@ class Athlete
      * @ORM\Column(type="integer")
      */
     private $id;
+
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $avatar;
+
+    /**
+     * @Vich\UploadableField(mapping="images_athletes", fileNameProperty="avatar")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -69,6 +89,16 @@ class Athlete
      * @ORM\OneToOne(targetEntity=Classement::class, inversedBy="joueur", cascade={"persist", "remove"})
      */
     private $ranking;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="athletes")
+     */
+    private $birth_place;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
 
 
     public function __construct()
@@ -261,5 +291,73 @@ class Athlete
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     * @return Athlete
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     * @return Athlete
+     */
+    public function setImageFile(File $avatar = null)
+    {
+        $this->imageFile = $avatar;
+
+        if($avatar){
+
+            $this->updated_at = new \DateTime('now');
+        }
+
+       // return $this;
+    }
+
+    public function getBirthPlace(): ?City
+    {
+        return $this->birth_place;
+    }
+
+    public function setBirthPlace(?City $birth_place): self
+    {
+        $this->birth_place = $birth_place;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+
 
 }

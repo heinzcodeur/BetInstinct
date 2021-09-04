@@ -27,7 +27,7 @@ class ClassementController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bet_instinct_classement_new", methods={"GET","POST"})
+     * @Route("/new/", name="bet_instinct_classement_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {

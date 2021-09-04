@@ -1,13 +1,12 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Classement{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
     <h1>Edit Classement</h1>
 
-    {{ include('bet_instinct/classement/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bet_instinct/classement/_form.html.twig', {'button_label': 'valider'}) }}
 
-    <a href="{{ path('bet_instinct_classement_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_classement_index') }}" class="btn btn-secondary">retour</a>
 
-    {{ include('bet_instinct/classement/_delete_form.html.twig') }}
+</div>
+    {{ include('end.html.twig') }}
 {% endblock %}

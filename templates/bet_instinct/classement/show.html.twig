@@ -28,6 +28,7 @@
 
     <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">modifier</a>
 
+    <a href="{{ path('bet_instinct_athlete_new',{'ranking':classement.ranking}) }}" class="btn btn-success">add player</a>
 
     {{include('end.html.twig')}}
 

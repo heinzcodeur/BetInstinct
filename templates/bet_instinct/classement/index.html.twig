@@ -7,18 +7,16 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Association</th>
                 <th>Ranking</th>
+                <th>Association</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for classement in classements %}
             <tr>
-                <td>{{ classement.id }}</td>
-                <td>{{ classement.association.name }}</td>
                 <td>{{ classement.ranking }}</td>
+                <td>{{ classement.association.name }}</td>
                 <td>
                     <a href="{{ path('bet_instinct_classement_show', {'id': classement.id}) }}" class="btn btn-info">show</a>
                     <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">edit</a>

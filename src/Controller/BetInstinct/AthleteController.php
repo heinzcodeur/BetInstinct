@@ -26,18 +26,35 @@ class AthleteController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bet_instinct_athlete_new", methods={"GET","POST"})
+     * @Route("/new/{ranking}", name="bet_instinct_athlete_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new($ranking=null, Request $request): Response
     {
         $athlete = new Athlete();
         $form = $this->createForm(AthleteType::class, $athlete);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($athlete);
-            $entityManager->flush();
+            if($athlete->getRanking()==null){
+                return $this->redirectToRoute('bet_instinct_classement_new',['athlete'=>$athlete ]);
+            }
+
+            $avatar = $form->get('avatar')->getData();//dd($avatar);
+           // dd($avatar->guessExtension());
+            $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
+            $avatar->move($this->getParameter('images_athletes'),$fichier);
+            $athlete->setAvatar($fichier);
+            $em=$this->getDoctrine()->getManager('betInstinct');
+            $em->persist($athlete);
+            $em->flush();
+           // return $this->redirectToRoute('bet_instinct_athlete_index');
+
+
+
+            //dd($athlete);
+           // $entityManager = $this->getDoctrine()->getManager();
+            //$entityManager->persist($athlete);
+            //$entityManager->flush();
 
             return $this->redirectToRoute('bet_instinct_athlete_show', ['id'=>$athlete->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -68,9 +85,15 @@ class AthleteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('bet_instinct_athlete_index', [], Response::HTTP_SEE_OTHER);
+            $avatar = $form->get('avatar')->getData();//dd($avatar);
+            // dd($avatar->guessExtension());
+            $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
+            $avatar->move($this->getParameter('images_athletes'),$fichier);
+            $athlete->setAvatar($fichier);
+            $em=$this->getDoctrine()->getManager('betInstinct');
+            $em->persist($athlete);
+            $em->flush();
+            return $this->redirectToRoute('bet_instinct_athlete_show', ['id'=>$athlete->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('bet_instinct/athlete/edit.html.twig', [

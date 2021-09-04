@@ -35,12 +35,11 @@ class PronosticController extends AbstractController
         $affiche = $thebet->getAffiche();
         //dd($affiche);
         $pronostic = new Pronostic();
-        $pronostic->setAffiche($affiche);
         $pronostic->setBet($thebet);
         $pronostic->setChoix($choix);
         $pronostic->setCote($cote);
 
-        return new Response('pronostic de '.$this->getUser()->getPrenom().' pour le match <b>'.$pronostic->getAffiche().'</b><br><br>'.$pronostic->getChoix().' pour '.$pronostic->getAffiche()->getFavori(). ' : '.$pronostic->getCote());
+        return new Response('pronostic de '.$this->getUser()->getPrenom().' pour le match <b>'.$pronostic->getBet()->getAffiche().'</b><br><br>'.$pronostic->getChoix().' pour '.$pronostic->getBet()->getAffiche()->getFavori(). ' : '.$pronostic->getCote());
 
         dd($pronostic);
         $form = $this->createForm(PronosticType::class, $pronostic);

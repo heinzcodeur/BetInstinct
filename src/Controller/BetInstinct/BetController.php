@@ -20,6 +20,7 @@ class BetController extends AbstractController
      */
     public function index(BetRepository $betRepository): Response
     {
+        $bets=$betRepository->findAll();
         return $this->render('bet_instinct/bet/index.html.twig', [
             'bets' => $betRepository->findAll(),
         ]);
@@ -39,7 +40,7 @@ class BetController extends AbstractController
             $entityManager->persist($bet);
             $entityManager->flush();
 
-            return $this->redirectToRoute('bet_instinct_bet_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('bet_instinct/bet/new.html.twig', [

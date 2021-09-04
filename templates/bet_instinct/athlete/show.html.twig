@@ -1,38 +1,46 @@
-{{include('head.html.twig')}}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Athlete</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mt-4">
+                <img src="{{ asset('/images/athletes/'~athlete.avatar) }}" alt="{{ athlete.nom }}">
+            </div>
+            <div class="col-md-8 bg-light mt-4 rounded-bottom rounded-top mb-4" style="overflow-x: scroll">
+                <h1>Athlete</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td class="font-weight-bold">{{ athlete.nom|upper }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ athlete.prenom|capitalize }}</td>
-            </tr>
-            <tr>
-                <th>Birthdate</th>
-                <td>{{ athlete.birthdate ? athlete.birthdate|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Taille</th>
-                <td>{{ athlete.taille }} m</td>
-            </tr>
-            <tr>
-                <th>ranking</th>
-                <td>{{ athlete.ranking.association.name }} {{ athlete.ranking.ranking }}  </td>
-            </tr>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td class="font-weight-bold">{{ athlete.nom|upper }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td>{{ athlete.prenom|capitalize }}</td>
+                    </tr>
+                    <tr>
+                        <th>Birthdate</th>
+                        <td>{{ athlete.birthdate ? athlete.birthdate|date('d-m-Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Taille</th>
+                        <td>{{ athlete.taille }} m</td>
+                    </tr>
+                    <tr>
+                        <th>ranking</th>
+                        <td>{{ athlete.ranking.association.name }} {{ athlete.ranking.ranking }}  </td>
+                    </tr>
 
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
 
-    <a href="{{ path('bet_instinct_athlete_index') }}" class="btn btn-primary mb-2">retour</a>
+                <a href="{{ path('bet_instinct_athlete_index') }}" class="btn btn-primary mb-2">retour</a>
 
-    <a href="{{ path('bet_instinct_athlete_edit', {'id': athlete.id}) }}" class="btn btn-success mb-2">modifier</a>
+                <a href="{{ path('bet_instinct_athlete_edit', {'id': athlete.id}) }}" class="btn btn-success mb-2">modifier</a>
 
+            </div>
 
-    {{ include('end.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
