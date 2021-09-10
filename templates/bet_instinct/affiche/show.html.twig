@@ -40,8 +40,9 @@
     </table>
 <div class="col text-center mb-2">
     <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}" class="btn btn-success">modifier</a>
-    <a href="{{ path('bet_instinct_affiche_index') }}" class="btn btn-primary">retour</a>
+    <a href="{{ path('home') }}" class="btn btn-primary">retour</a>
     <a href="{{ path('bet_instinct_bet_new') }}" class="btn btn-info">ajouter 1 pari</a>
+    {{ include('bet_instinct/affiche/_delete_form.html.twig') }}
 
 
 </div>

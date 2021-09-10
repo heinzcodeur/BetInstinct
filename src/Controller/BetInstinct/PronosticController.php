@@ -3,6 +3,7 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Bet;
+use App\Entity\BetInstinct\Jeu;
 use App\Entity\BetInstinct\Pronostic;
 use App\Form\BetInstinct\PronosticType;
 use App\Repository\BetInstinct\PronosticRepository;
@@ -33,15 +34,27 @@ class PronosticController extends AbstractController
     {
         $thebet=$this->getDoctrine()->getRepository(Bet::class)->find($bet);
         $affiche = $thebet->getAffiche();
-        //dd($affiche);
         $pronostic = new Pronostic();
         $pronostic->setBet($thebet);
         $pronostic->setChoix($choix);
         $pronostic->setCote($cote);
+        $pronostic->setAuthor($this->getUser());
 
-        return new Response('pronostic de '.$this->getUser()->getPrenom().' pour le match <b>'.$pronostic->getBet()->getAffiche().'</b><br><br>'.$pronostic->getChoix().' pour '.$pronostic->getBet()->getAffiche()->getFavori(). ' : '.$pronostic->getCote());
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($pronostic);
+        $entityManager->flush();
 
-        dd($pronostic);
+        return $this->redirectToRoute('bet_instinct_jeu_new', [], Response::HTTP_SEE_OTHER);
+
+        //dd($pronostic);
+
+       // return new Response('pronostic de '.$this->getUser()->getPrenom().' pour le match <b>'.$pronostic->getBet()->getAffiche().'</b><br><br>'.$pronostic->getChoix().' pour '.$pronostic->getBet()->getAffiche()->getFavori(). ' : '.$pronostic->getCote());
+
+
+       /* $jeu = new Jeu();
+        $jeu->setPronostic($pronostic);
+        $jeu->setMise(5);
+        dd($jeu);
         $form = $this->createForm(PronosticType::class, $pronostic);
         $form->handleRequest($request);
 
@@ -56,7 +69,7 @@ class PronosticController extends AbstractController
         return $this->renderForm('bet_instinct/pronostic/new.html.twig', [
             'pronostic' => $pronostic,
             'form' => $form,
-        ]);
+        ]);*/
     }
 
     /**

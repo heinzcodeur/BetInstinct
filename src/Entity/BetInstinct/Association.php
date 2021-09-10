@@ -29,6 +29,11 @@ class Association
      */
     private $classements;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="associations")
+     */
+    private $sport;
+
     public function __construct()
     {
         $this->classements = new ArrayCollection();
@@ -82,6 +87,18 @@ class Association
                 $classement->setAssociation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSport(): ?Sport
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?Sport $sport): self
+    {
+        $this->sport = $sport;
 
         return $this;
     }

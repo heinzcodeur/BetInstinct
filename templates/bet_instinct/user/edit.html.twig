@@ -1,0 +1,10 @@
+{{ include('head.html.twig') }}
+
+{% block body %}
+    <h3 class="text-center">Modifier</h3>
+
+    {{ include('bet_instinct/user/_form.html.twig', {'button_label': 'modifier'}) }}
+
+    <a href="{{ path('bet_instinct_user_index') }}" class="btn btn-secondary">retour</a>
+
+{% endblock %}

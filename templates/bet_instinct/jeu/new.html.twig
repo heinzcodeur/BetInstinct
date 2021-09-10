@@ -1,0 +1,9 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Create new Jeu</h1>
+
+    {{ include('bet_instinct/jeu/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_jeu_index') }}">back to list</a>
+{% endblock %}

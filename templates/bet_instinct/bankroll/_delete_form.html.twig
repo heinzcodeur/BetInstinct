@@ -1,0 +1,4 @@
+<form style="display: inline-block" method="post" action="{{ path('bet_instinct_bankroll_delete', {'id': bankroll.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bankroll.id) }}">
+    <button class="btn btn-danger">supprimer</button>
+</form>

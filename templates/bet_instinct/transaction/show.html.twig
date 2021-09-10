@@ -1,0 +1,35 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Transaction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transaction.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ transaction.type }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ transaction.montant }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ transaction.auteur }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ transaction.createdAt ? transaction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_transaction_index') }}" class="btn btn-secondary">retour</a>
+
+
+{% endblock %}

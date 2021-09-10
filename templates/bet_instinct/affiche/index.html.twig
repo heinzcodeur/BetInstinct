@@ -6,22 +6,20 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Schedule</th>
+                <th>date</th>
                 <th>Score</th>
-                <th>Cote_favorite</th>
-                <th>Cote_outsider</th>
+                <th>favori(te)</th>
+                <th>outsider</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for affiche in affiches %}
             <tr>
-                <td>{{ affiche.id }}</td>
-                <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ affiche.schedule ? affiche.schedule|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ affiche.score }}</td>
-                <td>{{ affiche.coteFavorite }}</td>
-                <td>{{ affiche.coteOutsider }}</td>
+                <td class="text-success font-weight-bold">{{ affiche.favori|upper }}</td>
+                <td class="text-danger font-weight-bold">{{ affiche.challenger|upper }}</td>
                 <td>
                     <a href="{{ path('bet_instinct_affiche_show', {'id': affiche.id}) }}" class="btn btn-info">voir</a>
                 </td>

@@ -2,31 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/BetInstinct.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BetInstinct.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/BetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/BetController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/PronosticController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/PronosticController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/City.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/City.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/AthleteType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/AthleteType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/type2choix/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/type2choix/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/type2choix/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/type2choix/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Association.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Association.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Sport.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Sport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/ClassementType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/ClassementType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +231,7 @@
       <workItem from="1629129011504" duration="14700000" />
       <workItem from="1629323676488" duration="6262000" />
       <workItem from="1629657827111" duration="47798000" />
-      <workItem from="1630315011508" duration="46378000" />
+      <workItem from="1630315011508" duration="63213000" />
     </task>
     <servers />
   </component>

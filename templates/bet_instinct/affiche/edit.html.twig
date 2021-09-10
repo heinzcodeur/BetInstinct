@@ -4,12 +4,10 @@
     <h1>Edit Affiche</h1>
     {{ include('bet_instinct/affiche/_form.html.twig', {'button_label': 'modifier'}) }}
 
-<div class="col text-center">
 
     <a href="{{ path('bet_instinct_affiche_index') }}" class="btn btn-info">retour</a>
 
     {{ include('bet_instinct/affiche/_delete_form.html.twig') }}
-</div>
 
     {{include('end.html.twig')}}
 

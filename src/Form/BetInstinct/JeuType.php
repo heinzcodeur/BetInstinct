@@ -2,26 +2,26 @@
 
 namespace App\Form\BetInstinct;
 
-use App\Entity\BetInstinct\Pari;
+use App\Entity\BetInstinct\Jeu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PariType extends AbstractType
+class JeuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('affiche')
-            ->add('type')
-            ->add('choix')
+            ->add('mise')
+            ->add('formule')
+            ->add('pronostic')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Pari::class,
+            'data_class' => Jeu::class,
         ]);
     }
 }

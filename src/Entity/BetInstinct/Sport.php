@@ -34,6 +34,11 @@ class Sport
      */
     private $type2choix;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Association::class, mappedBy="sport")
+     */
+    private $associations;
+
 
     public function __toString()
     {
@@ -43,6 +48,7 @@ return $this->name;
     public function __construct()
     {
         $this->type2choix = new ArrayCollection();
+        $this->associations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,6 +104,36 @@ return $this->name;
             // set the owning side to null (unless already changed)
             if ($type2choix->getSport() === $this) {
                 $type2choix->setSport(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Association[]
+     */
+    public function getAssociations(): Collection
+    {
+        return $this->associations;
+    }
+
+    public function addAssociation(Association $association): self
+    {
+        if (!$this->associations->contains($association)) {
+            $this->associations[] = $association;
+            $association->setSport($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssociation(Association $association): self
+    {
+        if ($this->associations->removeElement($association)) {
+            // set the owning side to null (unless already changed)
+            if ($association->getSport() === $this) {
+                $association->setSport(null);
             }
         }
 

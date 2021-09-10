@@ -87,6 +87,11 @@ class Affiche
      */
     private $bet;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archived;
+
 
     public function __construct()
     {
@@ -100,7 +105,7 @@ class Affiche
 
     public function __toString()
     {
-        return $this->challenger.' '.$this->favori;
+        return $this->favori.' '.$this->challenger;
     }
 
     public function getId(): ?int
@@ -368,6 +373,18 @@ class Affiche
                 $bet->setAffiche(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(?bool $archived): self
+    {
+        $this->archived = $archived;
 
         return $this;
     }

@@ -35,10 +35,16 @@ class Pronostic
     private $cote;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Pari::class, inversedBy="pronostic")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pronostics")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $pari;
+    private $author;
 
+
+    public function __toString()
+    {
+        return $this->getChoix();
+    }
 
     public function getId(): ?int
     {
@@ -82,14 +88,15 @@ class Pronostic
         return $this;
     }
 
-    public function getPari(): ?Pari
+
+    public function getAuthor(): ?User
     {
-        return $this->pari;
+        return $this->author;
     }
 
-    public function setPari(?Pari $pari): self
+    public function setAuthor(?User $author): self
     {
-        $this->pari = $pari;
+        $this->author = $author;
 
         return $this;
     }

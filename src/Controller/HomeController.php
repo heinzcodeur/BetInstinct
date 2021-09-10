@@ -14,7 +14,7 @@ class HomeController extends AbstractController
      */
     public function index(AfficheRepository $afficheRepository): Response
     {
-
+        dump($this->getUser());
         $matchs = $afficheRepository->findAll();
 
         //return new Response('toto');

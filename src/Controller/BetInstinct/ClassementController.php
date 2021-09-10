@@ -65,10 +65,14 @@ class ClassementController extends AbstractController
      */
     public function edit(Request $request, Classement $classement): Response
     {
+        //$joueurTemp=new Joueur();
+        //$classement->getJoueur()->setRanking($rankingTemp);
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
-
+        $joueur=$classement->getJoueur();
         if ($form->isSubmitted() && $form->isValid()) {
+            $classement->setJoueur($joueur);
+            //dd($classement);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_classement_index', [], Response::HTTP_SEE_OTHER);

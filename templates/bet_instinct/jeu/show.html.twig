@@ -1,0 +1,24 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Jeu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jeu.id }}</td>
+            </tr>
+            <tr>
+                <th>Mise</th>
+                <td>{{ jeu.mise }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_jeu_index') }}">back to list</a>
+
+    <a href="{{ path('bet_instinct_jeu_edit', {'id': jeu.id}) }}">edit</a>
+
+    {{ include('bet/instinct_jeu/_delete_form.html.twig') }}
+{% endblock %}

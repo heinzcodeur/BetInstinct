@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Bankroll{% endblock %}
+
+{% block body %}
+    <h1>Edit Bankroll</h1>
+
+    {{ include('bet_instinct_bankroll/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_bankroll_index') }}">back to list</a>
+
+    {{ include('bet_instinct_bankroll/_delete_form.html.twig') }}
+{% endblock %}

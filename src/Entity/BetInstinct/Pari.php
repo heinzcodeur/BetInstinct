@@ -30,6 +30,23 @@ class Pari
      */
     private $pronostic;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Bet::class, inversedBy="paris")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bet;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="paris")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Transaction::class, inversedBy="paris")
+     */
+    private $mise;
+
     public function __construct()
     {
         $this->pronostic = new ArrayCollection();
@@ -53,32 +70,39 @@ class Pari
         return $this;
     }
 
-    /**
-     * @return Collection|Pronostic[]
-     */
-    public function getPronostic(): Collection
+
+    public function getBet(): ?Bet
     {
-        return $this->pronostic;
+        return $this->bet;
     }
 
-    public function addPronostic(Pronostic $pronostic): self
+    public function setBet(?Bet $bet): self
     {
-        if (!$this->pronostic->contains($pronostic)) {
-            $this->pronostic[] = $pronostic;
-            $pronostic->setPari($this);
-        }
+        $this->bet = $bet;
 
         return $this;
     }
 
-    public function removePronostic(Pronostic $pronostic): self
+    public function getAuteur(): ?User
     {
-        if ($this->pronostic->removeElement($pronostic)) {
-            // set the owning side to null (unless already changed)
-            if ($pronostic->getPari() === $this) {
-                $pronostic->setPari(null);
-            }
-        }
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getMise(): ?Transaction
+    {
+        return $this->mise;
+    }
+
+    public function setMise(?Transaction $mise): self
+    {
+        $this->mise = $mise;
 
         return $this;
     }

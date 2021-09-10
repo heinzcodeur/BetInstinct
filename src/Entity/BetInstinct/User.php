@@ -3,6 +3,8 @@
 namespace App\Entity\BetInstinct;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -61,6 +63,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profession;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="auteur")
+     */
+    private $transactions;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nickname;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="auteur")
+     */
+    private $paris;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Bankroll::class, inversedBy="users")
+     */
+    private $solde;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pronostic::class, mappedBy="author")
+     */
+    private $pronostics;
+
+    public function __construct()
+    {
+        $this->transactions = new ArrayCollection();
+        $this->paris = new ArrayCollection();
+        $this->pronostics = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
 
     public function getId(): ?int
     {
@@ -207,6 +246,120 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfession(?string $profession): self
     {
         $this->profession = $profession;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transaction[]
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): self
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getAuteur() === $this) {
+                $transaction->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pari[]
+     */
+    public function getParis(): Collection
+    {
+        return $this->paris;
+    }
+
+    public function addPari(Pari $pari): self
+    {
+        if (!$this->paris->contains($pari)) {
+            $this->paris[] = $pari;
+            $pari->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePari(Pari $pari): self
+    {
+        if ($this->paris->removeElement($pari)) {
+            // set the owning side to null (unless already changed)
+            if ($pari->getAuteur() === $this) {
+                $pari->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSolde(): ?Bankroll
+    {
+        return $this->solde;
+    }
+
+    public function setSolde(?Bankroll $solde): self
+    {
+        $this->solde = $solde;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pronostic[]
+     */
+    public function getPronostics(): Collection
+    {
+        return $this->pronostics;
+    }
+
+    public function addPronostic(Pronostic $pronostic): self
+    {
+        if (!$this->pronostics->contains($pronostic)) {
+            $this->pronostics[] = $pronostic;
+            $pronostic->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePronostic(Pronostic $pronostic): self
+    {
+        if ($this->pronostics->removeElement($pronostic)) {
+            // set the owning side to null (unless already changed)
+            if ($pronostic->getAuthor() === $this) {
+                $pronostic->setAuthor(null);
+            }
+        }
 
         return $this;
     }

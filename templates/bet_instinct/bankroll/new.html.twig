@@ -1,0 +1,10 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Nouvelle Bankroll</h1>
+
+    {{ include('bet_instinct/bankroll/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_bankroll_index') }}" class="btn btn-secondary">retour</a>
+{% endblock %}

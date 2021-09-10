@@ -18,6 +18,7 @@ class ClassementType extends AbstractType
                 'class'=>Association::class
             ])
             ->add('ranking')
+            ->add('joueur')
         ;
     }
 

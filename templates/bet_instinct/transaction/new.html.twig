@@ -1,0 +1,10 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h3>Nouvelle Transaction</h3>
+
+    {{ include('bet_instinct/transaction/_form.html.twig') }}
+
+    <a href="{{ path('bet_instinct_transaction_index') }}" class="btn btn-secondary">retour</a>
+{% endblock %}

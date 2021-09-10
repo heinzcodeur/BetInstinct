@@ -1,0 +1,33 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h1>Bankroll index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>titulaire</th>
+                <th>Balance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bankroll in bankrolls %}
+            <tr>
+                <td>{{ bankroll.owner.nom}}</td>
+                <td>{{ bankroll.balance }}</td>
+                <td>
+                    <a href="{{ path('bet_instinct_bankroll_show', {'id': bankroll.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_bankroll_edit', {'id': bankroll.id}) }}" class="btn btn-primary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_bankroll_new') }}" class="btn btn-primary">nouvelle Bankroll</a>
+{% endblock %}

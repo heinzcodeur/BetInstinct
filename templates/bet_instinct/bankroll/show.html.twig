@@ -1,0 +1,26 @@
+{{include('head.html.twig')}}
+
+
+{% block body %}
+    <h1>Bankroll</h1>
+{{ dump(bankroll) }}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titulaire</th>
+                <td>{{ bankroll.owner }}</td>
+            </tr>
+            <tr>
+                <th>solde</th>
+                <td>{{ bankroll.balance? bankroll.balance : 0 }} €</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_bankroll_index') }}" class="btn btn-secondary">retour</a>
+
+    <a href="{{ path('bet_instinct_bankroll_edit', {'id': bankroll.id}) }}" class="btn btn-primary">edit</a>
+
+    {{ include('bet_instinct/bankroll/_delete_form.html.twig') }}
+
+{% endblock %}

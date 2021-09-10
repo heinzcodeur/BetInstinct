@@ -12,6 +12,12 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" href="{{ asset('betinstinct.png') }}">
         {% block stylesheets %}
+            <style>
+
+            .cursor{
+                cursor: pointer
+            }
+            </style>
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
@@ -42,7 +48,10 @@
                     <a class="nav-link" href="{{ path('bet_instinct_classement_index') }}">classement <span class="sr-only">(current)</span></a>
                 </li>
 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bet_instinct_pari_index') }}">pari <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('bet_instinct_bankroll_index') }}">bankroll<span class="sr-only">(current)</span></a>
+                </li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bet_instinct_transaction_index') }}">transaction<span class="sr-only">(current)</span></a>
                 </li>
 
                 <!--<li class="nav-item">
@@ -63,9 +72,11 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>-->
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" style="background-color:darkgoldenrod;padding: 12px">
                 <!--<input class="form-control mr-sm-2" type="search"  aria-label="Search">-->
-                <a href="{{ path('app_logout') }}" style="color: white">{{app.user.prenom}}</a>
+                <!--<a onclick="return(confirm('déconnexion?'))" style="text-decoration: none;color: white" href="{{ path('app_logout') }}">{{app.user.nickname|capitalize}}</a>-->
+
+                <a style="text-decoration: none;color: white" href="{{ path('bet_instinct_user_show',{'id':app.user.id}) }}">{{app.user.nickname|capitalize}}  {{ app.user.solde.balance }} €</a>
                 {% else %}
                 <a href="{{ path('app_login') }}" style="color: white">connexion</a>
                 <!--<a href="{{ path('app_register') }}" style="color: white">inscription</a>-->

@@ -105,6 +105,11 @@ class Bet
      */
     private $pronostics;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="bet")
+     */
+    private $paris;
+
     public function __toString()
     {
 return (string)$this->TypedePari;
@@ -114,6 +119,7 @@ return (string)$this->TypedePari;
     public function __construct()
     {
         $this->pronostics = new ArrayCollection();
+        $this->paris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -338,6 +344,36 @@ return (string)$this->TypedePari;
             // set the owning side to null (unless already changed)
             if ($pronostic->getBet() === $this) {
                 $pronostic->setBet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pari[]
+     */
+    public function getParis(): Collection
+    {
+        return $this->paris;
+    }
+
+    public function addPari(Pari $pari): self
+    {
+        if (!$this->paris->contains($pari)) {
+            $this->paris[] = $pari;
+            $pari->setBet($this);
+        }
+
+        return $this;
+    }
+
+    public function removePari(Pari $pari): self
+    {
+        if ($this->paris->removeElement($pari)) {
+            // set the owning side to null (unless already changed)
+            if ($pari->getBet() === $this) {
+                $pari->setBet(null);
             }
         }
 

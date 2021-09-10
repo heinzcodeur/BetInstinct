@@ -4,7 +4,6 @@
 {% block body %}
     <h3 class="text-center">          {{ bet.TypedePari.type2choix }}
     </h3>
-
     <table class="table">
         <tbody>
             <tr>
@@ -17,65 +16,14 @@
                 <td>{{ bet.affiche}}</td>
             </tr>
 
-                    <tr class="mt-2" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}'" style="cursor: pointer">
+                    <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}'">
                         <td>{{ bet.TypedePari.type2choix.choix1 }}</td>
                         <td style="color: green">{{ bet.cote1 }}</td>
                     </tr>
-                    <tr>
+
+                    <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix2,'cote':bet.cote2}) }}'">
                         <td>{{ bet.TypedePari.type2choix.choix2 }}</td>
                         <td style="color: red">{{ bet.cote2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ bet.TypedePari.type2choix.choix3 }}</td>
-                        <td style="color:green">{{ bet.cote3 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix4 }}</td>
-                        <td style="color:red">{{ bet.cote4 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix4 }}</td>
-                        <td style="color:red">{{ bet.cote4 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix5 }}</td>
-                        <td style="color:red">{{ bet.cote5 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix6 }}</td>
-                        <td style="color:red">{{ bet.cote6 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix7 }}</td>
-                        <td style="color:red">{{ bet.cote7 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix8 }}</td>
-                        <td style="color:red">{{ bet.cote8 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix9 }}</td>
-                        <td style="color:red">{{ bet.cote9 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix10 }}</td>
-                        <td style="color:red">{{ bet.cote10 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix11 }}</td>
-                        <td style="color:red">{{ bet.cote11 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix12 }}</td>
-                        <td style="color:red">{{ bet.cote12 }}</td>
-                    </tr>
-                    <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix13}}</td>
-                        <td style="color:red">{{ bet.cote13 }}</td>
-                    </tr>
-            <tr>
-                        <td >{{ bet.TypedePari.type2choix.choix14}}</td>
-                        <td style="color:red">{{ bet.cote14 }}</td>
                     </tr>
 
 

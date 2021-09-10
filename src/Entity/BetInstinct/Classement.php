@@ -6,6 +6,7 @@ use App\Repository\BetInstinct\ClassementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=ClassementRepository::class)
@@ -86,7 +87,10 @@ class Classement
 
         // set the owning side of the relation if necessary
         if ($joueur !== null && $joueur->getRanking() !== $this) {
+
+            $this->getJoueur()->setRanking(null);
             $joueur->setRanking($this);
+            $joueur->setUpdatedAt(new \DateTime('now'));
         }
 
         $this->joueur = $joueur;
