@@ -41,19 +41,17 @@ class Transaction
     private $updated;
 
     /**
-     * @ORM\Column(type="string", length=255, columnDefinition="ENUM('deposit','retrait')")
+     * @ORM\Column(type="string", length=255, columnDefinition="ENUM('gain','perte','deposit','retrait')")
      */
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="mise")
+     * @ORM\ManyToOne(targetEntity=Jeu::class, inversedBy="transactions")
      */
-    private $paris;
+    private $jeu;
 
-    public function __construct()
-    {
-        $this->paris = new ArrayCollection();
-    }
+
+
 
     public function getId(): ?int
     {
@@ -133,33 +131,17 @@ class Transaction
         return $this;
     }
 
-    /**
-     * @return Collection|Pari[]
-     */
-    public function getParis(): Collection
+    public function getJeu(): ?Jeu
     {
-        return $this->paris;
+        return $this->jeu;
     }
 
-    public function addPari(Pari $pari): self
+    public function setJeu(?Jeu $jeu): self
     {
-        if (!$this->paris->contains($pari)) {
-            $this->paris[] = $pari;
-            $pari->setMise($this);
-        }
+        $this->jeu = $jeu;
 
         return $this;
     }
 
-    public function removePari(Pari $pari): self
-    {
-        if ($this->paris->removeElement($pari)) {
-            // set the owning side to null (unless already changed)
-            if ($pari->getMise() === $this) {
-                $pari->setMise(null);
-            }
-        }
 
-        return $this;
-    }
 }

@@ -67,6 +67,7 @@ class TransactionController extends AbstractController
      */
     public function show(Transaction $transaction): Response
     {
+        dump($transaction);
         return $this->render('bet_instinct/transaction/show.html.twig', [
             'transaction' => $transaction,
         ]);

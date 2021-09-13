@@ -3,7 +3,7 @@
 
 {% block body %}
     <h1>Transaction</h1>
-
+{{ dump(transaction.jeu) }}
     <table class="table">
         <tbody>
             <tr>
@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <th>Montant</th>
-                <td>{{ transaction.montant }}</td>
+                <td>{{ transaction.montant }} €</td>
             </tr>
             <tr>
                 <th>Auteur</th>
@@ -26,10 +26,15 @@
                 <th>Created_at</th>
                 <td>{{ transaction.createdAt ? transaction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+        <tr onclick="document.location='{{ path('bet_instinct_jeu_show',{'id':transaction.jeu.id}) }}'" class="cursor">
+                <th>jeu</th>
+                <td>{{ transaction.jeu.pronostic.bet}} ({{ transaction.jeu.pronostic.bet.affiche}})</td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('bet_instinct_transaction_index') }}" class="btn btn-secondary">retour</a>
+    <a href="{{ path('bet_instinct_transaction_edit',{'id':transaction.id}) }}" class="btn btn-success">modifier</a>
 
 
 {% endblock %}

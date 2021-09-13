@@ -47,6 +47,10 @@ class JeuController extends AbstractController
             $balance=$solde->getBalance();
             //dd($balance);
             $solde->setBalance($balance - $jeu->getMise());
+
+            $jeu->setCreatedAt(new \DateTime('now'));
+            $transac->setJeu($jeu);
+            //dd($transac);
             $entityManager->persist($solde);
             $entityManager->persist($transac);
             $entityManager->persist($jeu);
@@ -79,7 +83,31 @@ class JeuController extends AbstractController
         $form = $this->createForm(JeuType::class, $jeu);
         $form->handleRequest($request);
 
+        $entityManager = $this->getDoctrine()->getManager();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($jeu);
+            if($jeu->getResultat()=='3'){
+                $transac=new Transaction();
+                $transac->setAuteur($this->getUser());
+                $transac->setCreatedAt(new \DateTimeImmutable('now'));
+                $transac->setJeu($jeu);
+                $transac->setType('gain');
+                $transac->setMontant($jeu->getPronostic()->getCote()*$jeu->getMise());
+
+                $solde=$this->getUser()->getSolde();
+                $balance=$solde->getBalance();
+
+                $solde->setBalance($balance+$transac->getMontant());
+                dump($this->getUser()->getSolde());
+//dd($balance);
+
+                //$entityManager->persist($solde);
+                $entityManager->persist($transac);
+
+                dump($jeu);
+                //dd($transac);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_jeu_index', [], Response::HTTP_SEE_OTHER);

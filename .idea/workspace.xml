@@ -3,22 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Association.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Association.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Classement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Pari.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Sport.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Sport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/JeuController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/JeuController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/TransactionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/TransactionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Jeu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Jeu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Transaction.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/ClassementType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/ClassementType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/JeuType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/JeuType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/TransactionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/TransactionType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/bet/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/bet/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/jeu/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/jeu/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/jeu/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/jeu/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/jeu/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/jeu/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/pays/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/pays/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/transaction/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/transaction/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/transaction/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/transaction/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,6 +237,7 @@
       <workItem from="1629323676488" duration="6262000" />
       <workItem from="1629657827111" duration="47798000" />
       <workItem from="1630315011508" duration="63213000" />
+      <workItem from="1631131942019" duration="57305000" />
     </task>
     <servers />
   </component>
@@ -271,10 +277,14 @@
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="336" y="205" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1630318167645" />
-    <state x="336" y="112" width="607" height="536" key="find.popup" timestamp="1629917793118">
+    <state x="336" y="112" width="607" height="536" key="find.popup" timestamp="1631294910870">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="336" y="112" width="607" height="536" key="find.popup/0.0.1280.760@0.0.1280.760" timestamp="1629917793118" />
+    <state x="336" y="112" width="607" height="536" key="find.popup/0.0.1280.760@0.0.1280.760" timestamp="1631294910870" />
+    <state x="295" y="172" key="run.anything.popup" timestamp="1631278776453">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="295" y="172" key="run.anything.popup/0.0.1280.760@0.0.1280.760" timestamp="1631278776453" />
     <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1630581452503">
       <screen x="0" y="0" width="1280" height="760" />
     </state>

@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Transaction{% endblock %}
+{{ include('head.html.twig')}}
 
 {% block body %}
-    <h1>Edit Transaction</h1>
+    <h3 class="text-center">Modifier la transaction n°{{ transaction.id }} de {{ transaction.auteur.nickname|capitalize }}</h3>
 
-    {{ include('bet_instinct_transaction/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bet_instinct/transaction/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('bet_instinct_transaction_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_transaction_index') }}" class="btn btn-secondary">retour</a>
 
-    {{ include('bet_instinct_transaction/_delete_form.html.twig') }}
 {% endblock %}

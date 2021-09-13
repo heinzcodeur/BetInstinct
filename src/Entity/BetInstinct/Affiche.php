@@ -105,7 +105,7 @@ class Affiche
 
     public function __toString()
     {
-        return $this->favori.' '.$this->challenger;
+        return $this->favori.' VS '.$this->challenger;
     }
 
     public function getId(): ?int

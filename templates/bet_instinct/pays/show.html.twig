@@ -19,12 +19,13 @@
             </tr>
         </tbody>
     </table>
-
+<div class="col text-center">
     <a href="{{ path('bet_instinct_pays_index') }}" class="btn btn-primary">retour</a>
 
-    <a href="{{ path('bet_instinct_pays_edit', {'id': pay.id}) }}">edit</a>
+    <a href="{{ path('bet_instinct_pays_edit', {'id': pay.id}) }}" class="btn btn-success">edit</a>
 
-    {{ include('bet_instinct_pays/_delete_form.html.twig') }}
+    <a href="{{ path('bet_instinct_city_new') }}" class="btn btn-secondary">add city</a>
+
 
     {{ include('end.html.twig') }}
 {% endblock %}

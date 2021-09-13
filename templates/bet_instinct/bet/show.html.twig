@@ -1,6 +1,5 @@
 {{include('head.html.twig')}}
 
-
 {% block body %}
     <h3 class="text-center">          {{ bet.TypedePari.type2choix }}
     </h3>
@@ -17,23 +16,98 @@
             </tr>
 
                     <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}'">
-                        <td>{{ bet.TypedePari.type2choix.choix1 }}</td>
-                        <td style="color: green">{{ bet.cote1 }}</td>
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix1 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}" class="btn btn-success">{{ bet.cote1 }}</a></td>
                     </tr>
 
                     <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix2,'cote':bet.cote2}) }}'">
-                        <td>{{ bet.TypedePari.type2choix.choix2 }}</td>
-                        <td style="color: red">{{ bet.cote2 }}</td>
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix2 }}</td>
+                        <td style="color: red"><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix2,'cote':bet.cote2}) }}" class="btn btn-success">{{ bet.cote2 }}</a></td>
                     </tr>
+            {% if bet.cote3 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix3,'cote':bet.cote3}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix3 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix3,'cote':bet.cote3}) }}" class="btn btn-success">{{ bet.cote3 }}</a></td>
+                    </tr>
+            {% endif %}
+{% if bet.cote4 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix4,'cote':bet.cote4}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix4 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix4,'cote':bet.cote4}) }}" class="btn btn-success">{{ bet.cote4 }}</a></td>
+                    </tr>
+
+        {% endif %}
+{% if bet.cote5 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix5,'cote':bet.cote5}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix5 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix5,'cote':bet.cote5}) }}" class="btn btn-success">{{ bet.cote5 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote6 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix6,'cote':bet.cote6}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix6 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix6,'cote':bet.cote6}) }}" class="btn btn-success">{{ bet.cote6 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote7 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix7,'cote':bet.cote7}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix7 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix7,'cote':bet.cote7}) }}" class="btn btn-success">{{ bet.cote7 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote8 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix8,'cote':bet.cote8}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix8 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix8,'cote':bet.cote8}) }}" class="btn btn-success">{{ bet.cote8 }}</a></td>
+                    </tr>
+        {% endif %}
+
+{% if bet.cote9 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix9,'cote':bet.cote9}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix9 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix9,'cote':bet.cote9}) }}" class="btn btn-success">{{ bet.cote9 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote10 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix10,'cote':bet.cote10}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix10 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix10,'cote':bet.cote10}) }}" class="btn btn-success">{{ bet.cote10 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote11 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix11,'cote':bet.cote11}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix11 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix11,'cote':bet.cote11}) }}" class="btn btn-success">{{ bet.cote11 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote12 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix12,'cote':bet.cote12}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix12 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix13,'cote':bet.cote13}) }}" class="btn btn-success">{{ bet.cote12 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote13 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix13,'cote':bet.cote13}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix13 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix13,'cote':bet.cote13}) }}" class="btn btn-success">{{ bet.cote13 }}</a></td>
+                    </tr>
+        {% endif %}
+{% if bet.cote14 %}
+ <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix14,'cote':bet.cote14}) }}'">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix14 }}</td>
+                        <td><a href="{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix14,'cote':bet.cote14}) }}" class="btn btn-success">{{ bet.cote14 }}</a></td>
+                    </tr>
+        {% endif %}
+
 
 
         </tbody>
     </table>
 
+<div class="col text-center">
+    <a href="{{ path('bet_instinct_affiche_show',{'id':bet.affiche.id}) }}" class="btn btn-secondary">retour</a>
 
-    <a href="{{ path('bet_instinct_bet_index') }}" class="btn btn-secondary">back to list</a>
-
-    <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}">edit</a>
+    <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}" class="btn btn-success disabled">edit</a>
 
     {{include('end.html.twig')}}
 

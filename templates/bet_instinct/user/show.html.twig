@@ -37,7 +37,23 @@
             <tr>
                 <th>mes transactions</th>
                 {% for t in user.transactions %}
-                <td> {{ dump(t) }} </td>
+                <td> {{ t.montant }} </td>
+                <td> {{ t.type }} </td>
+                {% endfor %}
+            </tr>
+        <tr>
+                <th>mes pronostics</th>
+                {% for j in user.pronostics %}
+                {% endfor %}
+            </tr>
+        <tr>
+                <th>mes paris</th>
+                {% for p in user.jeux %}
+                <td> {{ p.pronostic.bet.affiche }} </td>
+                <td> {{ p.formule }} </td>
+                <td> {{ p.pronostic.bet.TypedePari }} </td>
+                <td> {{ p.pronostic.bet.affiche }} </td>
+                <td> {{ p.pronostic }} </td>
                 {% endfor %}
             </tr>
         </tbody>

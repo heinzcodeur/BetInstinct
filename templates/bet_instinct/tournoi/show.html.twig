@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <th>Siteweb</th>
-                <td>{{ tournoi.siteweb }}</td>
+                <td class="cursor text-primary" onclick="document.location='{{ tournoi.siteweb}}'">{{ tournoi.siteweb }}</td>
             </tr>
             <tr>
                 <th>Dotation</th>
@@ -35,6 +35,8 @@
     <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
 
     <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-success">edit</a>
+
+    <a href="{{ path('bet_instinct_affiche_new') }}" class="btn btn-secondary">add match</a>
 
     {{ include('end.html.twig') }}
 

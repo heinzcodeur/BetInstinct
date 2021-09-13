@@ -4,6 +4,7 @@ namespace App\Form\BetInstinct;
 
 use App\Entity\BetInstinct\Jeu;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,14 @@ class JeuType extends AbstractType
             ->add('mise')
             ->add('formule')
             ->add('pronostic')
+            ->add('parieur')
+            ->add('resultat',ChoiceType::class,[
+                'choices'=>[
+                    'en attente'=>1,
+                    'perdant'=>2,
+                    'gagnant'=>3
+                ]
+            ])
         ;
     }
 
