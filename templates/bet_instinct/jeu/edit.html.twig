@@ -5,6 +5,6 @@
 
     {{ include('bet_instinct/jeu/_form.html.twig', {'button_label': 'modifier'}) }}
 
-    <a href="{{ path('bet_instinct_jeu_index') }}" class="btn btn-secondary">retour</a>
+    <a href="{{ path('bet_instinct_jeu_show',{'id':jeu.id}) }}" class="btn btn-secondary">retour</a>
 
 {% endblock %}

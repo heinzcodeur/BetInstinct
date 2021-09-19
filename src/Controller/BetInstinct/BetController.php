@@ -2,6 +2,7 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Form\BetInstinct\BetType;
 use App\Repository\BetInstinct\BetRepository;
@@ -27,11 +28,13 @@ class BetController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bet_instinct_bet_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="bet_instinct_bet_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Affiche $affiche, Request $request): Response
     {
+        dump($affiche);
         $bet = new Bet();
+        $bet->setAffiche($affiche);
         $form = $this->createForm(BetType::class, $bet);
         $form->handleRequest($request);
 

@@ -27,16 +27,23 @@ class ClassementController extends AbstractController
     }
 
     /**
-     * @Route("/new/", name="bet_instinct_classement_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="bet_instinct_classement_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new($id = null, Request $request): Response
     {
+        if ($id != null) {
+            $athlete = $this->getDoctrine()->getRepository(Athlete::class)->find($id);
+        }
         $classement = new Classement();
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($classement);
+            if(isset($athlete)){
+                if ($classement->getJoueur() == null) {
+                    $classement->setJoueur($athlete);
+                }
+            }//dd($classement);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($classement);
             $entityManager->flush();
@@ -69,7 +76,7 @@ class ClassementController extends AbstractController
         //$classement->getJoueur()->setRanking($rankingTemp);
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
-        $joueur=$classement->getJoueur();
+        $joueur = $classement->getJoueur();
         if ($form->isSubmitted() && $form->isValid()) {
             $classement->setJoueur($joueur);
             //dd($classement);
@@ -89,7 +96,7 @@ class ClassementController extends AbstractController
      */
     public function delete(Request $request, Classement $classement): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$classement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $classement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($classement);
             $entityManager->flush();

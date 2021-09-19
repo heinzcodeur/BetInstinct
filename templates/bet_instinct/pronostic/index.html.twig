@@ -6,7 +6,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>DATE</th>
+                <th>match</th>
+                <th>type</th>
                 <th>Choix</th>
                 <th>Cote</th>
                 <th>actions</th>
@@ -15,12 +17,13 @@
         <tbody>
         {% for pronostic in pronostics %}
             <tr>
-                <td>{{ pronostic.id }}</td>
+                <td>{{ pronostic.created|date('d-m-Y H:m:s') }}</td>
+                <td>{{ pronostic.affiche }}</td>
+                <td>{{ pronostic.bet.TypedePari }}</td>
                 <td>{{ pronostic.choix }}</td>
                 <td>{{ pronostic.cote }}</td>
                 <td>
                     <a href="{{ path('bet_instinct_pronostic_show', {'id': pronostic.id}) }}" class="btn btn-info">voir</a>
-                    <a href="{{ path('bet_instinct_pronostic_edit', {'id': pronostic.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -31,7 +34,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('bet_instinct_pronostic_new') }}" class="btn btn-primary">nouveau pronostic</a>
 
     {{include('end.html.twig')}}
 

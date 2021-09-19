@@ -16,6 +16,8 @@ class JeuType extends AbstractType
             ->add('mise')
             ->add('formule')
             ->add('pronostic')
+            ->add('pronostic2')
+            ->add('pronostic3')
             ->add('parieur')
             ->add('resultat',ChoiceType::class,[
                 'choices'=>[

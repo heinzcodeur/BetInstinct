@@ -3,8 +3,11 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Affiche;
+use App\Entity\BetInstinct\User;
 use App\Form\BetInstinct\AfficheType;
 use App\Repository\BetInstinct\AfficheRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +21,23 @@ class AfficheController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_affiche_index", methods={"GET"})
      */
-    public function index(AfficheRepository $afficheRepository): Response
+    public function index(AfficheRepository $afficheRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('a')
+            ->from(Affiche::class, 'a')
+            ->orderBy('a.schedule','DESC');
+           // ->where('u.prenom LIKE :prenom')
+            //->andWhere('u.nom = :nom')
+            //->setParameter('prenom', 'cedric')
+            //->setParameter('nom', 'booster');
+
+        $query = $queryBuilder->getQuery();
+//dd($query->getResult());
+       // echo $query->getDQL(), "\n";
+      //  dd('cool');
         return $this->render('bet_instinct/affiche/index.html.twig', [
-            'affiches' => $afficheRepository->findAll(),
+            'affiches' => $query->getResult(),
         ]);
     }
 

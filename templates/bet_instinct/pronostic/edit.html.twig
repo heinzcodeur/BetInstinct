@@ -1,15 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Pronostic{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
-    <h1>Edit Pronostic</h1>
+    <h5 class="text-center">Edit Pronostic {{ pronostic.bet.affiche }} {{ pronostic.bet.TypedePari }}</h5>
 
-    {{ include('bet_instinct/pronostic/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bet_instinct/pronostic/_form.html.twig', {'button_label': 'edit'}) }}
 
-    <a href="{{ path('bet_instinct_pronostic_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_pronostic_index') }}" class="btn btn-secondary">retour</a>
 
-    {{ include('bet_instinct_pronostic/_delete_form.html.twig') }}
+    {{ include('bet_instinct/pronostic/_delete_form.html.twig') }}
     </div>
 
 {% endblock %}

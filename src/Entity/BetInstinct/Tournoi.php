@@ -20,6 +20,11 @@ class Tournoi
     private $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $debut;
@@ -31,7 +36,7 @@ class Tournoi
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="tournois")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $city;
 
@@ -73,7 +78,8 @@ class Tournoi
 
     public function __toString()
     {
-return $this->city->getName();
+        if($this->name!=null){return $this->name;}
+        return $this->city->getName();
     }
 
     public function getId(): ?int
@@ -204,6 +210,24 @@ return $this->city->getName();
     {
         $this->tenant_titre = $tenant_titre;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Tournoi
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
         return $this;
     }
 }

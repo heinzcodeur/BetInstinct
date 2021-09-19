@@ -12,27 +12,60 @@
             <td>{{ jeu.pronostic.author.nickname|capitalize }}</td>
         </tr>
        <tr>
+            <th>date</th>
+            <td>{{ jeu.createdAt|date('d-m-Y H:m:s') }}</td>
+        </tr>
+       <tr>
+            <th>formule</th>
+            <td>{{ jeu.formule }}</td>
+        </tr>
+       <!--<tr>
             <th>match</th>
             <td>{{ jeu.pronostic.bet.affiche|upper }}</td>
-        </tr>
-        <tr>
+        </tr>-->
+       <!-- <tr>
             <th>type de pari</th>
             <td>{{ jeu.pronostic.bet.TypedePari|upper }}</td>
-        </tr>
-        <tr>
+            <td>{{ jeu.pronostic.bet.affiche }}</td>
+        </tr>-->
+
+        <tr onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':jeu.pronostic.id}) }}'" class="cursor">
             <th>pronostic</th>
             <td class="font-weight-bold">
                 {% if jeu.pronostic.bet.TypedePari.type2choix == 'Vainqueur'%}
-                    {% if jeu.pronostic.choix == 'outsider' %}
-                        {{ jeu.pronostic.bet.affiche.challenger|upper }}/<span class="text-danger">{{ jeu.pronostic.choix }}</span>
+
+                       <i class="text-secondary"> {{ jeu.pronostic.bet.affiche }}</i>
+                        <span class="text-primary">{{ jeu.pronostic.bet.TypedePari|upper }}</span>
+                        /<span class="text-success">{{ jeu.pronostic.choix }}</span>
+
                     {% else %}
-                        {{ jeu.pronostic.bet.affiche.favori|upper }}/<span class="text-success">{{ jeu.pronostic.choix }}</span>
-                    {% endif %}
-                    {% else %}
-                        {{ jeu.pronostic.choix }}
+                       <i class="text-secondary"> {{ jeu.pronostic.bet.affiche }}</i>
+                        <span class="text-primary" >{{ jeu.pronostic.bet.TypedePari }}</span>
+                        <span class="text-info">{{ jeu.pronostic.choix|upper }}</span>
                {% endif %}
             </td>
         </tr>
+        {% if jeu.pronostic2 is not null %}
+        <tr onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':jeu.pronostic2.id}) }}'" class="cursor">
+            <th>pronostic2</th>
+            <td class="font-weight-bold">
+                <i class="text-secondary">{{ jeu.pronostic2.bet.affiche }}</i>
+                <span class="text-primary">{{ jeu.pronostic.bet.TypedePari }}</span>
+                <span class="text-info">{{ jeu.pronostic.choix|upper }}</span>
+            </td>
+        </tr>
+        {% endif %}
+        {% if jeu.pronostic3 is not null %}
+        <tr onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':jeu.pronostic3.id}) }}'" class="cursor">
+            <th>pronostic3</th>
+            <td class="font-weight-bold">
+                <i class="text-secondary">{{ jeu.pronostic3.bet.affiche }}</i>
+                <span class="text-primary">{{ jeu.pronostic3.bet.TypedePari }}</span>
+                <span class="text-info">{{ jeu.pronostic3.choix|upper }}</span>
+
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <th>mise</th>
             <td>{{ jeu.mise }} €</td>

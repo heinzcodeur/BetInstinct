@@ -92,6 +92,11 @@ class Affiche
      */
     private $archived;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Pronostic::class, mappedBy="affiche")
+     */
+    private $pronostics;
+
 
     public function __construct()
     {
@@ -101,6 +106,7 @@ class Affiche
         $this->nombre2sets = new ArrayCollection();
         $this->les2joueursWin1sets = new ArrayCollection();
         $this->bet = new ArrayCollection();
+        $this->pronostics = new ArrayCollection();
     }
 
     public function __toString()
@@ -385,6 +391,36 @@ class Affiche
     public function setArchived(?bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pronostic[]
+     */
+    public function getPronostics(): Collection
+    {
+        return $this->pronostics;
+    }
+
+    public function addPronostic(Pronostic $pronostic): self
+    {
+        if (!$this->pronostics->contains($pronostic)) {
+            $this->pronostics[] = $pronostic;
+            $pronostic->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removePronostic(Pronostic $pronostic): self
+    {
+        if ($this->pronostics->removeElement($pronostic)) {
+            // set the owning side to null (unless already changed)
+            if ($pronostic->getAffiche() === $this) {
+                $pronostic->setAffiche(null);
+            }
+        }
 
         return $this;
     }

@@ -36,6 +36,10 @@ class JeuController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($jeu->getFormule()->getId()==2){
+                $jeu->setCoteTotale($jeu->getPronostic()->getCote()*$jeu->getPronostic2()->getCote()*$jeu->getPronostic3()->getCote());
+            }
+            //dd($jeu);
             $entityManager = $this->getDoctrine()->getManager();
             $transac=new Transaction();
             $transac->setType('retrait');

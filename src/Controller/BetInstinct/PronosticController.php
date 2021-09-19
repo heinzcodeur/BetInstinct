@@ -2,15 +2,18 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Entity\BetInstinct\Jeu;
 use App\Entity\BetInstinct\Pronostic;
 use App\Form\BetInstinct\PronosticType;
 use App\Repository\BetInstinct\PronosticRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/bet/instinct/pronostic")
@@ -20,10 +23,21 @@ class PronosticController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_pronostic_index", methods={"GET"})
      */
-    public function index(PronosticRepository $pronosticRepository): Response
+    public function index(PronosticRepository $pronosticRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('p')
+            ->from(Pronostic::class, 'p')
+            ->orderBy('p.created','DESC');
+        // ->where('u.prenom LIKE :prenom')
+        //->andWhere('u.nom = :nom')
+        //->setParameter('prenom', 'cedric')
+        //->setParameter('nom', 'booster');
+
+        $query = $queryBuilder->getQuery();
+
         return $this->render('bet_instinct/pronostic/index.html.twig', [
-            'pronostics' => $pronosticRepository->findAll(),
+            'pronostics' => $query->getResult()
         ]);
     }
 
@@ -35,7 +49,9 @@ class PronosticController extends AbstractController
         $thebet=$this->getDoctrine()->getRepository(Bet::class)->find($bet);
         $affiche = $thebet->getAffiche();
         $pronostic = new Pronostic();
+        $pronostic->setCreated(new \DateTime('now'));
         $pronostic->setBet($thebet);
+        $pronostic->setAffiche($pronostic->getBet()->getAffiche());
         $pronostic->setChoix($choix);
         $pronostic->setCote($cote);
         $pronostic->setAuthor($this->getUser());
@@ -44,7 +60,7 @@ class PronosticController extends AbstractController
         $entityManager->persist($pronostic);
         $entityManager->flush();
 
-        return $this->redirectToRoute('bet_instinct_jeu_new', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bet_instinct_affiche_show', ['id'=>$affiche->getId()], Response::HTTP_SEE_OTHER);
 
         //dd($pronostic);
 
@@ -91,6 +107,9 @@ class PronosticController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pronostic->setCreated(new \DateTime('now'));
+            $pronostic->setAffiche($pronostic->getBet()->getAffiche());
+            //dd($pronostic);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_pronostic_index', [], Response::HTTP_SEE_OTHER);

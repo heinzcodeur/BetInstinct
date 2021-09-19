@@ -80,9 +80,15 @@ class Classement
 
     public function setJoueur(?Athlete $joueur): self
     {
+
         // unset the owning side of the relation if necessary
         if ($joueur === null && $this->joueur !== null) {
             $this->joueur->setRanking(null);
+        }
+
+        if($this->joueur==null){
+            $this->joueur=$joueur;
+            $this->joueur->setRanking($this);
         }
 
         // set the owning side of the relation if necessary
@@ -90,6 +96,7 @@ class Classement
 
             $this->getJoueur()->setRanking(null);
             $joueur->setRanking($this);
+            $this->setRanking($joueur);
             $joueur->setUpdatedAt(new \DateTime('now'));
         }
 

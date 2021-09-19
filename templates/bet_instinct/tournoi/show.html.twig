@@ -7,7 +7,7 @@
         <tbody>
             <tr>
                 <th>tournoi</th>
-                <td>{{ tournoi.city }}</td>
+                <td>{{ tournoi.name?tournoi.name:tournoi.city.name }}</td>
             </tr>
             <tr>
                 <th>Debut</th>

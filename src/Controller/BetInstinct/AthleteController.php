@@ -35,26 +35,23 @@ class AthleteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($athlete->getRanking()==null){
-                return $this->redirectToRoute('bet_instinct_classement_new',['athlete'=>$athlete ]);
+            /*  if($athlete->getRanking()==null){
+                  return $this->redirectToRoute('bet_instinct_classement_new',['athlete'=>$athlete ]);
+              }*/
+            if ($form->get('avatar')->getData() != null) {
+                $avatar = $form->get('avatar')->getData();//dd($avatar);
+                // dd($avatar->guessExtension());
+                $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
+                $avatar->move($this->getParameter('images_athletes'), $fichier);
+                $athlete->setAvatar($fichier);
             }
-
-            $avatar = $form->get('avatar')->getData();//dd($avatar);
-           // dd($avatar->guessExtension());
-            $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
-            $avatar->move($this->getParameter('images_athletes'),$fichier);
-            $athlete->setAvatar($fichier);
             $em=$this->getDoctrine()->getManager('betInstinct');
             $em->persist($athlete);
             $em->flush();
-           // return $this->redirectToRoute('bet_instinct_athlete_index');
 
-
-
-            //dd($athlete);
-           // $entityManager = $this->getDoctrine()->getManager();
-            //$entityManager->persist($athlete);
-            //$entityManager->flush();
+            if($athlete->getRanking()==null){
+                return $this->redirectToRoute('bet_instinct_classement_new',['id'=>$athlete->getId()] );
+            }
 
             return $this->redirectToRoute('bet_instinct_athlete_show', ['id'=>$athlete->getId()], Response::HTTP_SEE_OTHER);
         }
