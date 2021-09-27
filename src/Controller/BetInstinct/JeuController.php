@@ -6,6 +6,7 @@ use App\Entity\BetInstinct\Jeu;
 use App\Entity\BetInstinct\Transaction;
 use App\Form\BetInstinct\JeuType;
 use App\Repository\BetInstinct\JeuRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,12 @@ class JeuController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_jeu_index", methods={"GET"})
      */
-    public function index(JeuRepository $jeuRepository): Response
+    public function index(JeuRepository $jeuRepository,EntityManagerInterface $entityManager): Response
     {
+        $j=$jeuRepository->findAll();
+        //$j[0]->setResultat('titi');
+        //$entityManager->flush();
+        dump($j);
         return $this->render('bet_instinct/jeu/index.html.twig', [
             'jeus' => $jeuRepository->findAll(),
         ]);

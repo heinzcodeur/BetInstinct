@@ -34,10 +34,16 @@ class Formule
      */
     private $jeux;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="formule")
+     */
+    private $games;
+
     public function __construct()
     {
         $this->paris = new ArrayCollection();
         $this->jeux = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
 
@@ -118,6 +124,36 @@ class Formule
             // set the owning side to null (unless already changed)
             if ($jeux->getFormule() === $this) {
                 $jeux->setFormule(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGames(): Collection
+    {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self
+    {
+        if (!$this->games->contains($game)) {
+            $this->games[] = $game;
+            $game->setFormule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame(Game $game): self
+    {
+        if ($this->games->removeElement($game)) {
+            // set the owning side to null (unless already changed)
+            if ($game->getFormule() === $this) {
+                $game->setFormule(null);
             }
         }
 

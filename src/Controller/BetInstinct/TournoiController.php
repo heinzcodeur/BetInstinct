@@ -35,6 +35,8 @@ class TournoiController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($tournoi->getName()==null){$tournoi->setName($tournoi->getCity()->getName());}
+            //dd($tournoi);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tournoi);
             $entityManager->flush();

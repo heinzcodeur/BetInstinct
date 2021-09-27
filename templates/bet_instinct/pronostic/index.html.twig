@@ -11,6 +11,7 @@
                 <th>type</th>
                 <th>Choix</th>
                 <th>Cote</th>
+                <th>game1</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ pronostic.bet.TypedePari }}</td>
                 <td>{{ pronostic.choix }}</td>
                 <td>{{ pronostic.cote }}</td>
+                {% if pronostic.game1 %}<td onclick="document.location='{{ path('bet_instinct_game_show',{'id':pronostic.game1.id}) }}'" class="cursor">{{ pronostic.game1.name }}</td>{% else %} <td></td>{% endif %}
                 <td>
                     <a href="{{ path('bet_instinct_pronostic_show', {'id': pronostic.id}) }}" class="btn btn-info">voir</a>
                 </td>

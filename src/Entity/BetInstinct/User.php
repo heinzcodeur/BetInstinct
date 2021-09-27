@@ -94,12 +94,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $jeux;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="parieur")
+     */
+    private $games;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->paris = new ArrayCollection();
         $this->pronostics = new ArrayCollection();
         $this->jeux = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     public function __toString()
@@ -394,6 +400,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($jeux->getParieur() === $this) {
                 $jeux->setParieur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGames(): Collection
+    {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self
+    {
+        if (!$this->games->contains($game)) {
+            $this->games[] = $game;
+            $game->setParieur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame(Game $game): self
+    {
+        if ($this->games->removeElement($game)) {
+            // set the owning side to null (unless already changed)
+            if ($game->getParieur() === $this) {
+                $game->setParieur(null);
             }
         }
 

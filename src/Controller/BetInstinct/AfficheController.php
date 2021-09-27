@@ -26,16 +26,9 @@ class AfficheController extends AbstractController
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('a')
             ->from(Affiche::class, 'a')
-            ->orderBy('a.schedule','DESC');
-           // ->where('u.prenom LIKE :prenom')
-            //->andWhere('u.nom = :nom')
-            //->setParameter('prenom', 'cedric')
-            //->setParameter('nom', 'booster');
+            ->orderBy('a.id','DESC');
 
         $query = $queryBuilder->getQuery();
-//dd($query->getResult());
-       // echo $query->getDQL(), "\n";
-      //  dd('cool');
         return $this->render('bet_instinct/affiche/index.html.twig', [
             'affiches' => $query->getResult(),
         ]);

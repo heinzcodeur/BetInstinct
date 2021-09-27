@@ -2,10 +2,12 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Athlete;
 use App\Entity\BetInstinct\Classement;
 use App\Form\BetInstinct\ClassementType;
 use App\Repository\BetInstinct\ClassementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +21,16 @@ class ClassementController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_classement_index", methods={"GET"})
      */
-    public function index(ClassementRepository $classementRepository): Response
+    public function index(ClassementRepository $classementRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('c')
+            ->from(Classement::class, 'c')
+            ->orderBy('c.id','DESC');
+
+        $query = $queryBuilder->getQuery();
         return $this->render('bet_instinct/classement/index.html.twig', [
-            'classements' => $classementRepository->findAll(),
+            'classements' => $query->getResult(),
         ]);
     }
 

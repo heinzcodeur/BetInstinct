@@ -40,20 +40,6 @@ class Pronostic
      */
     private $author;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Jeu::class, mappedBy="pronostic2", cascade={"persist", "remove"})
-     */
-    private $jeu2;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Jeu::class, mappedBy="pronostic3", cascade={"persist", "remove"})
-     */
-    private $jeu3;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Jeu::class, inversedBy="prono")
-     */
-    private $game;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -67,7 +53,7 @@ class Pronostic
 
     /**
      * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="pronostics")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $game1;
 
@@ -76,10 +62,30 @@ class Pronostic
      */
     private $created;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archived;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isConfirm;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isChecked;
+
 
     public function __toString()
     {
-        return $this->getChoix();
+        return (string)$this->affiche.' '.$this->bet->getTypedePari().' '.$this->choix;
     }
 
     public function getId(): ?int
@@ -137,61 +143,6 @@ class Pronostic
         return $this;
     }
 
-    public function getJeu2(): ?Jeu
-    {
-        return $this->jeu2;
-    }
-
-    public function setJeu2(?Jeu $jeu2): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($jeu2 === null && $this->jeu2 !== null) {
-            $this->jeu2->setPronostic2(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($jeu2 !== null && $jeu2->getPronostic2() !== $this) {
-            $jeu2->setPronostic2($this);
-        }
-
-        $this->jeu2 = $jeu2;
-
-        return $this;
-    }
-
-    public function getJeu3(): ?Jeu
-    {
-        return $this->jeu3;
-    }
-
-    public function setJeu3(?Jeu $jeu3): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($jeu3 === null && $this->jeu3 !== null) {
-            $this->jeu3->setPronostic3(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($jeu3 !== null && $jeu3->getPronostic3() !== $this) {
-            $jeu3->setPronostic3($this);
-        }
-
-        $this->jeu3 = $jeu3;
-
-        return $this;
-    }
-
-    public function getGame(): ?Jeu
-    {
-        return $this->game;
-    }
-
-    public function setGame(?Jeu $game): self
-    {
-        $this->game = $game;
-
-        return $this;
-    }
 
     public function getIsValid(): ?bool
     {
@@ -237,6 +188,54 @@ class Pronostic
     public function setCreated(?\DateTimeInterface $created): self
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(?bool $archived): self
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?\DateTimeInterface
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated(?\DateTimeInterface $updated): self
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    public function getIsConfirm(): ?bool
+    {
+        return $this->isConfirm;
+    }
+
+    public function setIsConfirm(?bool $isConfirm): self
+    {
+        $this->isConfirm = $isConfirm;
+
+        return $this;
+    }
+
+    public function getIsChecked(): ?bool
+    {
+        return $this->isChecked;
+    }
+
+    public function setIsChecked(?bool $isChecked): self
+    {
+        $this->isChecked = $isChecked;
 
         return $this;
     }

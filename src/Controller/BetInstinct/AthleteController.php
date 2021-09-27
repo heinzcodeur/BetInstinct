@@ -5,6 +5,7 @@ namespace App\Controller\BetInstinct;
 use App\Entity\BetInstinct\Athlete;
 use App\Form\BetInstinct\AthleteType;
 use App\Repository\BetInstinct\AthleteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,17 @@ class AthleteController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_athlete_index", methods={"GET"})
      */
-    public function index(AthleteRepository $athleteRepository): Response
+    public function index(AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryBuilder=$entityManager->createQueryBuilder();
+        $queryBuilder->select('a')
+                    ->from(Athlete::class,'a')
+                    ->orderBy('a.id','DESC')
+            ->setMaxResults(5);
+
+
         return $this->render('bet_instinct/athlete/index.html.twig', [
-            'athletes' => $athleteRepository->findAll(),
+            'athletes' => $queryBuilder->getQuery()->getResult()
         ]);
     }
 
@@ -82,14 +90,17 @@ class AthleteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $avatar = $form->get('avatar')->getData();//dd($avatar);
-            // dd($avatar->guessExtension());
-            $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
-            $avatar->move($this->getParameter('images_athletes'),$fichier);
-            $athlete->setAvatar($fichier);
-            $em=$this->getDoctrine()->getManager('betInstinct');
-            $em->persist($athlete);
-            $em->flush();
+            if ($form->get('avatar')->getData() != null) {
+
+                $avatar = $form->get('avatar')->getData();//dd($avatar);
+                // dd($avatar->guessExtension());
+                $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
+                $avatar->move($this->getParameter('images_athletes'), $fichier);
+                $athlete->setAvatar($fichier);
+            }
+                $em = $this->getDoctrine()->getManager('betInstinct');
+                $em->persist($athlete);
+                $em->flush();
             return $this->redirectToRoute('bet_instinct_athlete_show', ['id'=>$athlete->getId()], Response::HTTP_SEE_OTHER);
         }
 

@@ -68,29 +68,14 @@ class Jeu
     private $transactions;
 
     /**
-     * @ORM\OneToOne(targetEntity=Pronostic::class, cascade={"persist", "remove"})
-     */
-    private $pronostic2;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Pronostic::class, cascade={"persist", "remove"})
-     */
-    private $pronostic3;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $cote_totale;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Pronostic::class, mappedBy="game")
-     */
-    private $prono;
 
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
-        $this->prono = new ArrayCollection();
     }
 
     public function __toString()
@@ -230,30 +215,6 @@ class Jeu
         return $this;
     }
 
-    public function getPronostic2(): ?Pronostic
-    {
-        return $this->pronostic2;
-    }
-
-    public function setPronostic2(?Pronostic $pronostic2): self
-    {
-        $this->pronostic2 = $pronostic2;
-
-        return $this;
-    }
-
-    public function getPronostic3(): ?Pronostic
-    {
-        return $this->pronostic3;
-    }
-
-    public function setPronostic3(?Pronostic $pronostic3): self
-    {
-        $this->pronostic3 = $pronostic3;
-
-        return $this;
-    }
-
     public function getCoteTotale(): ?float
     {
         return $this->cote_totale;
@@ -265,35 +226,4 @@ class Jeu
 
         return $this;
     }
-
-    /**
-     * @return Collection|Pronostic[]
-     */
-    public function getProno(): Collection
-    {
-        return $this->prono;
-    }
-
-    public function addProno(Pronostic $prono): self
-    {
-        if (!$this->prono->contains($prono)) {
-            $this->prono[] = $prono;
-            $prono->setGame($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProno(Pronostic $prono): self
-    {
-        if ($this->prono->removeElement($prono)) {
-            // set the owning side to null (unless already changed)
-            if ($prono->getGame() === $this) {
-                $prono->setGame(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

@@ -2,32 +2,32 @@
 
 {% block body %}
     <h1>Game index</h1>
-    {{ dump(games.pronostics|length) }}
-    {% for g in games.pronostics %}
-            {{ dump(g) }}
-    {% endfor %}
+    <div class="col text-right">
+        <a href="{{ path('bet_instinct_game_new') }}" class="btn btn-primary">nouveau</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
+            <th>id</th>
             <th>Name</th>
+            <th>formule</th>
+            <th>nb pronostics</th>
             <th>actions</th>
         </tr>
         </thead>
         <tbody>
         {% for game in games %}
-            <tr>
+            {% if game.resultat=='gagnant' %}<tr class="bg-success">
+            {% elseif game.resultat=='perdant' %} <tr class="bg-danger">{% endif %}
                 <td>{{ game.id }}</td>
                 <td>{{ game.name }}</td>
+                <td>{{ game.formule }}</td>
+                <td>{{ game.pronostics|length }}</td>
                 <td>
-                    <a href="{{ path('bet_instinct_game_show', {'id': game.id}) }}">show</a>
-                    <a href="{{ path('bet_instinct_game_edit', {'id': game.id}) }}">edit</a>
+                    <a href="{{ path('bet_instinct_game_show', {'id': game.id}) }}" class="btn btn-info">show</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+
         {% endfor %}
         </tbody>
     </table>

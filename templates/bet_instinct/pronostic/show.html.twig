@@ -1,17 +1,21 @@
 {{include('head.html.twig')}}
 
 {% block body %}
-    <h4 class="text-center">Pronostic {{ pronostic.bet.affiche }} {{ pronostic.bet.TypedePari }}</h4>
+    <h4 class="text-center">Pronostic {{ pronostic.bet.affiche|upper }} {{ pronostic.bet.TypedePari }}</h4>
 {{ dump(pronostic) }}
     <table class="table">
         <tbody>
             <tr>
                 <th>Affiche</th>
-                <td>{{ pronostic.bet.affiche }}</td>
+                <td>{{ pronostic.bet.affiche|upper }}</td>
+            </tr>
+            <tr>
+                <th>type de pari</th>
+                <td>{{ pronostic.bet.TypedePari }}</td>
             </tr>
             <tr>
                 <th>Choix</th>
-                <td>{{ pronostic.choix }}</td>
+                <td class="font-weight-bold">{{ pronostic.choix }}</td>
             </tr>
             <tr>
                 <th>Cote</th>
@@ -19,15 +23,15 @@
             </tr>
         <tr>
                 <th>resultat</th>
-                <td>{{    pronostic.isValid==1?'valide':'perdu' }}</td>
+                <td>{{    pronostic.isValid==1?'valide':'' }}</td>
             </tr>
         </tbody>
     </table>
 <div class="col text-center">
-    <a href="{{ path('bet_instinct_pronostic_index') }}" class="btn btn-primary">retour</a>
+    <a href="{{ path('bet_instinct_game_show',{'id':pronostic.game1.id}) }}" class="btn btn-primary">retour</a>
 
+    {% if pronostic.isConfirm == false or pronostic.isConfirm == null %}
     <a href="{{ path('bet_instinct_pronostic_edit', {'id': pronostic.id}) }}" class="btn btn-success">edit</a>
-
-    {{ include('bet_instinct/pronostic/_delete_form.html.twig') }}
+    {% endif %}
 </div>
 {% endblock %}

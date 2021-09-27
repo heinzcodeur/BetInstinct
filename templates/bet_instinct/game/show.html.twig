@@ -1,26 +1,87 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Game{% endblock %}
+{{ include('head.html.twig') }}
 
 {% block body %}
-    <h1>Game</h1>
 
+    {% for a in app.flashes('info') %}
+        <div class="alert alert-info">{{ a }}</div>{% endfor %}
+    {% for s in app.flashes('success') %}
+        <div class="alert alert-success">{{ s }}</div>{% endfor %}
+    {% for d in app.flashes('danger') %}
+        <div class="alert alert-danger">{{ d }}</div>{% endfor %}
+
+    <h2 class="text-center">Pari "{{ game.name }}" {{ game.formule }} de {{ app.user.nickname|capitalize }}</h2>
+    {{ dump(game) }}
     <table class="table">
         <tbody>
+        <tr>
+            <th>cote totale</th>
+            <td>{{ game.coteTotale }}</td>
+        </tr>
+        <tr>
+            <th>nombre pronostic</th>
+            <td>{{ game.pronostics|length }}</td>
+        </tr>
+        {% if game.gain!=null %}
             <tr>
-                <th>Id</th>
-                <td>{{ game.id }}</td>
+                <th>gain</th>
+                <td class="text-success font-weight-bold">{{ game.gain }} €</td>
+            </tr>
+        {% endif %}
+        {% for p in game.pronostics %}
+            <tr class="bg-secondary cursor"
+                onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                <th>pronostic</th>
+                <td>{{ p.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ game.name }}</td>
+                <th>affiche</th>
+                <td><i>{{ p.bet.affiche.schedule|date('d-m-Y') }}</i> {{ p.bet.affiche|upper }} {{ p.bet.affiche.favori.ranking.association }}-{{ p.bet.affiche.tournoi }} </td>
+
+
             </tr>
+
+            <tr>
+                <th>type de pari</th>
+                <td>{{ p.bet.TypedePari }}</td>
+            </tr>
+            <tr>
+                <th>cote</th>
+                <td>{{ p.cote }}</td>
+            </tr>
+            <tr>
+                <th>choix</th>
+                <td>{{ p.choix }}</td>
+            </tr>
+            <tr>
+                <th>resultat</th>
+                {% if p.isValid == 1 %}
+                <td class="font-weight-bold text-success">valide</td>
+                {% else %}
+                <td class="font-weight-bold text-danger">perdu</td>
+                    {% endif %}
+            </tr>
+                {% if p.isChecked == false %}
+                <tr>
+                    <td>
+                        <a href="{{ path('bet_instinct_pronostic_checkin',{'id':p.id,'valid':true}) }}"
+                           class="btn btn-success">winner</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('bet_instinct_pronostic_checkin',{'id':p.id}) }}"
+                           class="btn btn-danger">loser</a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('bet_instinct_game_index') }}">back to list</a>
-
-    <a href="{{ path('bet_instinct_game_edit', {'id': game.id}) }}">edit</a>
-
-    {{ include('bet_instinct_game/_delete_form.html.twig') }}
+    <div class="col text-center mt-4">
+        <a href="{{ path('bet_instinct_game_index') }}" class="btn btn-secondary">retour</a>
+        {% if game.isConfirm == 0 and game.isArchived == false %}
+            <a href="{{ path('bet_instinct_game_edit', {'id': game.id}) }}" class="btn btn-info">edit</a>
+            <a href="{{ path('bet_instinct_game_validate', {'id': game.id}) }}" class="btn btn-primary">valider</a>
+            <a onclick="return(confirm('archiver?'))" href="{{ path('bet_instinct_game_archive',{'id':game.id}) }}"
+               class="btn btn-danger">archiver</a>
+        {% endif %}
+    </div>
 {% endblock %}

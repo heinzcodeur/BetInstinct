@@ -50,6 +50,11 @@ class Transaction
      */
     private $jeu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="transactions")
+     */
+    private $game;
+
 
 
 
@@ -139,6 +144,18 @@ class Transaction
     public function setJeu(?Jeu $jeu): self
     {
         $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }
