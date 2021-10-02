@@ -29,14 +29,22 @@
                 <th>Dotation</th>
                 <td>{{ tournoi.dotation|number_format(0,' ',' ',' ') }} $</td>
             </tr>
+        {% for a in tournoi.affiches %}
+            <tr>
+                <th>{{ a.schedule|date('d-m-Y H:i') }}</th>
+                <td onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':a.id}) }}'" class="cursor">{{ a }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
+    <div class="col text-center">
     <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
 
     <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-success">edit</a>
 
     <a href="{{ path('bet_instinct_affiche_new') }}" class="btn btn-secondary">add match</a>
+    <a href="{{ path('bet_instinct_equipe_new') }}" class="btn btn-info">add team</a>
 
     {{ include('end.html.twig') }}
 

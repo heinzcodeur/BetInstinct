@@ -27,6 +27,7 @@ class TournoiType extends AbstractType
             ->add('dotation')
             ->add('city')
             ->add('surface')
+            ->add('sport')
             ->add('tenant_titre')
         ;
     }

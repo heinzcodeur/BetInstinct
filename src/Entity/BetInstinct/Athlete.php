@@ -100,12 +100,18 @@ class Athlete
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="joueurs")
+     */
+    private $equipes;
+
 
     public function __construct()
     {
         $this->affiches_favori = new ArrayCollection();
         $this->affiches_challenger = new ArrayCollection();
         $this->titres = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
     }
 
     public function __toString()
@@ -354,6 +360,33 @@ class Athlete
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->addJoueur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            $equipe->removeJoueur($this);
+        }
 
         return $this;
     }

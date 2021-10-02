@@ -28,6 +28,17 @@ class BetType extends AbstractType
             ->add('cote12')
             ->add('cote13')
             ->add('cote14')
+            ->add('cote15')
+            ->add('cote16')
+            ->add('cote17')
+            ->add('cote18')
+            ->add('cote19')
+            ->add('cote20')
+            ->add('cote21')
+            ->add('cote22')
+            ->add('cote23')
+            ->add('cote24')
+            ->add('cote25')
         ;
     }
 

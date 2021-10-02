@@ -30,7 +30,7 @@ class BetController extends AbstractController
     /**
      * @Route("/new/{id}", name="bet_instinct_bet_new", methods={"GET","POST"})
      */
-    public function new(Affiche $affiche, Request $request): Response
+    public function new($id=null,Affiche $affiche, Request $request): Response
     {
         dump($affiche);
         $bet = new Bet();

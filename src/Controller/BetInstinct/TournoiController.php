@@ -36,6 +36,13 @@ class TournoiController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if($tournoi->getName()==null){$tournoi->setName($tournoi->getCity()->getName());}
+            if($tournoi->getSport()==null) {
+                $this->addFlash('info', 'choisissez un sport pour votre tournoi');
+                return $this->renderForm('bet_instinct/tournoi/new.html.twig', [
+                    'tournoi' => $tournoi,
+                    'form' => $form,
+                ]);
+            }
             //dd($tournoi);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tournoi);

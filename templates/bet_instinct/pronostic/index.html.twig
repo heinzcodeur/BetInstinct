@@ -1,43 +1,44 @@
-{{include('head.html.twig')}}
+{{ include('head.html.twig') }}
 
 {% block body %}
     <h1>Pronostic index</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>DATE</th>
-                <th>match</th>
-                <th>type</th>
-                <th>Choix</th>
-                <th>Cote</th>
-                <th>game1</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>DATE</th>
+            <th>match</th>
+            <th>type</th>
+            <th>Choix</th>
+            <th>Cote</th>
+            <th>game1</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for pronostic in pronostics %}
             <tr>
-                <td>{{ pronostic.created|date('d-m-Y H:m:s') }}</td>
-                <td>{{ pronostic.affiche }}</td>
-                <td>{{ pronostic.bet.TypedePari }}</td>
-                <td>{{ pronostic.choix }}</td>
-                <td>{{ pronostic.cote }}</td>
-                {% if pronostic.game1 %}<td onclick="document.location='{{ path('bet_instinct_game_show',{'id':pronostic.game1.id}) }}'" class="cursor">{{ pronostic.game1.name }}</td>{% else %} <td></td>{% endif %}
-                <td>
-                    <a href="{{ path('bet_instinct_pronostic_show', {'id': pronostic.id}) }}" class="btn btn-info">voir</a>
-                </td>
+            <td>{{ pronostic.created|date('d-m-Y H:m:s') }}</td>
+            <td>{% if pronostic.affiche.equipeA is not null %}{{ pronostic.affiche.equipeA.name|upper }} VS {{ pronostic.affiche.EquipeB.name }}{% endif %}</td>
+            <td>{{ pronostic.bet.TypedePari }}</td>
+            <td onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':pronostic.id}) }}'" class="cursor">{{ pronostic.choix }}</td>
+            <td>{{ pronostic.cote }}</td>
+            {% if pronostic.game1 %}
+                <td onclick="document.location='{{ path('bet_instinct_game_show',{'id':pronostic.game1.id}) }}'"
+                    class="cursor">{{ pronostic.game1.name }}</td>{% else %}
+                <td></td>
+            {% endif %}
+            <td>
+                <a href="{{ path('bet_instinct_pronostic_show', {'id': pronostic.id}) }}" class="btn btn-info">voir</a>
+            </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+
         {% endfor %}
         </tbody>
     </table>
 
 
-    {{include('end.html.twig')}}
+    {{ include('end.html.twig') }}
 
 
 {% endblock %}

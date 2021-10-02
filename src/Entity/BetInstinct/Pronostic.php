@@ -3,6 +3,8 @@
 namespace App\Entity\BetInstinct;
 
 use App\Repository\BetInstinct\PronosticRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -81,6 +83,22 @@ class Pronostic
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isChecked;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Game::class, inversedBy="pronostics2")
+     */
+    private $game2;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="pronos")
+     */
+    private $game3;
+
+    public function __construct()
+    {
+        $this->game2 = new ArrayCollection();
+        $this->game3 = new ArrayCollection();
+    }
 
 
     public function __toString()
@@ -236,6 +254,57 @@ class Pronostic
     public function setIsChecked(?bool $isChecked): self
     {
         $this->isChecked = $isChecked;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGame2(): Collection
+    {
+        return $this->game2;
+    }
+
+    public function addGame2(Game $game2): self
+    {
+        if (!$this->game2->contains($game2)) {
+            $this->game2[] = $game2;
+        }
+
+        return $this;
+    }
+
+    public function removeGame2(Game $game2): self
+    {
+        $this->game2->removeElement($game2);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGame3(): Collection
+    {
+        return $this->game3;
+    }
+
+    public function addGame3(Game $game3): self
+    {
+        if (!$this->game3->contains($game3)) {
+            $this->game3[] = $game3;
+            $game3->addProno($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame3(Game $game3): self
+    {
+        if ($this->game3->removeElement($game3)) {
+            $game3->removeProno($this);
+        }
 
         return $this;
     }

@@ -110,6 +110,61 @@ class Bet
      */
     private $paris;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote15;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote16;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote17;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote18;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote19;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote20;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote21;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote22;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote23;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote24;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote25;
+
     public function __toString()
     {
 return (string)$this->TypedePari;
@@ -376,6 +431,138 @@ return (string)$this->TypedePari;
                 $pari->setBet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCote15(): ?float
+    {
+        return $this->cote15;
+    }
+
+    public function setCote15(?float $cote15): self
+    {
+        $this->cote15 = $cote15;
+
+        return $this;
+    }
+
+    public function getCote16(): ?float
+    {
+        return $this->cote16;
+    }
+
+    public function setCote16(?float $cote16): self
+    {
+        $this->cote16 = $cote16;
+
+        return $this;
+    }
+
+    public function getCote17(): ?float
+    {
+        return $this->cote17;
+    }
+
+    public function setCote17(?float $cote17): self
+    {
+        $this->cote17 = $cote17;
+
+        return $this;
+    }
+
+    public function getCote18(): ?float
+    {
+        return $this->cote18;
+    }
+
+    public function setCote18(?float $cote18): self
+    {
+        $this->cote18 = $cote18;
+
+        return $this;
+    }
+
+    public function getCote19(): ?float
+    {
+        return $this->cote19;
+    }
+
+    public function setCote19(?float $cote19): self
+    {
+        $this->cote19 = $cote19;
+
+        return $this;
+    }
+
+    public function getCote20(): ?float
+    {
+        return $this->cote20;
+    }
+
+    public function setCote20(?float $cote20): self
+    {
+        $this->cote20 = $cote20;
+
+        return $this;
+    }
+
+    public function getCote21(): ?float
+    {
+        return $this->cote21;
+    }
+
+    public function setCote21(?float $cote21): self
+    {
+        $this->cote21 = $cote21;
+
+        return $this;
+    }
+
+    public function getCote22(): ?float
+    {
+        return $this->cote22;
+    }
+
+    public function setCote22(?float $cote22): self
+    {
+        $this->cote22 = $cote22;
+
+        return $this;
+    }
+
+    public function getCote23(): ?float
+    {
+        return $this->cote23;
+    }
+
+    public function setCote23(?float $cote23): self
+    {
+        $this->cote23 = $cote23;
+
+        return $this;
+    }
+
+    public function getCote24(): ?float
+    {
+        return $this->cote24;
+    }
+
+    public function setCote24(?float $cote24): self
+    {
+        $this->cote24 = $cote24;
+
+        return $this;
+    }
+
+    public function getCote25(): ?float
+    {
+        return $this->cote25;
+    }
+
+    public function setCote25(?float $cote25): self
+    {
+        $this->cote25 = $cote25;
 
         return $this;
     }

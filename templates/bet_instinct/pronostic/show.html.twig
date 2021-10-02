@@ -7,7 +7,7 @@
         <tbody>
             <tr>
                 <th>Affiche</th>
-                <td>{{ pronostic.bet.affiche|upper }}</td>
+                <td>{{ pronostic.affiche.equipeA.name|upper }} VS {{ pronostic.affiche.EquipeB.name }}</td>
             </tr>
             <tr>
                 <th>type de pari</th>
@@ -25,11 +25,16 @@
                 <th>resultat</th>
                 <td>{{    pronostic.isValid==1?'valide':'' }}</td>
             </tr>
+            <tr>
+                <th>game1</th>
+                <td>{{ pronostic.game1 }}</td>
+            </tr>
         </tbody>
     </table>
 <div class="col text-center">
+    {% if pronostic.game1!=null %}
     <a href="{{ path('bet_instinct_game_show',{'id':pronostic.game1.id}) }}" class="btn btn-primary">retour</a>
-
+    {% endif %}
     {% if pronostic.isConfirm == false or pronostic.isConfirm == null %}
     <a href="{{ path('bet_instinct_pronostic_edit', {'id': pronostic.id}) }}" class="btn btn-success">edit</a>
     {% endif %}

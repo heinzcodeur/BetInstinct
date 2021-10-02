@@ -365,6 +365,31 @@ return $this->name;
      */
     private $sport;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix21;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix22;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix23;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix24;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix25;
+
     public function __construct()
     {
         $this->typedeParis = new ArrayCollection();
@@ -485,6 +510,66 @@ return $this->name;
     public function setSport(?Sport $sport): self
     {
         $this->sport = $sport;
+
+        return $this;
+    }
+
+    public function getChoix21(): ?string
+    {
+        return $this->choix21;
+    }
+
+    public function setChoix21(?string $choix21): self
+    {
+        $this->choix21 = $choix21;
+
+        return $this;
+    }
+
+    public function getChoix22(): ?string
+    {
+        return $this->choix22;
+    }
+
+    public function setChoix22(?string $choix22): self
+    {
+        $this->choix22 = $choix22;
+
+        return $this;
+    }
+
+    public function getChoix23(): ?string
+    {
+        return $this->choix23;
+    }
+
+    public function setChoix23(?string $choix23): self
+    {
+        $this->choix23 = $choix23;
+
+        return $this;
+    }
+
+    public function getChoix24(): ?string
+    {
+        return $this->choix24;
+    }
+
+    public function setChoix24(?string $choix24): self
+    {
+        $this->choix24 = $choix24;
+
+        return $this;
+    }
+
+    public function getChoix25(): ?string
+    {
+        return $this->choix25;
+    }
+
+    public function setChoix25(?string $choix25): self
+    {
+        $this->choix25 = $choix25;
 
         return $this;
     }

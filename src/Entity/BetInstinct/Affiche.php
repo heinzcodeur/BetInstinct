@@ -97,6 +97,21 @@ class Affiche
      */
     private $pronostics;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="affiches")
+     */
+    private $equipeA;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="affiches")
+     */
+    private $EquipeB;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $Cote_match_null;
+
 
     public function __construct()
     {
@@ -421,6 +436,42 @@ class Affiche
                 $pronostic->setAffiche(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEquipeA(): ?Equipe
+    {
+        return $this->equipeA;
+    }
+
+    public function setEquipeA(?Equipe $equipeA): self
+    {
+        $this->equipeA = $equipeA;
+
+        return $this;
+    }
+
+    public function getEquipeB(): ?Equipe
+    {
+        return $this->EquipeB;
+    }
+
+    public function setEquipeB(?Equipe $EquipeB): self
+    {
+        $this->EquipeB = $EquipeB;
+
+        return $this;
+    }
+
+    public function getCoteMatchNull(): ?float
+    {
+        return $this->Cote_match_null;
+    }
+
+    public function setCoteMatchNull(?float $Cote_match_null): self
+    {
+        $this->Cote_match_null = $Cote_match_null;
 
         return $this;
     }

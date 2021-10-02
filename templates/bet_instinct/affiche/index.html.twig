@@ -20,8 +20,10 @@
             <tr>
                 <td>{{ affiche.schedule ? affiche.schedule|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ affiche.score }}</td>
+                {% if affiche.tournoi.sport == 'tennis' %}
                 <td class="text-success font-weight-bold">{{ affiche.favori|upper }}</td>
                 <td class="text-danger font-weight-bold">{{ affiche.challenger|upper }}</td>
+                {% endif %}
                 <td>
                     <a href="{{ path('bet_instinct_affiche_show', {'id': affiche.id}) }}" class="btn btn-info">voir</a>
                 </td>

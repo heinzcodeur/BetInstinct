@@ -34,6 +34,11 @@ class Type2choixType extends AbstractType
             ->add('choix18')
             ->add('choix19')
             ->add('choix20')
+            ->add('choix21')
+            ->add('choix22')
+            ->add('choix23')
+            ->add('choix24')
+            ->add('choix25')
         ;
     }
 

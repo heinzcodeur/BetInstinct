@@ -19,6 +19,7 @@ class GameType extends AbstractType
             ->add('formule',EntityType::class,[
                 'class'=>Formule::class
             ])
+            ->add('pronos')
             ->add('resultat',ChoiceType::class,[
                 'choices'=>[
                     'en attente'=>1,

@@ -3,6 +3,8 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Affiche;
+use App\Entity\BetInstinct\Bet;
+use App\Entity\BetInstinct\TypedePari;
 use App\Entity\BetInstinct\User;
 use App\Form\BetInstinct\AfficheType;
 use App\Repository\BetInstinct\AfficheRepository;
@@ -40,15 +42,38 @@ class AfficheController extends AbstractController
     public function new(Request $request): Response
     {
         $affiche = new Affiche();
+        $bet=new Bet();
+
         $form = $this->createForm(AfficheType::class, $affiche);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on check le type de sport de l'affiche
+            //dd($affiche);
+           if($affiche->getTournoi()->getSport()->getId()==3){
+               //si foot on cree un bet Resultat Foot
+            $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(22);
+            $bet->setTypedePari($type);
+            $bet->setAffiche($affiche);
+            $bet->setCote1($affiche->getCoteFavorite());
+            $bet->setCote2($affiche->getCoteMatchNull());
+            $bet->setCote3($affiche->getCoteOutsider());
+            //dd($bet);
+           }else{
+;               //sinon cree un bet vainqueur tennis
+            $bet->setAffiche($affiche);
+            $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(2);
+            $bet->setTypedePari($type);
+            $bet->setCote1($affiche->getCoteFavorite());
+            $bet->setCote2($affiche->getCoteOutsider());
+           }
+            //dd($bet);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affiche);
+            $entityManager->persist($bet);
             $entityManager->flush();
 
-            return $this->redirectToRoute('bet_instinct_affiche_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home');
         }
 
         return $this->renderForm('bet_instinct/affiche/new.html.twig', [

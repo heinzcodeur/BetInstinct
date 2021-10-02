@@ -50,12 +50,18 @@ class Pays
      */
     private $capitale;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="pays")
+     */
+    private $equipes;
+
 
     public function __construct()
     {
         $this->cities = new ArrayCollection();
         $this->athletes = new ArrayCollection();
         $this->athletes_origine = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
     }
 
     public function __toString()
@@ -190,6 +196,36 @@ class Pays
     public function setCapitale(?City $capitale): self
     {
         $this->capitale = $capitale;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->setPays($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            // set the owning side to null (unless already changed)
+            if ($equipe->getPays() === $this) {
+                $equipe->setPays(null);
+            }
+        }
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity\BetInstinct;
 
+use App\Entity\Betinstinct\Pronostic;
 use App\Repository\BetInstinct\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -94,17 +95,30 @@ class Game
      */
     private $underGames;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Pronostic::class, mappedBy="game2")
+     */
+    private $pronostics2;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Pronostic::class, inversedBy="game3")
+     */
+    private $pronos;
+
     public function __toString()
     {
         return $this->name.' '.$this->created->format('d-m-Y');
 
     }
 
-    public function __construct()
+    public function __construct($name=null)
     {
+        $this->name=$name;
         $this->pronostics = new ArrayCollection();
         $this->transactions = new ArrayCollection();
         $this->underGames = new ArrayCollection();
+        $this->pronostics2 = new ArrayCollection();
+        $this->pronos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -342,6 +356,57 @@ class Game
                 $underGame->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pronostic[]
+     */
+    public function getPronostics2(): Collection
+    {
+        return $this->pronostics2;
+    }
+
+    public function addPronostics2(Pronostic $pronostics2): self
+    {
+        if (!$this->pronostics2->contains($pronostics2)) {
+            $this->pronostics2[] = $pronostics2;
+            $pronostics2->addGame2($this);
+        }
+
+        return $this;
+    }
+
+    public function removePronostics2(Pronostic $pronostics2): self
+    {
+        if ($this->pronostics2->removeElement($pronostics2)) {
+            $pronostics2->removeGame2($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pronostic[]
+     */
+    public function getPronos(): Collection
+    {
+        return $this->pronos;
+    }
+
+    public function addProno(Pronostic $prono): self
+    {
+        if (!$this->pronos->contains($prono)) {
+            $this->pronos[] = $prono;
+        }
+
+        return $this;
+    }
+
+    public function removeProno(Pronostic $prono): self
+    {
+        $this->pronos->removeElement($prono);
 
         return $this;
     }

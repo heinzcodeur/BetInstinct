@@ -158,7 +158,7 @@ class PronosticController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit/{checkin}/{valid}", name="bet_instinct_pronostic_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit/", name="bet_instinct_pronostic_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Pronostic $pronostic): Response
     {
@@ -171,7 +171,6 @@ class PronosticController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $pronostic->setCreated(new \DateTime('now'));
             $pronostic->setAffiche($pronostic->getBet()->getAffiche());
-            dd($pronostic);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_pronostic_index', [], Response::HTTP_SEE_OTHER);

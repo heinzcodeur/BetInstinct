@@ -18,9 +18,12 @@ class AfficheType extends AbstractType
             ->add('schedule', DateTimeType::class,['widget'=>'single_text'])
             ->add('score')
             ->add('cote_favorite')
+            ->add('cote_match_null')
             ->add('cote_outsider')
             ->add('tournoi')
             ->add('favori')
+            ->add('equipeA')
+            ->add('EquipeB')
             ->add('challenger')
             ->add('archived')
         ;

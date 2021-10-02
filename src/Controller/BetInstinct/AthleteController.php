@@ -24,8 +24,7 @@ class AthleteController extends AbstractController
         $queryBuilder=$entityManager->createQueryBuilder();
         $queryBuilder->select('a')
                     ->from(Athlete::class,'a')
-                    ->orderBy('a.id','DESC')
-            ->setMaxResults(5);
+                    ->orderBy('a.id','DESC');
 
 
         return $this->render('bet_instinct/athlete/index.html.twig', [
