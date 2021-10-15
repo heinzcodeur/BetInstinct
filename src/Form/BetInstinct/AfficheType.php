@@ -25,7 +25,7 @@ class AfficheType extends AbstractType
             ->add('equipeA')
             ->add('EquipeB')
             ->add('challenger')
-            ->add('archived')
+            //->add('archived')
         ;
     }
 

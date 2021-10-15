@@ -114,11 +114,10 @@ class PronosticController extends AbstractController
                     if($g->getFormule()->getId()==1){
                         $g->setResultat('gagnant');
                         $g->setUpdated(new \DateTimeImmutable('now'));
-                        $g->setCoteTotale($pronostic->getCote());
                         $pronostic->setIsValid(true);
                         //puisque le game est gagnant on doit calculer et creer un gain avec une transaction
                         //d'abord on calcule le gain
-                        $gain=$pronostic->getCote()*$g->getMise();
+                        $gain=$g->getCoteTotale()*$g->getMise();
                         $g->setGain($gain);
                         $g->setIsArchived(true);
                         //ensuite on cree une transac
@@ -148,14 +147,40 @@ class PronosticController extends AbstractController
                         //pour un pronostic valide, on verifie si tous les autres pronos associés sont déjà checkés alors le game est gagnant
                         foreach ($g->getPronos() as $prono) {
                             //si au moins un prono n'est pas encore checké le resultat de game reste en attente
-                            if($prono->getIsChecked()!=1){
-                                dd($prono->getId());
-                                //$g->setResultat('en attente');
-                                return $this->redirectToRoute('bet_instinct_game_show',['id'=>$g->getId()]);
+                            if ($prono->getIsChecked() != 1) {
+                                $em->flush();
+                                return $this->redirectToRoute('bet_instinct_game_show', ['id' => $g->getId()]);
                             }
                         }
                             //sinon le game est gagnant
                             $g->setResultat('gagnant');
+
+                             $g->setUpdated(new \DateTimeImmutable('now'));
+                        //puisque le game est gagnant on doit calculer et creer un gain avec une transaction
+                        //d'abord on calcule le gain
+                        $gain=$g->getCoteTotale()*$g->getMise();
+                        $g->setGain($gain);
+                        $g->setIsArchived(true);
+                        //ensuite on cree une transac
+                        $transac=new Transaction();
+                        $transac->setType('gain');
+                        $transac->setMontant($gain);
+                        $transac->setAuteur($this->getUser());
+                        $transac->setCreatedAt(new \DateTimeImmutable('now'));
+                        $transac->setGame($g);
+
+                        //on recupere le solde du parieur
+                        $solde=$this->getUser()->getSolde();
+                        $balance=$solde->getBalance();
+                        //on additionne ce solde au gain
+                        $balance+=$gain;
+                        $solde->setBalance($balance);
+
+                        $em->persist($transac);
+
+                        $this->addFlash('success','ça fait Zumba Cafew '.$gain.' € pour toi seul!');
+
+
                         $em->flush();
                         //dd($g);
                             return $this->redirectToRoute('bet_instinct_game_show',['id'=>$g->getId()]);

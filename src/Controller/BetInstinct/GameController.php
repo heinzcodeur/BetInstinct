@@ -46,6 +46,13 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           // if($game->getFormule()->getId()==2){
+                $cote=1;
+                foreach ($game->getPronos() as $prono) {
+                    $cote*=$prono->getCote();
+                    $game->setCoteTotale($cote);
+                }
+            //}
             $game->setCreated(new \DateTimeImmutable('now'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($game);

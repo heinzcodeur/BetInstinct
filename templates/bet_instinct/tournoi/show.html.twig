@@ -1,7 +1,7 @@
 {{ include('head.html.twig') }}
 
 {% block body %}
-    <h1>Tournoi</h1>
+    <h2 class="text-center">{{tournoi.name}} {{ tournoi.equipes|length }} équipes</h2>
 
     <table class="table">
         <tbody>
@@ -29,10 +29,10 @@
                 <th>Dotation</th>
                 <td>{{ tournoi.dotation|number_format(0,' ',' ',' ') }} $</td>
             </tr>
-        {% for a in tournoi.affiches %}
+        {% for e in tournoi.equipes %}
             <tr>
-                <th>{{ a.schedule|date('d-m-Y H:i') }}</th>
-                <td onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':a.id}) }}'" class="cursor">{{ a }}</td>
+                <th>club</th>
+                <td onclick="document.location='{{ path('bet_instinct_equipe_show',{'id':e.id}) }}'" class='cursor'>{{ e }}</td>
             </tr>
         {% endfor %}
         </tbody>
