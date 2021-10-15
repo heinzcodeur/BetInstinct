@@ -2,8 +2,7 @@
 
 
 {% block body %}
-    <h1>Create new Bet</h1>
-
+    <h1 class="text-center">{{ affiche }}</h1>
     {{ include('bet_instinct/bet/_form.html.twig') }}
 
     <a href="{{ path('bet_instinct_bet_index') }}" class="btn btn-secondary">retour</a>

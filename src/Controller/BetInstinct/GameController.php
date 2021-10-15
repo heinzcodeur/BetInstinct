@@ -91,7 +91,7 @@ class GameController extends AbstractController
                 $game->setParieur($this->getUser());
 
                 $cote = 0;
-                foreach ($game->getPronostics() as $p) {
+                foreach ($game->getPronos() as $p) {
                     $cote += $p->getCote();
                     $p->setIsConfirm(true);
                     $p->setUpdated(new \DateTime('now'));
@@ -116,7 +116,7 @@ class GameController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 //on recupere les pronostics
                 $tab=[];
-                foreach($game->getPronostics2() as $p){
+                foreach($game->getPronos() as $p){
                     $tab[]=$p;
                 }
 
@@ -127,8 +127,8 @@ class GameController extends AbstractController
                 $combi->setParent($game);
                 //ensuite on attribue $combi au game2 de chaque pronostic et on calcule la cotetotale du combiné
                 $cote=1;
-                foreach ($game->getPronostics2() as $p){
-                    $p->addGame2($combi);
+                foreach ($game->getPronos() as $p){
+                    $p->addGame3($combi);
                     $cote*=$p->getCote();
                }
                 //on hydrate le combiné
@@ -147,8 +147,8 @@ class GameController extends AbstractController
                 //creation du premier double
                 $d1=new Game('double1-du-'.$n2);
                 $d1->setParent($game);
-                $tab[0]->addGame2($d1);
-                $tab[1]->addGame2($d1);
+                $tab[0]->addGame3($d1);
+                $tab[1]->addGame3($d1);
                 $d1->setCoteTotale(1);
                 $d1->setCoteTotale($tab[0]->getCote()*$tab[1]->getCote());
                 $d1->setCreated(new \DateTime('now'));
@@ -161,8 +161,8 @@ class GameController extends AbstractController
                 //creation du deuxieme double
                 $d2=new Game('double2-du-'.$n2);
                 $d2->setParent($game);
-                $tab[0]->addGame2($d2);
-                $tab[2]->addGame2($d2);
+                $tab[0]->addGame3($d2);
+                $tab[2]->addGame3($d2);
                 $d2->setCoteTotale(1);
                 $d2->setCoteTotale($tab[0]->getCote()*$tab[2]->getCote());
                 $d2->setCreated(new \DateTime('now'));
@@ -175,8 +175,8 @@ class GameController extends AbstractController
                 //creation du troisieme double
                 $d3=new Game('double3-du-'.$n2);
                 $d3->setParent($game);
-                $tab[1]->addGame2($d3);
-                $tab[2]->addGame2($d3);
+                $tab[1]->addGame3($d3);
+                $tab[2]->addGame3($d3);
                 $d3->setCoteTotale(1);
                 $d3->setCoteTotale($tab[1]->getCote()*$tab[2]->getCote());
                 $d3->setCreated(new \DateTime('now'));

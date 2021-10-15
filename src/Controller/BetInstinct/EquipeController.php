@@ -5,6 +5,7 @@ namespace App\Controller\BetInstinct;
 use App\Entity\BetInstinct\Association;
 use App\Entity\BetInstinct\Athlete;
 use App\Entity\BetInstinct\Equipe;
+use App\Entity\BetInstinct\Pays;
 use App\Form\BetInstinct\EquipeType;
 use App\Repository\BetInstinct\ClassementRepository;
 use App\Repository\BetInstinct\EquipeRepository;
@@ -25,7 +26,7 @@ class EquipeController extends AbstractController
     public function index(EquipeRepository $equipeRepository): Response
     {
         return $this->render('bet_instinct/equipe/index.html.twig', [
-            'equipes' => $equipeRepository->findAll(),
+            'equipes' => $equipeRepository->equipeAllIdDEsc()
         ]);
     }
 
@@ -38,25 +39,33 @@ class EquipeController extends AbstractController
         $athlete = new Athlete();
         $ranking = new Classement();
         //recuperation du dernier ID insere dans la tabe classement
-        $last=$this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy([],['id'=>'desc']);
-        $rank=$last->getRanking()+1;
+        $last = $this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy([], ['id' => 'desc']);
+        $rank = $last->getRanking() + 1;
         $association = $this->getDoctrine()->getRepository(Association::class)->find(3);
         $ranking->setAssociation($association);
         $ranking->setJoueur($athlete);
-        $ranking->setRanking($rank+1);
+        $ranking->setRanking($rank + 1);
         $form = $this->createForm(EquipeType::class, $equipe);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
-            if(count($t)>0){
-                $this->addFlash('danger','Team déjà inscrite!');
+            $t = $this->getDoctrine()->getRepository(Equipe::class)->findBy(['name' => $equipe->getName()]);
+            if (count($t) > 0) {
+                $this->addFlash('danger', 'Team déjà inscrite!');
                 return $this->renderForm('bet_instinct/equipe/new.html.twig', [
                     'equipe' => $equipe,
                     'form' => $form,
                 ]);
             }
+
+            if ($equipe->getPays() == null) {
+                $pays = new Pays();
+                $pays->setName($equipe->getName());
+                $pays->setShortcut(strtoupper(substr($pays->getName(), 0, 3)));
+                $equipe->setPays($pays);
+            }
+
             $athlete->setNom($equipe->getName());
             $athlete->setPrenom($equipe->getTournoi()->getName());
             $athlete->setBirthdate(new  \DateTime('1900-01-01 00:00:00'));
@@ -65,12 +74,17 @@ class EquipeController extends AbstractController
 
 
             $entityManager = $this->getDoctrine()->getManager();
+            if (isset($pays)) {
+                $entityManager->persist($pays);
+            }
+
+
             $entityManager->persist($equipe);
             $entityManager->persist($athlete);
             $entityManager->persist($ranking);
             $entityManager->flush();
 
-            $this->addFlash('success','nouvelle équipe '.$equipe->getName());
+            $this->addFlash('success', 'nouvelle équipe ' . $equipe->getName());
 
             return $this->redirectToRoute('bet_instinct_equipe_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -116,7 +130,7 @@ class EquipeController extends AbstractController
      */
     public function delete(Request $request, Equipe $equipe): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$equipe->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $equipe->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($equipe);
             $entityManager->flush();
@@ -125,7 +139,8 @@ class EquipeController extends AbstractController
         return $this->redirectToRoute('bet_instinct_equipe_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    static function LastId(){
+    static function LastId()
+    {
 
         //$classement=$classementRepository->findOneBy([],['id'=>'DESC']);
         //return $classement->getRanking();

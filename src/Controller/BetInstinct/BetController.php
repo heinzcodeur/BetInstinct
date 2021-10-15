@@ -49,6 +49,7 @@ class BetController extends AbstractController
         return $this->renderForm('bet_instinct/bet/new.html.twig', [
             'bet' => $bet,
             'form' => $form,
+            'affiche'=>$affiche
         ]);
     }
 

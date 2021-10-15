@@ -22,8 +22,8 @@
         {% for athlete in athletes %}
             <tr>
                 <td>{{ athlete.id }}</td>
-                <td>{{ athlete.nom }}</td>
-                <td>{{ athlete.prenom }}</td>
+                <td class="font-weight-bold">{{ athlete.nom|upper }}</td>
+                <td>{{ athlete.prenom|capitalize }}</td>
                 <td>{{ athlete.ranking }}</td>
                 <!--<td>{{ athlete.birthdate ? athlete.birthdate|date('Y-m-d H:i:s') : '' }}</td>-->
                 <td>{{ athlete.taille }}</td>

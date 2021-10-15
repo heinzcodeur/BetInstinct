@@ -21,7 +21,7 @@ class PaysController extends AbstractController
     public function index(PaysRepository $paysRepository): Response
     {
         return $this->render('bet_instinct/pays/index.html.twig', [
-            'pays' => $paysRepository->findAll(),
+            'pays' => $paysRepository->paysAllDesc(),
         ]);
     }
 

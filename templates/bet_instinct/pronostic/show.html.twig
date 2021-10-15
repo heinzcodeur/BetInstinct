@@ -1,14 +1,10 @@
 {{include('head.html.twig')}}
 
 {% block body %}
-    <h4 class="text-center">Pronostic {{ pronostic.bet.affiche|upper }} {{ pronostic.bet.TypedePari }}</h4>
+    <h4 class="text-center"> {{ pronostic.bet.affiche|upper }} {{ pronostic.bet.TypedePari }}</h4>
 {{ dump(pronostic) }}
     <table class="table">
         <tbody>
-            <tr>
-                <th>Affiche</th>
-                <td>{{ pronostic.affiche.equipeA.name|upper }} VS {{ pronostic.affiche.EquipeB.name }}</td>
-            </tr>
             <tr>
                 <th>type de pari</th>
                 <td>{{ pronostic.bet.TypedePari }}</td>
@@ -18,17 +14,25 @@
                 <td class="font-weight-bold">{{ pronostic.choix }}</td>
             </tr>
             <tr>
+                <th>pronostic exact</th>
+                <td class="font-weight-bold">{{ pronostic.pronoExact }}</td>
+            </tr>
+            <tr>
                 <th>Cote</th>
                 <td>{{ pronostic.cote }}</td>
             </tr>
         <tr>
                 <th>resultat</th>
-                <td>{{    pronostic.isValid==1?'valide':'' }}</td>
+            {% if pronostic.isValid is null %} <td>en attente</td>{% endif %}
+            {% if pronostic.isValid == true %} <td>winner</td>{% endif %}
+            {% if pronostic.isValid == false %} <td>perdant</td>{% endif %}
             </tr>
-            <tr>
-                <th>game1</th>
-                <td>{{ pronostic.game1 }}</td>
+            {% for g in pronostic.game3 %}
+            <tr onclick="document.location='{{ path('bet_instinct_game_show',{'id':g.id}) }}'" class="cursor">
+                <th>game3</th>
+                <td>{{ g }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 <div class="col text-center">

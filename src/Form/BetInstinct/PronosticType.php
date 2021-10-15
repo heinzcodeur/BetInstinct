@@ -15,10 +15,10 @@ class PronosticType extends AbstractType
             //->add('affiche')
             ->add('bet')
             ->add('choix')
-            ->add('game2')
-            ->add('game1')
+            ->add('game3')
             ->add('affiche')
             ->add('isValid')
+            ->add('pronoExact')
 
         ;
     }

@@ -21,13 +21,16 @@ class AthleteController extends AbstractController
      */
     public function index(AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
     {
+        //$q=$entityManager->createNativeQuery('SELECT a FROM BetInstinct\Athlete a');
         $queryBuilder=$entityManager->createQueryBuilder();
         $queryBuilder->select('a')
                     ->from(Athlete::class,'a')
+                    //->where('a.ranking.association.name')
                     ->orderBy('a.id','DESC');
 
 
         return $this->render('bet_instinct/athlete/index.html.twig', [
+            //'athletes' => $queryBuilder->getQuery()->getResult()
             'athletes' => $queryBuilder->getQuery()->getResult()
         ]);
     }

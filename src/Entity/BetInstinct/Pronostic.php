@@ -94,6 +94,11 @@ class Pronostic
      */
     private $game3;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pronoExact;
+
     public function __construct()
     {
         $this->game2 = new ArrayCollection();
@@ -305,6 +310,18 @@ class Pronostic
         if ($this->game3->removeElement($game3)) {
             $game3->removeProno($this);
         }
+
+        return $this;
+    }
+
+    public function getPronoExact(): ?string
+    {
+        return $this->pronoExact;
+    }
+
+    public function setPronoExact(?string $pronoExact): self
+    {
+        $this->pronoExact = $pronoExact;
 
         return $this;
     }
