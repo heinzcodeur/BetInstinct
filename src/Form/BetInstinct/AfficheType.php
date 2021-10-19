@@ -4,6 +4,7 @@ namespace App\Form\BetInstinct;
 
 use App\Entity\BetInstinct\Affiche;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -25,6 +26,11 @@ class AfficheType extends AbstractType
             ->add('equipeA')
             ->add('EquipeB')
             ->add('challenger')
+            ->add('niveau',ChoiceType::class,[
+                'choices'=>[
+                    '1'=>'1','2'=>'2','3'=>'3','4'=>'4'
+                ]
+            ])
             //->add('archived')
         ;
     }

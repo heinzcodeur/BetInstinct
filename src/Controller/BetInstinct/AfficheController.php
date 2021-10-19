@@ -43,34 +43,44 @@ class AfficheController extends AbstractController
     {
         $affiche = new Affiche();
         $bet=new Bet();
+        $bet2=new Bet();
 
         $form = $this->createForm(AfficheType::class, $affiche);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //on check le type de sport de l'affiche
-            //dd($affiche);
            if($affiche->getTournoi()->getSport()->getId()==3){
                //si foot on cree un bet Resultat Foot
-            $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(22);
-            $bet->setTypedePari($type);
+               $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(22);
+               $bet->setTypedePari($type);
             $bet->setAffiche($affiche);
             $bet->setCote1($affiche->getCoteFavorite());
             $bet->setCote2($affiche->getCoteMatchNull());
             $bet->setCote3($affiche->getCoteOutsider());
             //dd($bet);
            }else{
-;               //sinon cree un bet vainqueur tennis
+;               //sinon on cree un bet vainqueur tennis
             $bet->setAffiche($affiche);
             $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(2);
             $bet->setTypedePari($type);
             $bet->setCote1($affiche->getCoteFavorite());
             $bet->setCote2($affiche->getCoteOutsider());
+            //ensuite on cree un bet score exact dame
+               $bet2->setAffiche($affiche);
+               $type2=$this->getDoctrine()->getRepository(TypedePari::class)->find(1);
+               $bet2->setTypedePari($type2);
+               $bet2->setCote1(2.2);
+               $bet2->setCote2(3.6);
+               $bet2->setCote3(3.3);
+               $bet2->setCote4(4.2);
+
            }
             //dd($bet);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affiche);
             $entityManager->persist($bet);
+            $entityManager->persist($bet2);
             $entityManager->flush();
 
             return $this->redirectToRoute('home');

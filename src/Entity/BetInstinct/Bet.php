@@ -106,11 +106,6 @@ class Bet
     private $pronostics;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pari::class, mappedBy="bet")
-     */
-    private $paris;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $cote15;
@@ -165,6 +160,61 @@ class Bet
      */
     private $cote25;
 
+    /**
+     * @ORM\Column(type="float", length=255, nullable=true)
+     */
+    private $cote26;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote27;
+
+    /**
+     * @ORM\Column(type="float", length=255, nullable=true)
+     */
+    private $cote28;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote29;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote30;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote31;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote32;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote33;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote34;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote35;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cote36;
+
     public function __toString()
     {
 return (string)$this->TypedePari;
@@ -174,7 +224,6 @@ return (string)$this->TypedePari;
     public function __construct()
     {
         $this->pronostics = new ArrayCollection();
-        $this->paris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -405,36 +454,6 @@ return (string)$this->TypedePari;
         return $this;
     }
 
-    /**
-     * @return Collection|Pari[]
-     */
-    public function getParis(): Collection
-    {
-        return $this->paris;
-    }
-
-    public function addPari(Pari $pari): self
-    {
-        if (!$this->paris->contains($pari)) {
-            $this->paris[] = $pari;
-            $pari->setBet($this);
-        }
-
-        return $this;
-    }
-
-    public function removePari(Pari $pari): self
-    {
-        if ($this->paris->removeElement($pari)) {
-            // set the owning side to null (unless already changed)
-            if ($pari->getBet() === $this) {
-                $pari->setBet(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCote15(): ?float
     {
         return $this->cote15;
@@ -563,6 +582,138 @@ return (string)$this->TypedePari;
     public function setCote25(?float $cote25): self
     {
         $this->cote25 = $cote25;
+
+        return $this;
+    }
+
+    public function getCote26(): ?string
+    {
+        return $this->cote26;
+    }
+
+    public function setCote26(?string $cote26): self
+    {
+        $this->cote26 = $cote26;
+
+        return $this;
+    }
+
+    public function getCote27(): ?float
+    {
+        return $this->cote27;
+    }
+
+    public function setCote27(?float $cote27): self
+    {
+        $this->cote27 = $cote27;
+
+        return $this;
+    }
+
+    public function getCote28(): ?string
+    {
+        return $this->cote28;
+    }
+
+    public function setCote28(?string $cote28): self
+    {
+        $this->cote28 = $cote28;
+
+        return $this;
+    }
+
+    public function getCote29(): ?float
+    {
+        return $this->cote29;
+    }
+
+    public function setCote29(?float $cote29): self
+    {
+        $this->cote29 = $cote29;
+
+        return $this;
+    }
+
+    public function getCote30(): ?string
+    {
+        return $this->cote30;
+    }
+
+    public function setCote30(string $cote30): self
+    {
+        $this->cote30 = $cote30;
+
+        return $this;
+    }
+
+    public function getCote31(): ?float
+    {
+        return $this->cote31;
+    }
+
+    public function setCote31(?float $cote31): self
+    {
+        $this->cote31 = $cote31;
+
+        return $this;
+    }
+
+    public function getCote32(): ?float
+    {
+        return $this->cote32;
+    }
+
+    public function setCote32(?float $cote32): self
+    {
+        $this->cote32 = $cote32;
+
+        return $this;
+    }
+
+    public function getCote33(): ?float
+    {
+        return $this->cote33;
+    }
+
+    public function setCote33(?float $cote33): self
+    {
+        $this->cote33 = $cote33;
+
+        return $this;
+    }
+
+    public function getCote34(): ?float
+    {
+        return $this->cote34;
+    }
+
+    public function setCote34(?float $cote34): self
+    {
+        $this->cote34 = $cote34;
+
+        return $this;
+    }
+
+    public function getCote35(): ?float
+    {
+        return $this->cote35;
+    }
+
+    public function setCote35(?float $cote35): self
+    {
+        $this->cote35 = $cote35;
+
+        return $this;
+    }
+
+    public function getCote36(): ?float
+    {
+        return $this->cote36;
+    }
+
+    public function setCote36(?float $cote36): self
+    {
+        $this->cote36 = $cote36;
 
         return $this;
     }

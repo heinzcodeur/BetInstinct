@@ -31,7 +31,7 @@
             </tr>
         {% for e in tournoi.equipes %}
             <tr>
-                <th>club</th>
+                <th><img src="{{ asset('betinstinct.png') }}" width="50" HEIGHT="50" alt=""></th>
                 <td onclick="document.location='{{ path('bet_instinct_equipe_show',{'id':e.id}) }}'" class='cursor'>{{ e }}</td>
             </tr>
         {% endfor %}

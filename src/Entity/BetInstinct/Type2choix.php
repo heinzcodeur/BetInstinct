@@ -390,6 +390,61 @@ return $this->name;
      */
     private $choix25;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix26;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix27;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix28;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix29;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix30;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix31;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix32;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix33;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix34;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix35;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $choix36;
+
     public function __construct()
     {
         $this->typedeParis = new ArrayCollection();
@@ -570,6 +625,138 @@ return $this->name;
     public function setChoix25(?string $choix25): self
     {
         $this->choix25 = $choix25;
+
+        return $this;
+    }
+
+    public function getChoix26(): ?string
+    {
+        return $this->choix26;
+    }
+
+    public function setChoix26(?string $choix26): self
+    {
+        $this->choix26 = $choix26;
+
+        return $this;
+    }
+
+    public function getChoix27(): ?string
+    {
+        return $this->choix27;
+    }
+
+    public function setChoix27(?string $choix27): self
+    {
+        $this->choix27 = $choix27;
+
+        return $this;
+    }
+
+    public function getChoix28(): ?string
+    {
+        return $this->choix28;
+    }
+
+    public function setChoix28(?string $choix28): self
+    {
+        $this->choix28 = $choix28;
+
+        return $this;
+    }
+
+    public function getChoix29(): ?string
+    {
+        return $this->choix29;
+    }
+
+    public function setChoix29(?string $choix29): self
+    {
+        $this->choix29 = $choix29;
+
+        return $this;
+    }
+
+    public function getChoix30(): ?string
+    {
+        return $this->choix30;
+    }
+
+    public function setChoix30(?string $choix30): self
+    {
+        $this->choix30 = $choix30;
+
+        return $this;
+    }
+
+    public function getChoix31(): ?string
+    {
+        return $this->choix31;
+    }
+
+    public function setChoix31(?string $choix31): self
+    {
+        $this->choix31 = $choix31;
+
+        return $this;
+    }
+
+    public function getChoix32(): ?string
+    {
+        return $this->choix32;
+    }
+
+    public function setChoix32(?string $choix32): self
+    {
+        $this->choix32 = $choix32;
+
+        return $this;
+    }
+
+    public function getChoix33(): ?string
+    {
+        return $this->choix33;
+    }
+
+    public function setChoix33(?string $choix33): self
+    {
+        $this->choix33 = $choix33;
+
+        return $this;
+    }
+
+    public function getChoix34(): ?string
+    {
+        return $this->choix34;
+    }
+
+    public function setChoix34(?string $choix34): self
+    {
+        $this->choix34 = $choix34;
+
+        return $this;
+    }
+
+    public function getChoix35(): ?string
+    {
+        return $this->choix35;
+    }
+
+    public function setChoix35(?string $choix35): self
+    {
+        $this->choix35 = $choix35;
+
+        return $this;
+    }
+
+    public function getChoix36(): ?string
+    {
+        return $this->choix36;
+    }
+
+    public function setChoix36(?string $choix36): self
+    {
+        $this->choix36 = $choix36;
 
         return $this;
     }

@@ -1,13 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Equipe{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
     <h1>Edit Equipe</h1>
 
-    {{ include('bet_instinct_equipe/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bet_instinct/equipe/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('bet_instinct_equipe_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_equipe_index') }}" class="btn btn-secondary">retour</a>
 
-    {{ include('bet_instinct_equipe/_delete_form.html.twig') }}
+    {{ include('bet_instinct/equipe/_delete_form.html.twig') }}
 {% endblock %}

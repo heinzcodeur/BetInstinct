@@ -46,7 +46,10 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           // if($game->getFormule()->getId()==2){
+            if($game->getName()==null){
+                $ladate=new \DateTime('now');
+                $game->setName($ladate->format('H:i:s Y-m-d'));
+            }
                 $cote=1;
                 foreach ($game->getPronos() as $prono) {
                     $cote*=$prono->getCote();
@@ -54,6 +57,7 @@ class GameController extends AbstractController
                 }
             //}
             $game->setCreated(new \DateTimeImmutable('now'));
+                $game->setParieur($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($game);
            // dd($game);
@@ -97,13 +101,13 @@ class GameController extends AbstractController
                 $game->setIsConfirm(true);
                 $game->setParieur($this->getUser());
 
-                $cote = 0;
+                /*$cote = 0;
                 foreach ($game->getPronos() as $p) {
                     $cote += $p->getCote();
                     $p->setIsConfirm(true);
                     $p->setUpdated(new \DateTime('now'));
                 }
-                $game->setCoteTotale($cote);
+                $game->setCoteTotale($cote);*/
 
                 $entityManager->persist($solde);
                 $entityManager->persist($transac);
@@ -145,7 +149,25 @@ class GameController extends AbstractController
                 $formule=$this->getDoctrine()->getRepository(Formule::class)->find(2);
                 $combi->setFormule($formule);
                 $combi->setIsConfirm(true);
+                $combi->setParieur($game->getParieur());
+
+                $transac = new Transaction();
+                $transac->setType('retrait');
+                $transac->setMontant($game->getMise());
+                $transac->setAuteur($this->getUser());
+                $transac->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac->setGame($combi);
+
                 $entityManager->persist($combi);
+                $entityManager->persist($transac);
+                $entityManager->flush();
 
                // creation des paris doubles
                 $doubles=[];
@@ -163,7 +185,25 @@ class GameController extends AbstractController
                 $d1->setParieur($this->getUser());
                 $d1->setFormule($formule);
                 $d1->setIsConfirm(true);
+                $d1->setParieur($game->getParieur());
+
+                $transac1 = new Transaction();
+                $transac1->setType('retrait');
+                $transac1->setMontant($game->getMise());
+                $transac1->setAuteur($this->getUser());
+                $transac1->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac1->setGame($d1);
+
                 $entityManager->persist($d1);
+                $entityManager->persist($transac1);
+                $entityManager->flush();
 
                 //creation du deuxieme double
                 $d2=new Game('double2-du-'.$n2);
@@ -177,7 +217,25 @@ class GameController extends AbstractController
                 $d2->setParieur($this->getUser());
                 $d2->setFormule($formule);
                 $d2->setIsConfirm(true);
+                $d2->setParieur($game->getParieur());
+
+                $transac2 = new Transaction();
+                $transac2->setType('retrait');
+                $transac2->setMontant($game->getMise());
+                $transac2->setAuteur($this->getUser());
+                $transac2->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac2->setGame($d2);
+
+                $entityManager->persist($transac2);
                 $entityManager->persist($d2);
+                $entityManager->flush();
 
                 //creation du troisieme double
                 $d3=new Game('double3-du-'.$n2);
@@ -191,8 +249,24 @@ class GameController extends AbstractController
                 $d3->setParieur($this->getUser());
                 $d3->setFormule($formule);
                 $d3->setIsConfirm(true);
+                $d3->setParieur($game->getParieur());
+
+                $transac3 = new Transaction();
+                $transac3->setType('retrait');
+                $transac3->setMontant($game->getMise());
+                $transac3->setAuteur($this->getUser());
+                $transac3->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac3->setGame($d3);
 
                 $entityManager->persist($d3);
+                $entityManager->persist($transac3);
 
                 $entityManager->flush();
 

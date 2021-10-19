@@ -189,70 +189,22 @@ class PronosticController extends AbstractController
                     return $this->redirectToRoute('bet_instinct_game_show',['id'=>$g->getId()]);
                     }
                 }
-                        dd($pronostic->getAffiche()->getFavori()->getNom());
-           // dd(count($pronostic->getGame3()));
-                //dd('r');
                 //ici on valide le pronostic
                 $pronostic->setIsValid(true);
-                //si game simple soit un seul pronostic, le game est validé gagnant
-               /* if($g->getFormule()->getId()==1){
-                    //dd($game);
-                    $g->setResultat('gagnant');
-                    $g->setUpdated(new \DateTimeImmutable('now'));
-                    $g->setCoteTotale($pronostic->getCote());
-                    //puisque le game est gagnant on doit calculer et creer un gain avec une transaction
-                    //d'abord on calcule le gain
-                    $gain=$pronostic->getCote()*$g->getMise();
-                    $g->setGain($gain);
-                    $g->setIsArchived(true);
-                    //ensuite on cree une transac
-                    $transac=new Transaction();
-                    $transac->setType('gain');
-                    $transac->setMontant($gain);
-                    $transac->setAuteur($this->getUser());
-                    $transac->setCreatedAt(new \DateTimeImmutable('now'));
-                    $transac->setGame($g);
-
-                    //on recupere le solde du parieur
-                    $solde=$this->getUser()->getSolde();
-                    $balance=$solde->getBalance();
-                    //on additionne ce solde au gain
-                    $balance+=$gain;
-                    $solde->setBalance($balance);
-
-                    $em->persist($transac);
-                    $em->flush();
-
-                    $this->addFlash('success','ça fait Zumba Cafew '.$gain.' € pour toi seul!');
-                    return $this->redirectToRoute('bet_instinct_game_show',['id'=>$g->getId()]);
-                }
-                if($g->getFormule()->getId()==2){
-
-                    $em->flush();
-                    return $this->redirectToRoute('bet_instinct_game_show',['id'=>$g->getId()]);
-                }
-            } else {
-                $pronostic->setIsValid(false);
-                foreach($pronostic->getGame3() as $g){
-                    if($g->getFormule()->getId()!=3){
-                        $g->setResultat('perdant');
-                        $g->setGain(0);
-                        dump($g);
-                    }
-                    $em->flush();
-                }
-
-               // dd('ici');
-               /* if($game->getFormule()->getId()==1 || $game->getFormule()->getId()==2) {
-                    $game->setResultat('perdant');
-                    $game->setGain(0);
-                    $em->flush();
-                }else{
-                    dd('oui');
-                }*/
-
             }
-            return $this->redirectToRoute('bet_instinct_game_show',['id'=>$game->getId()]);
+        $pronostic->setIsValid(false);
+        foreach ($pronostic->getGame3() as $g){
+            if($g->getFormule()->getId()!=3){
+                $g->setResultat('perdant');
+                $g->setUpdated(new \DateTime('now'));
+                $g->setIsArchived(true);
+                $g->setGain(0);
+            }
+        }
+        $pronostic->setPronoExact($score);
+        $em->flush();
+        //dd($pronostic);
+            return $this->redirectToRoute('bet_instinct_game_index');
         }
 
 

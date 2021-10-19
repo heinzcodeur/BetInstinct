@@ -45,8 +45,15 @@ class ClassementController extends AbstractController
         $classement = new Classement();
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $checkranking=$this->getDoctrine()->getRepository(Classement::class)->findBy(['ranking'=>$classement->getRanking(),'association'=>$classement->getAssociation()]);
+            if(is_array($checkranking) && count($checkranking)>0){
+                $this->addFlash('danger','ranking indisponible');
+                return $this->renderForm('bet_instinct/classement/new.html.twig', [
+                        'classement' => $classement,
+                        'form' => $form]
+                );
+            }
             if(isset($athlete)){
                 if ($classement->getJoueur() == null) {
                     $classement->setJoueur($athlete);

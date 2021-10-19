@@ -9,11 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Type2choixType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('sport')
             ->add('choix1')
             ->add('choix2')
             ->add('choix3')
@@ -34,15 +32,28 @@ class Type2choixType extends AbstractType
             ->add('choix18')
             ->add('choix19')
             ->add('choix20')
+            ->add('name')
             ->add('choix21')
             ->add('choix22')
             ->add('choix23')
             ->add('choix24')
             ->add('choix25')
+            ->add('choix26')
+            ->add('choix27')
+            ->add('choix28')
+            ->add('choix29')
+            ->add('choix30')
+            ->add('choix31')
+            ->add('choix32')
+            ->add('choix33')
+            ->add('choix34')
+            ->add('choix35')
+            ->add('choix36')
+            ->add('sport')
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Type2choix::class,

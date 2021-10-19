@@ -1,6 +1,7 @@
 {{include('head.html.twig')}}
 {% block body %}
     {{ dump(affiche) }}
+    {% for b in affiche.bet %}{{ dump(b) }}{% endfor %}
     <h1 class="text-center">{{ affiche.favori|upper }} VS {{ affiche.challenger|upper }}</h1>
     <table class="table">
         <tbody>
@@ -12,12 +13,10 @@
         {% for b in affiche.bet %}
             <tr>
                 <td>
-
-                    <a href="{{ path('bet_instinct_bet_show',{'id':b.id}) }}">{{ b.typedePari.Type2choix }}</a>
+                    <a href="{{ path('bet_instinct_bet_show',{'id':b.id}) }}">{{ b.typedePari.Type2choix.name }}</a>
                 </td>
             </tr>
         {% endfor %}
-
             <tr>
                 <th>Schedule</th>
                 <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>

@@ -112,6 +112,11 @@ class Affiche
      */
     private $Cote_match_null;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, columnDefinition="ENUM('1','2','3','4')")
+     */
+    private $niveau;
+
 
     public function __construct()
     {
@@ -472,6 +477,18 @@ class Affiche
     public function setCoteMatchNull(?float $Cote_match_null): self
     {
         $this->Cote_match_null = $Cote_match_null;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?string
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?string $niveau): self
+    {
+        $this->niveau = $niveau;
 
         return $this;
     }

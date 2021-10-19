@@ -21,12 +21,24 @@
         </tr>
         <tr>
             <th>mise</th>
-            <td>{{ game.mise }}</td>
+            <td>{{ game.mise }} €</td>
         </tr>
+        {% if game.resultat =='en attente' %}
         <tr>
             <th>gains potentiels</th>
-            <td class="text-primary">{{ game.mise * game.coteTotale }}</td>
+            <td class="text-primary">{{ game.mise * game.coteTotale }} €</td>
         </tr>
+            {% elseif game.resultat == 'gagnant' %}
+            <tr>
+                <th>gains </th>
+                <td class="text-success">{{ game.mise * game.coteTotale }} € €</td>
+            </tr>
+        {% else %}
+            <tr>
+            <th>gains</th>
+            <td class="text-danger">0 €</td>
+        </tr>
+        {% endif %}
         {% if game.formule.id != 3 and game.parent==null %}
             <tr>
                 <th>nombre pronostic</th>
@@ -37,10 +49,12 @@
                 <th>nombre pronostics3</th>
                 <td>{{ game.pronos|length }}</td>
             </tr>
+            {% if game.parent is not null %}
             <tr>
                 <th>parent</th>
-                <td>{{ game.parent }}</td>
+                <td onclick="document.location='{{ path('bet_instinct_game_show',{'id':game.parent.id}) }}'" class="cursor">{{ game.parent }}</td>
             </tr>
+                {% endif %}
         {% endif %}
 
         {% if game.formule.id == 3 %}
@@ -69,10 +83,10 @@
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
                         </tr>
-                        <tr>
+                        <tr onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':p.affiche.id}) }}'" class="cursor">
                             <th>affiche</th>
                             <td><i></i> {{ p.bet.affiche|upper }} {{ p.bet.affiche.favori.ranking.association }}-
-                                <b><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i>{{ p.bet.affiche.tournoi }}</b></td>
+                                <b><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche.tournoi }}</b></td>
                         </tr>
 
                         <tr>
@@ -86,9 +100,13 @@
                         <tr>
                             <th>choix</th>
                             <td>{{ p.choix }}</td>
-                        </tr>
+                        </tr><tr>
+            <th>bon pronostic</th>
+            <td>{{ p.pronoExact }}</td>
+        </tr>
 
-                        <tr>
+
+            <tr>
                             <th>resultat</th>
                             {% if p.isValid is null %}
                                 <td class="font-weight-bold text-primary">en attente</td>
@@ -99,7 +117,7 @@
                             {% endif %}
                         </tr>
 
-                            {% if p.isChecked is null %}
+                            {% if p.isChecked is null and game.resultat !='perdant'%}
                                 <script>
                                     function score(v, p) {
                                         var id=p;

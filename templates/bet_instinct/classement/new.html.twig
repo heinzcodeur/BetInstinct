@@ -4,6 +4,10 @@
 {% block body %}
     <h1>Create new Classement</h1>
 
+    {% for d in app.flashes('danger') %}
+    <div class="alert alert-danger">{{ d }}</div>
+    {% endfor %}
+
     {{ include('bet_instinct/classement/_form.html.twig') }}
 
 

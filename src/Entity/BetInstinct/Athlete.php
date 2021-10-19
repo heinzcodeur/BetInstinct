@@ -111,6 +111,11 @@ class Athlete
      */
     private $documents;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, columnDefinition="ENUM('homme','dame')")
+     */
+    private $genre;
+
 
     public function __construct()
     {
@@ -424,6 +429,18 @@ class Athlete
                 $document->setAthete(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?string $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }

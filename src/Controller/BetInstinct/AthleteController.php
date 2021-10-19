@@ -29,6 +29,7 @@ class AthleteController extends AbstractController
                     ->orderBy('a.id','DESC');
 
 
+
         return $this->render('bet_instinct/athlete/index.html.twig', [
             //'athletes' => $queryBuilder->getQuery()->getResult()
             'athletes' => $queryBuilder->getQuery()->getResult()
@@ -45,9 +46,14 @@ class AthleteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /*  if($athlete->getRanking()==null){
-                  return $this->redirectToRoute('bet_instinct_classement_new',['athlete'=>$athlete ]);
-              }*/
+            $checkathlete=$this->getDoctrine()->getRepository(Athlete::class)->findBy(['nom'=>$athlete->getNom(),'genre'=>$athlete->getGenre()]);
+            if(is_array($checkathlete) && count($checkathlete)>0){
+                  $this->addFlash('danger','athlete deja inscrit');
+                  return $this->renderForm('bet_instinct/athlete/new.html.twig', [
+                      'athlete' => $athlete,
+                      'form' => $form]
+                  );
+              }
             if ($form->get('avatar')->getData() != null) {
                 $avatar = $form->get('avatar')->getData();//dd($avatar);
                 // dd($avatar->guessExtension());
