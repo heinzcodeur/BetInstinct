@@ -1,7 +1,6 @@
 {{include('head.html.twig')}}
 {% block body %}
     {{ dump(affiche) }}
-    {% for b in affiche.bet %}{{ dump(b) }}{% endfor %}
     <h1 class="text-center">{{ affiche.favori|upper }} VS {{ affiche.challenger|upper }}</h1>
     <table class="table">
         <tbody>
@@ -27,17 +26,17 @@
             </tr>
             <tr>
                 <th>Favori</th>
-                <td onclick="document.location='{{ path('bet_instinct_athlete_show',{'id':affiche.favori.id}) }}'" class="cursor">{{ affiche.favori }} {{ affiche.favori.ranking }}</td>
+                <td onclick="document.location='{{ path('bet_instinct_athlete_show',{'id':affiche.favori.id}) }}'" class="cursor">{{ affiche.favori|capitalize }} {{ affiche.favori.ranking }}</td>
                 {% if  affiche.equipeA!=null  %}
-                <td>{{ affiche.equipeA.name }}</td>
+                <td>{{ affiche.equipeA.name|capitalize }}</td>
                 {% endif %}
             </tr>
 
             <tr>
                 <th>Outsider</th>
-                <td onclick="document.location='{{ path('bet_instinct_athlete_show',{'id':affiche.challenger.id}) }}'" class="cursor">{{ affiche.challenger }} {{ affiche.challenger.ranking }}</td>
+                <td onclick="document.location='{{ path('bet_instinct_athlete_show',{'id':affiche.challenger.id}) }}'" class="cursor">{{ affiche.challenger|capitalize }} {{ affiche.challenger.ranking }}</td>
                 {% if  affiche.EquipeB!=null  %}
-                    <td>{{ affiche.EquipeB.name }}</td>
+                    <td>{{ affiche.EquipeB.name|capitalize }}</td>
                 {% endif %}
 
             </tr>

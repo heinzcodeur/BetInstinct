@@ -4,28 +4,9 @@
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AthleteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/ClassementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/PronosticController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/PronosticController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Affiche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Athlete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Bet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BetInstinct/Type2choix.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BetInstinct/Type2choix.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/AfficheType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/AthleteType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/AthleteType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/BetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BetInstinct/BetType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BetInstinct/Type2choixType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/TournoiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/TournoiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TestController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/classement/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/equipe/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/equipe/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/equipe/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/equipe/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +232,7 @@
       <workItem from="1633605460447" duration="14734000" />
       <workItem from="1633945270003" duration="41455000" />
       <workItem from="1634339246595" duration="24745000" />
-      <workItem from="1634641649843" duration="6530000" />
+      <workItem from="1634641649843" duration="19163000" />
     </task>
     <servers />
   </component>
@@ -271,10 +252,10 @@
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="394" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.760@0.0.1280.760" timestamp="1628800089840" />
-    <state x="370" y="136" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1634644418603">
+    <state x="370" y="136" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1634726889145">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="370" y="136" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.760@0.0.1280.760" timestamp="1634644418603" />
+    <state x="370" y="136" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.760@0.0.1280.760" timestamp="1634726889145" />
     <state x="419" y="136" key="FileChooserDialogImpl" timestamp="1634560881568">
       <screen x="0" y="0" width="1280" height="760" />
     </state>

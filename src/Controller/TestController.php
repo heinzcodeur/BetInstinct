@@ -18,8 +18,10 @@ class TestController extends AbstractController
     public function index(): Response
     {
 
-        $t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
-        dd($t);
+        //$t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
+        $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(19);
+
+        dd($type->getType2choix()->getName());
 
         //$last=$this->getDoctrine()->getRepository(Classement::class)->findOneBy([],['id'=>'desc']);
 
