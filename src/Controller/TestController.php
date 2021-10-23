@@ -19,9 +19,9 @@ class TestController extends AbstractController
     {
 
         //$t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
-        $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(19);
+        $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(25);
 
-        dd($type->getType2choix()->getName());
+        dd($type->getType2choix()->getChoix1());
 
         //$last=$this->getDoctrine()->getRepository(Classement::class)->findOneBy([],['id'=>'desc']);
 
@@ -49,3 +49,4 @@ class TestController extends AbstractController
         ]);
     }
 }
+

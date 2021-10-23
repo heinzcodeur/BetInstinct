@@ -50,6 +50,7 @@ class AfficheController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //on check le type de sport de l'affiche
+            //si affiche football
            if($affiche->getTournoi()->getSport()->getId()==3){
                //si foot on cree un bet Resultat Foot
                $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(22);
@@ -102,21 +103,58 @@ class AfficheController extends AbstractController
                $bet2->setCote35(200);
                $bet2->setCote35(350);
 
+                $betScoreMultiChance = new Bet();
+                $betScoreMultiChance->setAffiche($affiche);
+               $typescoreMulti=$this->getDoctrine()->getRepository(TypedePari::class)->find(24);
+               $betScoreMultiChance->setTypedePari($typescoreMulti);
+               $betScoreMultiChance->setCote1(3.75);
+               $betScoreMultiChance->setCote2(9);
+               $betScoreMultiChance->setCote3(13.5);
+               $betScoreMultiChance->setCote4(80);
+               $betScoreMultiChance->setCote5(3.95);
+               $betScoreMultiChance->setCote6(8.5);
+               $betScoreMultiChance->setCote7(8);
+               $betScoreMultiChance->setCote8(17);
+               $betScoreMultiChance->setCote9(20);
+               $betScoreMultiChance->setCote10(65);
+               $betScoreMultiChance->setCote11(3.65);
 
-              /* foreach ($cote as $key=>$value){
-                   //$bet2
-                   $k=$key+1;
-                   $ku='$cote'.$k;
-                  if(property_exists($bet2,$ku)) {
-                      $bet2->setCote.$k.'(3)';
-                  }
-                    //($ku);
-                   //$prop='cote'.$key+1;
-                    //$ku;
-               }*/
 
 
-           }else {
+               /* foreach ($cote as $key=>$value){
+                    //$bet2
+                    $k=$key+1;
+                    $ku='$cote'.$k;
+                   if(property_exists($bet2,$ku)) {
+                       $bet2->setCote.$k.'(3)';
+                   }
+                     //($ku);
+                    //$prop='cote'.$key+1;
+                     //$ku;
+                }*/
+
+
+           }
+           //si affiche basket
+           elseif($affiche->getTournoi()->getSport()->getId()==2){
+               $bet=new bet();
+               $bet->setAffiche($affiche);
+               $type = $this->getDoctrine()->getRepository(TypedePari::class)->find(25);
+               $bet->setTypedePari($type);
+               $bet->setCote1(4.41);
+               $bet->setCote2(3.75);
+               $bet->setCote3(6.01);
+               $bet->setCote4(7.25 );
+               $bet->setCote5(11.01);
+               $bet->setCote6(12.01);
+               $bet->setCote7(6.25);
+               $bet->setCote8(7.51);
+               $bet->setCote9(13.01);
+               $bet->setCote10(23.01);
+               $bet->setCote11(46.01);
+               $bet->setCote12(60.01);
+           }
+           else {
                //sinon on cree un bet vainqueur tennis
                $bet->setAffiche($affiche);
                $type = $this->getDoctrine()->getRepository(TypedePari::class)->find(2);
@@ -170,12 +208,21 @@ class AfficheController extends AbstractController
             $entityManager->persist($affiche);
             $entityManager->persist($bet);
             $entityManager->persist($bet2);
-            $entityManager->persist($bet3);
-            $entityManager->persist($betSet1Vainqueur);
-            $entityManager->persist($betScoreSet1);
+            if(isset($bet3)){
+                $entityManager->persist($bet3);
+            }
+            if(isset($betScoreMultiChance)){
+                $entityManager->persist($betScoreMultiChance);
+            }
+            if(isset($betSet1Vainqueur)){
+                $entityManager->persist($betSet1Vainqueur);
+            }
+            if(isset($betScoreSet1)){
+                $entityManager->persist($betScoreSet1);
+            }
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('bet_instinct_affiche_show',['id'=>$affiche->getId()]);
         }
 
         return $this->renderForm('bet_instinct/affiche/new.html.twig', [

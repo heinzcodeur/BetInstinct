@@ -131,6 +131,7 @@ class GameController extends AbstractController
                     $tab[]=$p;
                 }
 
+                //dump(count($tab));dd('pi');
                 //on crée d'abord le combiné
                 $combi=new Game();
                 //on donne un nom et lui attribue un game parent
@@ -150,6 +151,8 @@ class GameController extends AbstractController
                 $combi->setFormule($formule);
                 $combi->setIsConfirm(true);
                 $combi->setParieur($game->getParieur());
+                //Dans un système Lucky 31, vous donnez cinq pronostics à partir desquels 31 paris sont formés: un pari simple par pronostic, dix combinaisons double, dix combinaisons triple, cinq combinaisons quadruples et une combinaison quintuple. Au moins un pronostic doit être correct pour que vous remportiez des gains. Le montant exact de vos gains dépend du nombre de pronostics qui sont corrects.
+                //lesdoubles=>p1*p2;p1*p3;p1*p4;p1*p5
 
                 $transac = new Transaction();
                 $transac->setType('retrait');
@@ -265,8 +268,137 @@ class GameController extends AbstractController
                 $solde->setBalance($balance - $game->getMise());
                 $transac3->setGame($d3);
 
+                $game->setIsConfirm(true);
                 $entityManager->persist($d3);
                 $entityManager->persist($transac3);
+
+                $d4=new Game('double4-du-'.$n2);
+                $d4->setParent($game);
+                $tab[1]->addGame3($d4);
+                $tab[2]->addGame3($d4);
+                $d3->setCoteTotale(1);
+                $d3->setCoteTotale($tab[1]->getCote()*$tab[3]->getCote());
+                $d3->setCreated(new \DateTime('now'));
+                $d3->setMise($game->getMise());
+                $d3->setParieur($this->getUser());
+                $d3->setFormule($formule);
+                $d3->setIsConfirm(true);
+                $d3->setParieur($game->getParieur());
+
+                $transac4 = new Transaction();
+                $transac4->setType('retrait');
+                $transac4->setMontant($game->getMise());
+                $transac4->setAuteur($this->getUser());
+                $transac4->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac3->setGame($d4);
+
+                $game->setIsConfirm(true);
+                $entityManager->persist($d4);
+                $entityManager->persist($transac4);
+
+                $d5=new Game('double4-du-'.$n2);
+                $d5->setParent($game);
+                $tab[1]->addGame3($d5);
+                $tab[2]->addGame3($d5);
+                $d5->setCoteTotale(1);
+                $d5->setCoteTotale($tab[2]->getCote()*$tab[3]->getCote());
+                $d5->setCreated(new \DateTime('now'));
+                $d5->setMise($game->getMise());
+                $d5->setParieur($this->getUser());
+                $d5->setFormule($formule);
+                $d5->setIsConfirm(true);
+                $d5->setParieur($game->getParieur());
+
+                $transac5 = new Transaction();
+                $transac5->setType('retrait');
+                $transac5->setMontant($game->getMise());
+                $transac5->setAuteur($this->getUser());
+                $transac5->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac5->setGame($d5);
+
+                $game->setIsConfirm(true);
+                $entityManager->persist($d5);
+                $entityManager->persist($transac5);
+
+                $d6=new Game('double4-du-'.$n2);
+                $d6->setParent($game);
+                $tab[1]->addGame3($d6);
+                $tab[2]->addGame3($d6);
+                $d6->setCoteTotale(1);
+                $d6->setCoteTotale($tab[2]->getCote()*$tab[4]->getCote());
+                $d6->setCreated(new \DateTime('now'));
+                $d6->setMise($game->getMise());
+                $d6->setParieur($this->getUser());
+                $d6->setFormule($formule);
+                $d6->setIsConfirm(true);
+                $d6->setParieur($game->getParieur());
+
+                $transac6 = new Transaction();
+                $transac6->setType('retrait');
+                $transac6->setMontant($game->getMise());
+                $transac6->setAuteur($this->getUser());
+                $transac6->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac6->setGame($d6);
+
+                $game->setIsConfirm(true);
+                $entityManager->persist($d6);
+                $entityManager->persist($transac6);
+
+
+                $d8=new Game('double4-du-'.$n2);
+                $d8->setParent($game);
+                $tab[1]->addGame3($d8);
+                $tab[2]->addGame3($d8);
+                $d8->setCoteTotale(1);
+                $d8->setCoteTotale($tab[3]->getCote()*$tab[4]->getCote());
+                $d8->setCreated(new \DateTime('now'));
+                $d8->setMise($game->getMise());
+                $d8->setParieur($this->getUser());
+                $d8->setFormule($formule);
+                $d8->setIsConfirm(true);
+                $d8->setParieur($game->getParieur());
+
+                $transac8 = new Transaction();
+                $transac8->setType('retrait');
+                $transac8->setMontant($game->getMise());
+                $transac8->setAuteur($this->getUser());
+                $transac8->setCreatedAt(new \DateTimeImmutable('now'));
+
+                //on met à jour le solde du parieur
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde = $this->getUser()->getSolde();
+                $balance = $solde->getBalance();
+                $solde->setBalance($balance - $game->getMise());
+                $transac8->setGame($d8);
+
+                $game->setIsConfirm(true);
+                $entityManager->persist($d8);
+                $entityManager->persist($transac8);
+
+
+
 
                 $entityManager->flush();
 

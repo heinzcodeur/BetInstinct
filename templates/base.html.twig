@@ -24,6 +24,10 @@
                 .inline{
                     display: inline;
                 }
+
+                .mt-4{
+                    margin-top: 2.5rem!important;
+                }
             </style>
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -33,7 +37,7 @@
         {% endblock %}
     </head>
     <body style="background: #5e07a0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-dark fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">BetInstinct</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,7 +62,7 @@
                     <a class="nav-link" href="{{ path('bet_instinct_game_index') }}">game<span class="sr-only">(current)</span></a>
                 </li>
 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bet_instinct_transaction_index') }}">transaction<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('bet_instinct_typede_pari_index') }}">gestion_bet<span class="sr-only">(current)</span></a>
                 </li>
 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('bet_instinct_equipe_index') }}">équipes<span class="sr-only">(current)</span></a>

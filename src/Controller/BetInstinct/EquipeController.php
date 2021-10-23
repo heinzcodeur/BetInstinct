@@ -114,6 +114,19 @@ class EquipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $checkatl=$this->getDoctrine()->getRepository(Athlete::class)->findBy(['nom'=>$equipe->getName()]);
+            if(count($checkatl)==0){
+
+            $athlete=new Athlete();
+            $athlete->setNom($equipe->getName());
+            $athlete->setPrenom($equipe->getTournoi()->getName());
+            $athlete->setBirthdate(new  \DateTime('1900-01-01 00:00:00'));
+            $athlete->setPays($equipe->getPays());
+            $athlete->setTaille(1.75);
+            $this->getDoctrine()->getManager()->persist($athlete);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_equipe_index', [], Response::HTTP_SEE_OTHER);

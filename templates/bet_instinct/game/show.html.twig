@@ -64,7 +64,7 @@
             {% endfor %}#}
             <tr>
                 <th>nb sous paris</th>
-                <td>{{ game.pronos|length }}</td>
+                <td>{{ game.undergames|length }}</td>
             </tr>
         {% endif %}
 
@@ -85,7 +85,7 @@
                         </tr>
                         <tr onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':p.affiche.id}) }}'" class="cursor">
                             <th>affiche</th>
-                            <td><i></i> {{ p.bet.affiche|upper }} {{ p.bet.affiche.favori.ranking.association }}-
+                            <td><i></i> {{ p.bet.affiche|upper }} -
                                 <b><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche.tournoi }}</b></td>
                         </tr>
 
@@ -161,7 +161,7 @@
                     {% endif %}
                         <tr>
                 <th>affiche</th>
-                <td><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche|upper }} {{ p.bet.affiche.favori.ranking.association }}- <b>{{ p.bet.affiche.tournoi }}</b></td>
+                <td><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche|upper }} - <b>{{ p.bet.affiche.tournoi }}</b></td>
                         </tr>
 
             <tr>

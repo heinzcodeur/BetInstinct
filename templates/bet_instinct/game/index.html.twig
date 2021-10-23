@@ -11,7 +11,7 @@
             <th>id</th>
             <th>Name</th>
             <th>formule</th>
-            <th>nb pronostics</th>
+            <th>validé?</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -23,7 +23,7 @@
                 <td>{{ game.id }}</td>
                 <td>{{ game.name }}</td>
                 <td>{{ game.formule }}</td>
-                <td>{{ game.pronos|length }}</td>
+                <td>{{ game.isConfirm }}</td>
                 <td>
                     <a href="{{ path('bet_instinct_game_show', {'id': game.id}) }}" class="btn btn-info">show</a>
                 </td>

@@ -4,9 +4,21 @@
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/TournoiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/TournoiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/EquipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/EquipeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/TestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/affiche/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/association/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/association/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/association/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/game/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/head.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/head.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +186,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myYoutube" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -232,7 +244,7 @@
       <workItem from="1633605460447" duration="14734000" />
       <workItem from="1633945270003" duration="41455000" />
       <workItem from="1634339246595" duration="24745000" />
-      <workItem from="1634641649843" duration="19163000" />
+      <workItem from="1634641649843" duration="44912000" />
     </task>
     <servers />
   </component>
@@ -256,10 +268,10 @@
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="370" y="136" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.760@0.0.1280.760" timestamp="1634726889145" />
-    <state x="419" y="136" key="FileChooserDialogImpl" timestamp="1634560881568">
+    <state x="419" y="136" key="FileChooserDialogImpl" timestamp="1634901978213">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="419" y="136" key="FileChooserDialogImpl/0.0.1280.760@0.0.1280.760" timestamp="1634560881568" />
+    <state x="419" y="136" key="FileChooserDialogImpl/0.0.1280.760@0.0.1280.760" timestamp="1634901978213" />
     <state x="383" y="195" key="NewPhpClassDialog" timestamp="1633183812715">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
@@ -329,7 +341,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
