@@ -4,6 +4,7 @@ namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
+use App\Entity\BetInstinct\Equipe;
 use App\Entity\BetInstinct\Jeu;
 use App\Entity\BetInstinct\Pronostic;
 use App\Entity\BetInstinct\Transaction;
@@ -57,37 +58,24 @@ class PronosticController extends AbstractController
         $pronostic->setCote($cote);
         $pronostic->setAuthor($this->getUser());
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($pronostic);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('bet_instinct_affiche_show', ['id' => $affiche->getId()], Response::HTTP_SEE_OTHER);
-
         //dd($pronostic);
 
-        // return new Response('pronostic de '.$this->getUser()->getPrenom().' pour le match <b>'.$pronostic->getBet()->getAffiche().'</b><br><br>'.$pronostic->getChoix().' pour '.$pronostic->getBet()->getAffiche()->getFavori(). ' : '.$pronostic->getCote());
+        $checkprono = $this->getDoctrine()->getRepository(Pronostic::class)->findBy(['bet' => $thebet->getId(),'choix'=>$pronostic->getChoix()]);
+        //dd($checkprono);
+        if (count($checkprono) > 0) {
+            $this->addFlash('danger', 'pronostic déjà créé');
+            return $this->render('bet_instinct/bet/show.html.twig', [
+                'bet' => $thebet
+            ]);
+        }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($pronostic);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('bet_instinct_affiche_show', ['id' => $affiche->getId()], Response::HTTP_SEE_OTHER);
 
-        /* $jeu = new Jeu();
-         $jeu->setPronostic($pronostic);
-         $jeu->setMise(5);
-         dd($jeu);
-         $form = $this->createForm(PronosticType::class, $pronostic);
-         $form->handleRequest($request);
+        }
 
-         if ($form->isSubmitted() && $form->isValid()) {
-             $entityManager = $this->getDoctrine()->getManager();
-             $entityManager->persist($pronostic);
-             $entityManager->flush();
-
-             return $this->redirectToRoute('bet_instinct_pronostic_index', [], Response::HTTP_SEE_OTHER);
-         }
-
-         return $this->renderForm('bet_instinct/pronostic/new.html.twig', [
-             'pronostic' => $pronostic,
-             'form' => $form,
-         ]);*/
-    }
 
     /**
      * @Route("/{id}", name="bet_instinct_pronostic_show", methods={"GET"})

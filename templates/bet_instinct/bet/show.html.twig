@@ -3,6 +3,9 @@
 {% block body %}
     <h3 class="text-center">          {{ bet.TypedePari.type2choix }}
     </h3>
+
+  {% for d in app.flashes('danger') %} <div class="alert alert-danger"> {{ d}} </div>{% endfor %}
+
     <table class="table">
         <tbody>
             <tr>

@@ -1,7 +1,7 @@
 {{include('head.html.twig')}}
 
 {% block body %}
-    <h4 class="text-center"> {{ pronostic.bet.affiche|upper }} {{ pronostic.bet.TypedePari }}</h4>
+    <h4 class="text-center"><a href="{{ path('bet_instinct_affiche_show',{'id':pronostic.bet.affiche.id}) }}" class="cursor"> {{ pronostic.bet.affiche|upper }} {{ pronostic.bet.TypedePari }}</a></h4>
 {{ dump(pronostic) }}
     <table class="table">
         <tbody>

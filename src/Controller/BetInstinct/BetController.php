@@ -59,7 +59,7 @@ class BetController extends AbstractController
     public function show(Bet $bet): Response
     {
         //return new Response($bet->getTypedePari()->getType2choix());
-
+       // dd($bet);
         return $this->render('bet_instinct/bet/show.html.twig', [
             'bet' => $bet,
         ]);

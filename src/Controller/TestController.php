@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\BetInstinct\Bet;
 use App\Entity\BetInstinct\Classement;
 use App\Entity\BetInstinct\Equipe;
+use App\Entity\BetInstinct\Pronostic;
 use App\Entity\BetInstinct\TypedePari;
 use Doctrine\DBAL\Driver\SQLSrv\LastInsertId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +23,14 @@ class TestController extends AbstractController
         //$t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
         $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(25);
 
+        $p=$this->getDoctrine()->getRepository(Pronostic::class)->findBy(['bet'=>204]);
+
+        if(count($p)>1){ dd('return;');}
+        $bet=$this->getDoctrine()->getRepository(Bet::class)->find(204);
+        //$bets=$this->getDoctrine()->getRepository(Bet::class)->findBy(['bet'=>204]);
+        dump($bet->getTypedePAri()->getType2choix()->getName());
+        //dump($bets);
+dd('la');
         dd($type->getType2choix()->getChoix1());
 
         //$last=$this->getDoctrine()->getRepository(Classement::class)->findOneBy([],['id'=>'desc']);

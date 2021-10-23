@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7cd1f41c-de6d-4ce9-a22d-e1677595b5a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/AfficheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/EquipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/EquipeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BetInstinct/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/association/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/association/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/association/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/athlete/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/bet/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/game/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/game/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/typede_pari/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/head.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/head.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bet_instinct/tournoi/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +229,7 @@
       <workItem from="1633605460447" duration="14734000" />
       <workItem from="1633945270003" duration="41455000" />
       <workItem from="1634339246595" duration="24745000" />
-      <workItem from="1634641649843" duration="44912000" />
+      <workItem from="1634641649843" duration="46158000" />
     </task>
     <servers />
   </component>
