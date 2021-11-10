@@ -20,6 +20,14 @@ class TestController extends AbstractController
     public function index(): Response
     {
 
+        $last = $this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy(['association' => '2','id'=>'desc']);
+
+dd($last);
+        $date=new \DateTime('now');
+        $timestamp = strtotime($date->format('d-m-Y'));
+        dump($date);
+        dd($timestamp);
+
         //$t=$this->getDoctrine()->getRepository(Equipe::class)->findBy(['name'=>'tottenham']);
         $type=$this->getDoctrine()->getRepository(TypedePari::class)->find(25);
 

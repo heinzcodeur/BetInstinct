@@ -2,26 +2,24 @@
 
 namespace App\Form\BetInstinct;
 
-use App\Entity\BetInstinct\Pays;
+use App\Entity\BetInstinct\Continent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PaysType extends AbstractType
+class ContinentType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
-            ->add('shortcut')
-            ->add('zone')
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Pays::class,
+            'data_class' => Continent::class,
         ]);
     }
 }

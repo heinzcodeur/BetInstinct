@@ -19,7 +19,6 @@
         <th>cote2</th>
         <th>outsider</th>
         <th>date</th>
-        <th>score</th>
         </thead>
         <tbody>
         {% for m in matchs %}
@@ -36,9 +35,11 @@
                     <td class="bg-danger">{{ m.coteOutsider }}</td>
                     <td>{{ m.challenger|upper }}</td>
                     {% endif %}
-                <td>{{ m.schedule|date('d-m-Y')}}</td>
-                <td>{{ m.score ? m.score:'???' }}</td>
-            </tr>
+                {% set d =((date().timestamp - m.schedule.timestamp )/60/60/24)|round %}
+                {% if d < 1 %} <td>  à l'instant </td>{% else %}
+                <td>il y a {{ ((date().timestamp - m.schedule.timestamp )/60/60/24)|round}} jours </td>
+            {% endif %}
+             </tr>
 
         {% endfor %}
         </tbody>

@@ -10,12 +10,14 @@ use App\Entity\BetInstinct\Pronostic;
 use App\Entity\BetInstinct\Transaction;
 use App\Form\BetInstinct\PronosticType;
 use App\Repository\BetInstinct\PronosticRepository;
+use App\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
+
 
 /**
  * @Route("/bet/instinct/pronostic")
@@ -27,11 +29,13 @@ class PronosticController extends AbstractController
      */
     public function index(PronosticRepository $pronosticRepository, EntityManagerInterface $entityManager): Response
     {
+
+        Service::Archivage($pronosticRepository->findAll(),$entityManager);
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('p')
             ->from(Pronostic::class, 'p')
+        ->where('p.archived = 0')
             ->orderBy('p.created', 'DESC');
-        // ->where('u.prenom LIKE :prenom')
         //->andWhere('u.nom = :nom')
         //->setParameter('prenom', 'cedric')
         //->setParameter('nom', 'booster');
@@ -94,6 +98,7 @@ class PronosticController extends AbstractController
         $em=$this->getDoctrine()->getManager();
 
         $pronostic->setIsChecked(true);
+        $em->flush();
         $pronostic->getAffiche()->setScore(intval($score));
 
         if ($valid == true) {
@@ -132,13 +137,14 @@ class PronosticController extends AbstractController
                     //sinon si game combiné
                     elseif($g->getFormule()->getId()==2) {
                         $pronostic->setIsValid(true);
+                        $em->flush();
                         //pour un pronostic valide, on verifie si tous les autres pronos associés sont déjà checkés alors le game est gagnant
                         foreach ($g->getPronos() as $prono) {
                             //si au moins un prono n'est pas encore checké le resultat de game reste en attente
                             if ($prono->getIsChecked() != 1) {
-                                $em->flush();
                                 return $this->redirectToRoute('bet_instinct_game_show', ['id' => $g->getId()]);
                             }
+                            $em->flush();
                         }
                             //sinon le game est gagnant
                             $g->setResultat('gagnant');
@@ -206,7 +212,6 @@ class PronosticController extends AbstractController
 
         $form = $this->createForm(PronosticType::class, $pronostic);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pronostic->setCreated(new \DateTime('now'));

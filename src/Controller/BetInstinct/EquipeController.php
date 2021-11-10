@@ -39,12 +39,7 @@ class EquipeController extends AbstractController
         $athlete = new Athlete();
         $ranking = new Classement();
         //recuperation du dernier ID insere dans la tabe classement
-        $last = $this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy([], ['id' => 'desc']);
-        $rank = $last->getRanking() + 1;
-        $association = $this->getDoctrine()->getRepository(Association::class)->find(3);
-        $ranking->setAssociation($association);
-        $ranking->setJoueur($athlete);
-        $ranking->setRanking($rank + 1);
+
         $form = $this->createForm(EquipeType::class, $equipe);
 
         $form->handleRequest($request);
@@ -116,7 +111,6 @@ class EquipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $checkatl=$this->getDoctrine()->getRepository(Athlete::class)->findBy(['nom'=>$equipe->getName()]);
             if(count($checkatl)==0){
-
             $athlete=new Athlete();
             $athlete->setNom($equipe->getName());
             $athlete->setPrenom($equipe->getTournoi()->getName());

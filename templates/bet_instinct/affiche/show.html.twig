@@ -1,7 +1,6 @@
 {{include('head.html.twig')}}
 {% block body %}
-    {{ dump(affiche) }}
-    <h1 class="text-center">{{ affiche.favori|upper }} VS {{ affiche.challenger|upper }}</h1>
+    <h2 class="text-center inline">{{ affiche.favori|upper }}</h2> VS <h2 class="inline text-right">{{ affiche.challenger|upper }}</h2>
     <table class="table">
         <tbody>
 
@@ -13,6 +12,7 @@
             <tr>
                 <td>
                     <a href="{{ path('bet_instinct_bet_show',{'id':b.id}) }}">{{ b.typedePari.Type2choix.name }}</a>
+                    {% if b.typedePari.Type2choix.name == 'Resultat Foot' %}{{ b.typedePari.Type2choix.choix1 }}{% endif %}
                 </td>
             </tr>
         {% endfor %}
@@ -45,10 +45,12 @@
         </tbody>
     </table>
 <div class="col text-center mb-2">
+    {% if affiche.score =='??' %}
     <a href="{{ path('bet_instinct_affiche_edit', {'id': affiche.id}) }}" class="btn btn-success">modifier</a>
-    <a href="{{ path('home') }}" class="btn btn-primary">retour</a>
     <a href="{{ path('bet_instinct_bet_new',{'id':affiche.id}) }}" class="btn btn-info">ajouter 1 pari</a>
-    {{ include('bet_instinct/affiche/_delete_form.html.twig') }}
+    {% endif %}
+    <a href="{{ path('bet_instinct_affiche_archive',{'id':affiche.id}) }}" class="btn btn-warning">archiver</a>
+    <a href="{{ path('home') }}" class="btn btn-primary">retour</a>
 
 
 </div>

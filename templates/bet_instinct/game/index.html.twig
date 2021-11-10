@@ -8,10 +8,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th>id</th>
-            <th>Name</th>
+            <!--<th>id</th>-->
+            <th>pronostic</th>
             <th>formule</th>
-            <th>validé?</th>
+            <!--<th>validé?</th>-->
             <th>actions</th>
         </tr>
         </thead>
@@ -20,10 +20,11 @@
             <tr {% if game.resultat=="en attente" %}class="bg-info"{% endif %}>
             {% if game.resultat=='gagnant' %}<tr class="bg-success">
             {% elseif game.resultat=='perdant' %} <tr class="bg-danger">{% endif %}
-                <td>{{ game.id }}</td>
-                <td>{{ game.name }}</td>
+                <!--<td>{{ game.id }}</td>-->
+                {% if game.formule is not null  %}<td>{% for p in game.pronos %}{{  p }}<br>{% endfor %}</td>
+                {% else %}  <td>{{ game.name }}</td>    {% endif %}
                 <td>{{ game.formule }}</td>
-                <td>{{ game.isConfirm }}</td>
+            <!--<td>{{ game.isConfirm }}</td>-->
                 <td>
                     <a href="{{ path('bet_instinct_game_show', {'id': game.id}) }}" class="btn btn-info">show</a>
                 </td>

@@ -55,6 +55,11 @@ class Pays
      */
     private $equipes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Continent::class, inversedBy="pays")
+     */
+    private $zone;
+
 
     public function __construct()
     {
@@ -226,6 +231,18 @@ class Pays
                 $equipe->setPays(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getZone(): ?Continent
+    {
+        return $this->zone;
+    }
+
+    public function setZone(?Continent $zone): self
+    {
+        $this->zone = $zone;
 
         return $this;
     }

@@ -1,51 +1,52 @@
-{{ include('head.html.twig') }}
-
+{% extends 'base.html.twig' %}
 {% block body %}
-    <h2 class="text-center">{{tournoi.name}} - {{ tournoi.equipes|length }} équipes</h2>
+<div class="container" style="margin-top: 90px;background-color: #fff;border-radius:5px" >
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">
+                <img src="{{ asset('images/logo-nba.png') }}" alt="logonba" width="25" height="55">
+                {{ tournoi.name }} - {{ tournoi.equipes|length }} équipes</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>tournoi</th>
-                <td>{{ tournoi.name?tournoi.name:tournoi.city.name }}</td>
-            </tr>
-            <tr>
-                <th>Debut</th>
-                <td>{{ tournoi.debut ? tournoi.debut|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Fin</th>
-                <td>{{ tournoi.fin ? tournoi.fin|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date_creation</th>
-                <td>{{ tournoi.dateCreation ? tournoi.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Siteweb</th>
-                <td class="cursor text-primary" onclick="document.location='{{ tournoi.siteweb}}'">{{ tournoi.siteweb }}</td>
-            </tr>
-            <tr>
-                <th>Dotation</th>
-                <td>{{ tournoi.dotation|number_format(0,' ',' ',' ') }} $</td>
-            </tr>
-        {% for e in tournoi.equipes %}
-            <tr>
-                <th><img src="{{ asset('betinstinct.png') }}" width="50" HEIGHT="50" alt=""></th>
-                <td onclick="document.location='{{ path('bet_instinct_equipe_show',{'id':e.id}) }}'" class='cursor'>{{ e }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tbody>
+                {% for a in tournoi.affiches %}
+                <tr onclick="document.location='{{ path("bet_instinct_affiche_show",{'id':a.id}) }}'" class="cursor">
+                    <td>{{ a}}</td>
+                </tr>
+               {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
 
-    <div class="col text-center">
-    <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
+            <table>
+                <tbody>
+                {% for e in tournoi.equipes %}
+                    <tr>
+                        <th><img src="{{ asset('betinstinct.png') }}" width="50" HEIGHT="50" alt=""></th>
+                        <td onclick="document.location='{{ path('bet_instinct_equipe_show',{'id':e.id}) }}'"
+                            class='cursor'>{{ e }}</td>
+                    </tr>
+                {% endfor %}
 
-    <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-success">edit</a>
+                </tbody>
+            </table>
 
-    <a href="{{ path('bet_instinct_affiche_new') }}" class="btn btn-secondary">add match</a>
-    <a href="{{ path('bet_instinct_equipe_new') }}" class="btn btn-info">add team</a>
+        </div>
 
-    {{ include('end.html.twig') }}
+        <div class="col text-center">
+            <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
 
-{% endblock %}
+            <a href="{{ path('bet_instinct_tournoi_edit', {'id': tournoi.id}) }}" class="btn btn-success">edit</a>
+
+            <a href="{{ path('bet_instinct_affiche_new') }}" class="btn btn-secondary">add match</a>
+            <a href="{{ path('bet_instinct_equipe_new') }}" class="btn btn-info">add team</a>
+
+        </div>
+    </div>
+</div>
+    {% endblock %}

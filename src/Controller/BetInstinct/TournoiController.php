@@ -71,6 +71,10 @@ class TournoiController extends AbstractController
      */
     public function show(Tournoi $tournoi): Response
     {
+        foreach($tournoi->getAffiches() as $a){
+            dump($a);
+        }
+
         return $this->render('bet_instinct/tournoi/show.html.twig', [
             'tournoi' => $tournoi,
         ]);

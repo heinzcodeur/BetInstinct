@@ -3,8 +3,10 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Athlete;
+use App\Entity\BetInstinct\Classement;
 use App\Form\BetInstinct\AthleteType;
 use App\Repository\BetInstinct\AthleteRepository;
+use App\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +23,16 @@ class AthleteController extends AbstractController
      */
     public function index(AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
     {
-        //$q=$entityManager->createNativeQuery('SELECT a FROM BetInstinct\Athlete a');
+
+        $athletes=$athleteRepository->findAll();
+        foreach($athletes as $athlete){
+            if($athlete->getRanking()==NULL) {
+                $ranking=new Classement();
+                Service::createRanking($athlete,1,$ranking, $entityManager);
+                dump($athlete);
+            }
+        }
+
         $queryBuilder=$entityManager->createQueryBuilder();
         $queryBuilder->select('a')
                     ->from(Athlete::class,'a')
@@ -39,24 +50,21 @@ class AthleteController extends AbstractController
     /**
      * @Route("/new/{ranking}", name="bet_instinct_athlete_new", methods={"GET","POST"})
      */
-    public function new($ranking=null, Request $request): Response
+    public function new($ranking=null, Request $request, AthleteRepository $athleteRepository): Response
     {
         $athlete = new Athlete();
         $form = $this->createForm(AthleteType::class, $athlete);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $checkathlete=$this->getDoctrine()->getRepository(Athlete::class)->findBy(['nom'=>$athlete->getNom(),'genre'=>$athlete->getGenre()]);
-            if(is_array($checkathlete) && count($checkathlete)>0){
-                  $this->addFlash('danger','athlete deja inscrit');
-                  return $this->renderForm('bet_instinct/athlete/new.html.twig', [
-                      'athlete' => $athlete,
-                      'form' => $form]
-                  );
-              }
+            if(is_array(Service::checkAthlete($athlete,$athleteRepository)) && count(Service::checkAthlete($athlete,$athleteRepository))>0) {
+                $this->addFlash('danger', 'athlete deja inscrit');
+                return self::renderForm('bet_instinct/athlete/new.html.twig', [
+                    'athlete' => $athlete,
+                    'form' => $form]);
+            }
             if ($form->get('avatar')->getData() != null) {
-                $avatar = $form->get('avatar')->getData();//dd($avatar);
-                // dd($avatar->guessExtension());
+                $avatar = $form->get('avatar')->getData();
                 $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
                 $avatar->move($this->getParameter('images_athletes'), $fichier);
                 $athlete->setAvatar($fichier);
@@ -83,7 +91,7 @@ class AthleteController extends AbstractController
      */
     public function show(Athlete $athlete): Response
     {
-        dump($athlete);
+        dump($athlete->getRanking());
         return $this->render('bet_instinct/athlete/show.html.twig', [
             'athlete' => $athlete,
         ]);

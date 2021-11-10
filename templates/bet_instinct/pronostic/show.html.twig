@@ -23,9 +23,9 @@
             </tr>
         <tr>
                 <th>resultat</th>
-            {% if pronostic.isValid is null %} <td>en attente</td>{% endif %}
-            {% if pronostic.isValid == true %} <td>winner</td>{% endif %}
-            {% if pronostic.isValid == false %} <td>perdant</td>{% endif %}
+            {% if pronostic.isValid is null %} <td class="text-primary">en attente</td>{% endif %}
+            {% if pronostic.isValid == true %} <td class="text-success">winner</td>{% endif %}
+            {% if pronostic.isValid == false %} <td class="text-danger font-weight-bold">perdant</td>{% endif %}
             </tr>
             {% for g in pronostic.game3 %}
             <tr onclick="document.location='{{ path('bet_instinct_game_show',{'id':g.id}) }}'" class="cursor">

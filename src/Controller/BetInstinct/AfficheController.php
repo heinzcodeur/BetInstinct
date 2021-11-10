@@ -8,6 +8,7 @@ use App\Entity\BetInstinct\TypedePari;
 use App\Entity\BetInstinct\User;
 use App\Form\BetInstinct\AfficheType;
 use App\Repository\BetInstinct\AfficheRepository;
+use App\Service;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,9 +26,11 @@ class AfficheController extends AbstractController
      */
     public function index(AfficheRepository $afficheRepository, EntityManagerInterface $entityManager): Response
     {
+        //Service::Archivage($afficheRepository->findAll(),$entityManager);
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('a')
             ->from(Affiche::class, 'a')
+            ->where('a.archived = 0')
             ->orderBy('a.id','DESC');
 
         $query = $queryBuilder->getQuery();
@@ -39,7 +42,7 @@ class AfficheController extends AbstractController
     /**
      * @Route("/new", name="bet_instinct_affiche_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $affiche = new Affiche();
         $bet=new Bet();
@@ -137,22 +140,10 @@ class AfficheController extends AbstractController
            }
            //si affiche basket
            elseif($affiche->getTournoi()->getSport()->getId()==2){
-               $bet=new bet();
-               $bet->setAffiche($affiche);
-               $type = $this->getDoctrine()->getRepository(TypedePari::class)->find(25);
-               $bet->setTypedePari($type);
-               $bet->setCote1(4.41);
-               $bet->setCote2(3.75);
-               $bet->setCote3(6.01);
-               $bet->setCote4(7.25 );
-               $bet->setCote5(11.01);
-               $bet->setCote6(12.01);
-               $bet->setCote7(6.25);
-               $bet->setCote8(7.51);
-               $bet->setCote9(13.01);
-               $bet->setCote10(23.01);
-               $bet->setCote11(46.01);
-               $bet->setCote12(60.01);
+                    $ecartgagnant=Service::ecartGagnant($affiche,$entityManager,25);
+                    $nbpoints=Service::nbPoints($affiche,$entityManager,27);
+                    $vainqueurBasket = Service::vainqueur($affiche,$entityManager,2);
+                    $troispoints=Service::total3points($affiche,$entityManager,29);
            }
            else {
                //sinon on cree un bet vainqueur tennis
@@ -169,14 +160,14 @@ class AfficheController extends AbstractController
                $bet2->setCote2(3.6);
                $bet2->setCote3(3.3);
                $bet2->setCote4(4.2);
-
+                //on cree un bet nombre de sets
                $bet3 = new Bet();
                $bet3->setAffiche($affiche);
                $typeNbSets = $this->getDoctrine()->getRepository(TypedePari::class)->find(6);
                $bet3->setTypedePari($typeNbSets);
                $bet3->setCote1(1.5);
                $bet3->setCote2(2.05);
-
+                //on cree un bet score set1
                $betScoreSet1 = new Bet();
                $betScoreSet1->setAffiche($affiche);
                $typeScoreSet1 = $this->getDoctrine()->getRepository(TypedePari::class)->find(3);
@@ -195,15 +186,28 @@ class AfficheController extends AbstractController
                $betScoreSet1->setCote12(6.75);
                $betScoreSet1->setCote13(17);
                $betScoreSet1->setCote14(7.5);
-
+                //on cree un bet vainqueur set1
                $betSet1Vainqueur = new Bet();
                $betSet1Vainqueur->setAffiche($affiche);
                $typeSet1V=$this->getDoctrine()->getRepository(TypedePari::class)->find(19);
                $betSet1Vainqueur->setTypedePari($typeSet1V);
                $betSet1Vainqueur->setCote1(1.45);
                $betSet1Vainqueur->setCote2(2.15);
+
+               //on cree un bet score exact set1 multichoix
+               $betScoreExactSet1multiChoix = new Bet();
+               $betScoreExactSet1multiChoix->setAffiche($affiche);
+               $typeScoreMulti=$this->getDoctrine()->getRepository(TypedePari::class)->find(28);
+               $betScoreExactSet1multiChoix->setTypedePari($typeScoreMulti);
+               $betScoreExactSet1multiChoix->setCote1(4.75);
+               $betScoreExactSet1multiChoix->setCote1(3.51);
+               $betScoreExactSet1multiChoix->setCote1(6.51);
+               $betScoreExactSet1multiChoix->setCote1(5.51);
+               $betScoreExactSet1multiChoix->setCote1(2.75);
+               $betScoreExactSet1multiChoix->setCote1(7.01);
            }
             //dd($bet);
+            $affiche->setArchived(0);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affiche);
             $entityManager->persist($bet);
@@ -219,6 +223,21 @@ class AfficheController extends AbstractController
             }
             if(isset($betScoreSet1)){
                 $entityManager->persist($betScoreSet1);
+            }
+            if(isset($betScoreExactSet1multiChoix)){
+                $entityManager->persist($betScoreExactSet1multiChoix);
+            }
+            if(isset($ecartgagnant)){
+                $entityManager->persist($ecartgagnant);
+            }
+            if(isset($vainqueurBasket)){
+                $entityManager->persist($vainqueurBasket);
+            }
+            if(isset($troispoints)){
+                $entityManager->persist($troispoints);
+            }
+            if(isset($nbpoints)){
+                $entityManager->persist($nbpoints);
             }
             $entityManager->flush();
 
@@ -239,6 +258,15 @@ class AfficheController extends AbstractController
         return $this->render('bet_instinct/affiche/show.html.twig', [
             'affiche' => $affiche,
         ]);
+    }
+
+    /**
+     * @Route("archive/{id}", name="bet_instinct_affiche_archive")
+     */
+    public function archiverAffiche(Affiche $affiche, EntityManagerInterface $entityManager){
+        $affiche->setArchived(1);
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
     }
 
     /**
