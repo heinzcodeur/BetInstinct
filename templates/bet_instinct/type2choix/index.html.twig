@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>name</th>
-                <th>Choix1</th>
+                <!--<th>Choix1</th>
                 <th>Choix2</th>
                 <th>Choix3</th>
                 <th>Choix4</th>
@@ -29,7 +29,7 @@
                 <th>Choix17</th>
                 <th>Choix18</th>
                 <th>Choix19</th>
-                <th>Choix20</th>
+                <th>Choix20</th>-->
                 <th>actions</th>
             </tr>
         </thead>
@@ -38,7 +38,7 @@
             <tr>
                 <td>{{ type2choix.id }}</td>
                 <td>{{ type2choix.name }}</td>
-                <td>{{ type2choix.choix1 }}</td>
+               <!-- <td>{{ type2choix.choix1 }}</td>
                 <td>{{ type2choix.choix2 }}</td>
                 <td>{{ type2choix.choix3 }}</td>
                 <td>{{ type2choix.choix4 }}</td>
@@ -57,10 +57,10 @@
                 <td>{{ type2choix.choix17 }}</td>
                 <td>{{ type2choix.choix18 }}</td>
                 <td>{{ type2choix.choix19 }}</td>
-                <td>{{ type2choix.choix20 }}</td>
+                <td>{{ type2choix.choix20 }}</td>-->
                 <td>
-                    <a href="{{ path('bet_instinct_type2choix_show', {'id': type2choix.id}) }}">show</a>
-                    <a href="{{ path('bet_instinct_type2choix_edit', {'id': type2choix.id}) }}">edit</a>
+                    <a href="{{ path('bet_instinct_type2choix_show', {'id': type2choix.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_type2choix_edit', {'id': type2choix.id}) }}" class="btn btn-danger">edit</a>
                 </td>
             </tr>
         {% else %}

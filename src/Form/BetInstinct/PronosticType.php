@@ -18,6 +18,7 @@ class PronosticType extends AbstractType
             ->add('game3')
             ->add('affiche')
             ->add('isValid')
+            ->add('isConfirm')
             ->add('pronoExact')
 
         ;

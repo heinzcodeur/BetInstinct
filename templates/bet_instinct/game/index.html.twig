@@ -1,10 +1,16 @@
 {{ include('head.html.twig') }}
 
 {% block body %}
-    <h1>Game index</h1>
-    <div class="col text-right">
-        <a href="{{ path('bet_instinct_game_new') }}" class="btn btn-primary">nouveau</a>
+    <div class="row">
+        <h2 class="text-center">les games de {{ app.user.nickname|capitalize }}</h2>
+        <div class="col text-center mt-2 mb-3">
+            <a href="{{ path('bet_instinct_game_new') }}" class="btn btn-primary">nouveau</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'en attente'}) }}" class="btn btn-secondary">en cours</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'gagnant'}) }}" class="btn btn-success">winner</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'perdant'}) }}" class="btn btn-danger">loser</a>
+        </div>
     </div>
+
     <table class="table">
         <thead>
         <tr>

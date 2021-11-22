@@ -9,6 +9,8 @@ use App\Entity\BetInstinct\Pays;
 use App\Form\BetInstinct\EquipeType;
 use App\Repository\BetInstinct\ClassementRepository;
 use App\Repository\BetInstinct\EquipeRepository;
+use App\Service;
+use Doctrine\ORM\EntityManagerInterface;
 use Proxies\__CG__\App\Entity\BetInstinct\Classement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +39,6 @@ class EquipeController extends AbstractController
     {
         $equipe = new Equipe();
         $athlete = new Athlete();
-        $ranking = new Classement();
         //recuperation du dernier ID insere dans la tabe classement
 
         $form = $this->createForm(EquipeType::class, $equipe);
@@ -67,8 +68,12 @@ class EquipeController extends AbstractController
             $athlete->setPays($equipe->getPays());
             $athlete->setTaille(1.75);
 
-
             $entityManager = $this->getDoctrine()->getManager();
+            //$asso = new Association();
+            $asso = $this->getDoctrine()->getRepository(Association::class)->findOneBy(['name'=>'FIBA']);
+            //$asso->setName('FIBA');
+            $ranking = Service::createRanking($athlete, $asso->getId(), $entityManager);
+
             if (isset($pays)) {
                 $entityManager->persist($pays);
             }

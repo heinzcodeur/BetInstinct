@@ -6,6 +6,7 @@ use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Form\BetInstinct\BetType;
 use App\Repository\BetInstinct\BetRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,11 +20,19 @@ class BetController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_bet_index", methods={"GET"})
      */
-    public function index(BetRepository $betRepository): Response
+    public function index(BetRepository $betRepository, EntityManagerInterface $entityManager): Response
     {
-        $bets=$betRepository->findAll();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('b')
+            ->from(Bet::class, 'b')
+            //->where('a.archived = 0')
+            ->orderBy('b.id','DESC');
+
+        //$bets=$betRepository->findAll();
+        $query = $queryBuilder->getQuery();
         return $this->render('bet_instinct/bet/index.html.twig', [
-            'bets' => $betRepository->findAll(),
+            'bets' => $query->getResult(),
         ]);
     }
 
@@ -60,6 +69,7 @@ class BetController extends AbstractController
     {
         //return new Response($bet->getTypedePari()->getType2choix());
        // dd($bet);
+
         return $this->render('bet_instinct/bet/show.html.twig', [
             'bet' => $bet,
         ]);

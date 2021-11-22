@@ -35,9 +35,12 @@
                     <td class="bg-danger">{{ m.coteOutsider }}</td>
                     <td>{{ m.challenger|upper }}</td>
                     {% endif %}
-                {% set d =((date().timestamp - m.schedule.timestamp )/60/60/24)|round %}
-                {% if d < 1 %} <td>  à l'instant </td>{% else %}
-                <td>il y a {{ ((date().timestamp - m.schedule.timestamp )/60/60/24)|round}} jours </td>
+                {% set d =(( m.schedule.timestamp - date().timestamp)) %}
+                {% set minutes =(( m.schedule.timestamp - date().timestamp)/60) %}
+                {% set heures =(( m.schedule.timestamp - date().timestamp)/60/60) %}
+                {{ dump(d|round) }}
+                 {% if (d|round) >0 %} <td>  dans {{ d|round }} minutes</td>{% else %}
+                <td>dépassé</td>
             {% endif %}
              </tr>
 

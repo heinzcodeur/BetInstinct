@@ -5,6 +5,8 @@ namespace App\Controller\BetInstinct;
 use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Entity\BetInstinct\Equipe;
+use App\Entity\BetInstinct\Formule;
+use App\Entity\BetInstinct\Game;
 use App\Entity\BetInstinct\Jeu;
 use App\Entity\BetInstinct\Pronostic;
 use App\Entity\BetInstinct\Transaction;
@@ -34,8 +36,8 @@ class PronosticController extends AbstractController
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('p')
             ->from(Pronostic::class, 'p')
-        ->where('p.archived = 0')
-            ->orderBy('p.created', 'DESC');
+        //->where('p.archived = 0')
+            ->orderBy('p.id', 'DESC');
         //->andWhere('u.nom = :nom')
         //->setParameter('prenom', 'cedric')
         //->setParameter('nom', 'booster');
@@ -48,13 +50,53 @@ class PronosticController extends AbstractController
     }
 
     /**
-     * @Route("/new/{bet}/{choix}/{cote}", name="bet_instinct_pronostic_new", methods={"GET","POST"})
+     * @Route("/new/{bet}/{choix}/{cote}/{type}/{pourcentage}", name="bet_instinct_pronostic_new", methods={"GET","POST"})
      */
-    public function new($bet, $choix, $cote, Request $request): Response
+    public function new($bet, $choix, $cote, $type=false,$pourcentage=null,Request $request): Response
     {
+        $a='/bet/instinct/pronostic/new/454/undefined/3.61/true';
+        //dd(floatval($cote));
+        //si jeu simple, on crée un objet jeu simple
+        if($type==true){
+
+            $thebet = $this->getDoctrine()->getRepository(Bet::class)->find($bet);
+            $affiche = $thebet->getAffiche();
+            $pronostic = new Pronostic();
+            $pronostic->setCreated(new \DateTime('now'));
+            $pronostic->setBet($thebet);
+            $pronostic->setAffiche($pronostic->getBet()->getAffiche());
+            $pronostic->setChoix($choix);
+            $pronostic->setCote($cote);
+            $pronostic->setAuthor($this->getUser());
+            //dd($checkprono);
+            $checkprono = $this->getDoctrine()->getRepository(Pronostic::class)->findBy(['bet' => $thebet->getId(),'choix'=>$pronostic->getChoix()]);
+            if (count($checkprono) > 0) {
+                $this->addFlash('danger', 'pronostic déjà créé');
+                return $this->render('bet_instinct/bet/show.html.twig', [
+                    'bet' => $thebet
+                ]);
+            }
+            //creation jeu simple
+            $formule = $this->getDoctrine()->getRepository(Formule::class)->find(1);
+            $mise = Service::mise($this->getUser()->getSolde()->getBalance(),$pourcentage);
+            $game = Service::createSimpleGame($formule,$pronostic,$this->getUser(),$cote,$mise);
+            $transac = Service::createTransac($game);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($pronostic);
+            $entityManager->persist($game);
+            $entityManager->persist($transac);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('bet_instinct_affiche_show', ['id' => $affiche->getId()], Response::HTTP_SEE_OTHER);
+
+
+        }
+
         $thebet = $this->getDoctrine()->getRepository(Bet::class)->find($bet);
         $affiche = $thebet->getAffiche();
         $pronostic = new Pronostic();
+        $game=new Game();
         $pronostic->setCreated(new \DateTime('now'));
         $pronostic->setBet($thebet);
         $pronostic->setAffiche($pronostic->getBet()->getAffiche());
@@ -92,9 +134,9 @@ class PronosticController extends AbstractController
     }
 
     /**
-     * @Route("/checkin/{id}/{score}/{valid}/", name="bet_instinct_pronostic_checkin")
+     * @Route("/checkin/{id}/{score}/{valid}/{rightprono}", name="bet_instinct_pronostic_checkin")
      */
-    public function checkinPronostic($score, $valid,Pronostic $pronostic){
+    public function checkinPronostic($score, $rightprono, $valid,Pronostic $pronostic){
         $em=$this->getDoctrine()->getManager();
 
         $pronostic->setIsChecked(true);
@@ -195,13 +237,11 @@ class PronosticController extends AbstractController
                 $g->setGain(0);
             }
         }
-        $pronostic->setPronoExact($score);
+        $pronostic->setPronoExact($rightprono);
         $em->flush();
         //dd($pronostic);
             return $this->redirectToRoute('bet_instinct_game_index');
         }
-
-
 
     /**
      * @Route("/{id}/edit/", name="bet_instinct_pronostic_edit", methods={"GET","POST"})

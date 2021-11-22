@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Entity\BetInstinct\Classement;
 use App\Entity\BetInstinct\Equipe;
 use App\Entity\BetInstinct\Pronostic;
+use App\Entity\BetInstinct\Type2choix;
 use App\Entity\BetInstinct\TypedePari;
+use App\Service;
 use Doctrine\DBAL\Driver\SQLSrv\LastInsertId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +23,16 @@ class TestController extends AbstractController
     public function index(): Response
     {
 
-        $last = $this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy(['association' => '2','id'=>'desc']);
+        $type = $this->getDoctrine()->getRepository(Type2choix::class)->findOneBy([],['id'=>'desc']);
+        $type2=new Type2choix();
+        $type2->setName('Mi-temps - Nombre de points equipeB');
+        //foreach ($type)
+        dd($type2);
 
-dd($last);
+
+      //  $last = $this->getDoctrine()->getRepository(\App\Entity\BetInstinct\Classement::class)->findOneBy(['association' => '2','id'=>'desc']);
+
+//dd($last);
         $date=new \DateTime('now');
         $timestamp = strtotime($date->format('d-m-Y'));
         dump($date);
@@ -66,5 +76,40 @@ dd('la');
             'controller_name' => 'TestController',
         ]);
     }
+
+    /**
+     * @Route("/tester", name="tester")
+     */
+    public function triple()
+    {
+        $tablo = [2, 5, 7, 9];
+        dump($tablo);
+
+        $aff = $this->getDoctrine()->getRepository(Affiche::class)->find(188);
+
+        //dump(Service::mytimestamp($aff->getSchedule()));
+    //die('cool');
+        /* dump($str/60);
+         if($str<60) {
+             dump('a l\'instant');
+         }else{
+             $str = $str/60;
+             dump($str);
+             if($str<60){
+                 dump('titi');
+                 dump(($str / 60) . ' minutes');
+             }else{
+                 $str = $str/60;
+                 dump(($str) . ' heures');
+                 if(round($str>24)){
+                     dump(($str / 60 / 24) . ' jours');
+                 }
+             }
+         }
+         dd($aff);*/
+
+         dd(Service::makeTriple($tablo));
+    }
+
 }
 

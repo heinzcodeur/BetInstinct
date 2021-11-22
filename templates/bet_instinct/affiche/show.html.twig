@@ -4,18 +4,7 @@
     <table class="table">
         <tbody>
 
-        <tr>
-            <td>nombre de paris</td>
-            <td>{{ affiche.bet|length}}</td>
-        </tr>
-        {% for b in affiche.bet %}
-            <tr>
-                <td>
-                    <a href="{{ path('bet_instinct_bet_show',{'id':b.id}) }}">{{ b.typedePari.Type2choix.name }}</a>
-                    {% if b.typedePari.Type2choix.name == 'Resultat Foot' %}{{ b.typedePari.Type2choix.choix1 }}{% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+
             <tr>
                 <th>Schedule</th>
                 <td>{{ affiche.schedule ? affiche.schedule|date('Y-m-d H:i:s') : '' }}</td>
@@ -41,7 +30,30 @@
 
             </tr>
 
+            <tr id="nbparis" onclick="(function() {
+                var table = document.querySelector('#paris');
+                    if(!table.classList.contains('d-none')){
+                    table.classList.add('d-none');
+                    }else{
+                    table.classList.remove('d-none');
+                    }
+            })();" class="cursor">
+                <td>nombre de paris</td>
+                <td>{{ affiche.bet|length}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="d-none" id="paris">
+        <tbody>
+            {% for b in affiche.bet %}
 
+                <tr>
+                    <td>
+                        <a href="{{ path('bet_instinct_bet_show',{'id':b.id}) }}">{{ b.typedePari.Type2choix.name }}</a>
+                        {% if b.typedePari.Type2choix.name == 'Resultat Foot' %}{{ b.typedePari.Type2choix.choix1 }}{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 <div class="col text-center mb-2">

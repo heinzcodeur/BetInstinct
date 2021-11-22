@@ -3,7 +3,7 @@
 
 {% block body %}
     <h1>Nouveau type de Pari</h1>
-
+{% for t in app.flashes('danger') %} <div class="alert alert-danger">{{ t }}</div>{% endfor %}
     {{ include('bet_instinct/typede_pari/_form.html.twig') }}
 
     <a href="{{ path('bet_instinct_typede_pari_index') }}" class="btn btn-secondary">retour</a>

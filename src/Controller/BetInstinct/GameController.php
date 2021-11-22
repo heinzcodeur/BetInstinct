@@ -20,18 +20,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     /**
-     * @Route("/", name="bet_instinct_game_index", methods={"GET"})
+     * @Route("/{value}/index", name="bet_instinct_game_index", methods={"GET"})
      */
-    public function index(GameRepository $gameRepository, EntityManagerInterface $entityManager): Response
+    public function index(GameRepository $gameRepository, EntityManagerInterface $entityManager,$value = 'en attente'): Response
     {
         Service::Archivage($gameRepository->findAll(),$entityManager);
-
+        //Service::filterIndex($entityManager,Game::class,'where','resultat','=','perdant');
         $queryBuilder = $entityManager->createQueryBuilder();
+        //dd($value);
         $queryBuilder->select('g')
             ->from(Game::class, 'g')
             ->where('g.resultat=:r')
+            ->andWhere('g.isArchived = 0')
             ->orderBy('g.id', 'DESC')
-          ->setParameter('r','gagnant');
+            ->setParameter('r',$value);
         $games = $queryBuilder->getQuery()->getResult();
 
         return $this->render('bet_instinct/game/index.html.twig', [
@@ -80,7 +82,7 @@ class GameController extends AbstractController
      */
     public function validerGame(Request $request, Game $game)
     {
-        if ($game->getMise() > 0.1) {
+        if (floatval($game->getMise()) > 0.1) {
 
             if ($game->getFormule()->getId() == 1 || $game->getFormule()->getId() == 2) {
 
@@ -93,8 +95,6 @@ class GameController extends AbstractController
                 $transac->setCreatedAt(new \DateTimeImmutable('now'));
 
                 //on met à jour le solde du parieur
-                $solde = $this->getUser()->getSolde();
-                $balance = $solde->getBalance();
                 $solde = $this->getUser()->getSolde();
                 $balance = $solde->getBalance();
                 $solde->setBalance($balance - $game->getMise());
@@ -145,14 +145,18 @@ class GameController extends AbstractController
                 $paires = [];
 
                 // creation des paris doubles
+                //on prend le premier element de l'array
                 for ($i = 0; $i < count($tab); $i++) {
+                    //on prend le 2e element de l'array
                     for ($j = 1; $j < count($tab); $j++) {
                         dump('$i = ' . $i . ' and $j = ' . $j . ' if( ' . $tab[$i]->getBet()->getId() . ' !== ' . $tab[$j]->getBet()->getId() . ')');
+                        //si id 1er et id 2e sont differents
                         if ($tab[$i]->getBet()->getId() !== $tab[$j]->getBet()->getId()) {
+                            //on recupere les ID et on les compare, on inverse les paires pour 2e comparaison
                             $paire1 = $tab[$i]->getBet()->getId() . ' - ' . $tab[$j]->getBet()->getId();
                             $paire2 = $tab[$j]->getBet()->getId() . ' - ' . $tab[$i]->getBet()->getId();
-
-
+                        dump($paire1);
+                        dd($paire2);
                             if (!in_array($paire1, $paires)) {
                                 if (!in_array($paire2, $paires)) {
                                     $double = new Game();
@@ -199,10 +203,11 @@ class GameController extends AbstractController
                     }
                 }
 
+                //creation des triple
 
                 //dd($lesdoubles);
 
-                $entityManager->flush();
+                //$entityManager->flush();
 
                 $this->addFlash('info', 'Votre pari systeme est valide');
 
@@ -215,11 +220,15 @@ class GameController extends AbstractController
             return $this->redirectToRoute('bet_instinct_game_show', ['id' => $game->getId()]);
 
         }
+        else{
+            $this->addFlash('danger','la mise minimale est de 0,10 euros');
+            return $this->redirectToRoute('bet_instinct_game_show',['id'=>$game->getId()]);
+        }
     }
 
 
     /**
-     * @Route("/{id}", name="bet_instinct_game_show", methods={"GET"})
+     * @Route("/show/{id}", name="bet_instinct_game_show", methods={"GET"})
      */
     public function show(Game $game): Response
     {

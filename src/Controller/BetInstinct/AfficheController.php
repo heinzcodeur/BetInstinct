@@ -141,9 +141,39 @@ class AfficheController extends AbstractController
            //si affiche basket
            elseif($affiche->getTournoi()->getSport()->getId()==2){
                     $ecartgagnant=Service::ecartGagnant($affiche,$entityManager,25);
+                    $entityManager->persist($ecartgagnant);
                     $nbpoints=Service::nbPoints($affiche,$entityManager,27);
+                    $entityManager->persist($nbpoints);
                     $vainqueurBasket = Service::vainqueur($affiche,$entityManager,2);
+                    $entityManager->persist($vainqueurBasket);
                     $troispoints=Service::total3points($affiche,$entityManager,29);
+                    $entityManager->persist($troispoints);
+                    $nbpointsQT1=Service::nbPointsQT1($affiche,$entityManager,35);
+                    $entityManager->persist($nbpointsQT1);
+                    $nbpointsQT2=Service::nbPointsQT1($affiche,$entityManager,40);
+                    $entityManager->persist($nbpointsQT2);
+                    $nbpointsQT3=Service::nbPointsQT1($affiche,$entityManager,41);
+                    $entityManager->persist($nbpointsQT3);
+                    //$nbpointsMiTemps=Service::nbPoinstMitemps($affiche,$entityManager,38);
+                    //$entityManager->persist($nbpointsMiTemps);
+                    $premiere50points = Service::premiereEquipe50points($affiche, $entityManager,34);
+                    $entityManager->persist($premiere50points);
+                    $premiere40points = Service::premiereEquipe40points($affiche, $entityManager,33);
+                    $entityManager->persist($premiere40points);
+                    $premiere30points = Service::premiereEquipe30points($affiche, $entityManager,32);
+                    $entityManager->persist($premiere30points);
+                    $premiere20points = Service::premiereEquipe20points($affiche, $entityManager,31);
+                    $entityManager->persist($premiere20points);
+                    $vainqueurNbPpoints = Service::VainqueurNombre2points($affiche, $entityManager,37);
+                    $entityManager->persist($vainqueurNbPpoints);
+                    $premierQTres = Service::premierQTresultat($affiche,$entityManager,38);
+                    $entityManager->persist($premierQTres);
+                    $margevainqueur = Service::margeduvainqueur($affiche, $entityManager,26);
+                    $entityManager->persist($margevainqueur);
+                    //$nbpointsMiTempsEquipeA = Service::nbPointsEquipeAmitemps($affiche,$entityManager,38);
+                    //$entityManager->persist($nbpointsMiTempsEquipeA);
+                   // $nbpointsMiTempsEquipeB = Service::nbPointsEquipeBmitemps($affiche,$entityManager,36);
+                    //$entityManager->persist($nbpointsMiTempsEquipeB);
            }
            else {
                //sinon on cree un bet vainqueur tennis
@@ -210,8 +240,12 @@ class AfficheController extends AbstractController
             $affiche->setArchived(0);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affiche);
-            $entityManager->persist($bet);
-            $entityManager->persist($bet2);
+            if(isset($bet)){
+                $entityManager->persist($bet);
+            }
+            if(isset($bet2)){
+                $entityManager->persist($bet2);
+            }
             if(isset($bet3)){
                 $entityManager->persist($bet3);
             }
@@ -227,7 +261,7 @@ class AfficheController extends AbstractController
             if(isset($betScoreExactSet1multiChoix)){
                 $entityManager->persist($betScoreExactSet1multiChoix);
             }
-            if(isset($ecartgagnant)){
+           /*  if(isset($ecartgagnant)){
                 $entityManager->persist($ecartgagnant);
             }
             if(isset($vainqueurBasket)){
@@ -238,7 +272,7 @@ class AfficheController extends AbstractController
             }
             if(isset($nbpoints)){
                 $entityManager->persist($nbpoints);
-            }
+            }*/
             $entityManager->flush();
 
             return $this->redirectToRoute('bet_instinct_affiche_show',['id'=>$affiche->getId()]);
@@ -255,6 +289,12 @@ class AfficheController extends AbstractController
      */
     public function show(Affiche $affiche): Response
     {
+        /*foreach($affiche->getBet() as $p){
+            dump($p);
+        }
+        dd('titi');*/
+        dump($affiche);
+
         return $this->render('bet_instinct/affiche/show.html.twig', [
             'affiche' => $affiche,
         ]);

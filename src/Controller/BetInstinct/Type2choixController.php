@@ -2,9 +2,12 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Equipe;
 use App\Entity\BetInstinct\Type2choix;
 use App\Form\BetInstinct\Type2choixType;
 use App\Repository\BetInstinct\Type2choixRepository;
+use App\Service;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +21,9 @@ class Type2choixController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_type2choix_index", methods={"GET"})
      */
-    public function index(Type2choixRepository $type2choixRepository): Response
+    public function index(Type2choixRepository $type2choixRepository, EntityManagerInterface $entityManager): Response
     {
+
         return $this->render('bet_instinct/type2choix/index.html.twig', [
             'type2choixes' => $type2choixRepository->findAll(),
         ]);
@@ -35,6 +39,15 @@ class Type2choixController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $t = $this->getDoctrine()->getRepository(Type2choix::class)->findBy(['name' => $type2choix->getName()]);
+            if (count($t) > 0) {
+                $this->addFlash('danger', 'type2choix déjà enregistré!');
+                return $this->renderForm('bet_instinct/type2choix/new.html.twig', [
+                    'type2choix' => $type2choix,
+                    'form' => $form,
+                ]);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($type2choix);
             $entityManager->flush();
@@ -67,6 +80,7 @@ class Type2choixController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            dd($type2choix);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('bet_instinct_type2choix_index', [], Response::HTTP_SEE_OTHER);

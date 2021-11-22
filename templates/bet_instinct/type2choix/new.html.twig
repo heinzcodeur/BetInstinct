@@ -2,11 +2,11 @@
 
 
 {% block body %}
-    <h1>Create new Type2choix</h1>
-
+    <h1 class="text-center">Nouveau Type2choix</h1>
+    {% for t in app.flashes('danger') %} <div class="alert alert-danger">{{ t }}</div>{% endfor %}
     {{ include('bet_instinct/type2choix/_form.html.twig') }}
 
-    <a href="{{ path('bet_instinct_type2choix_index') }}" class="btn btn-secondary">back to list</a>
+    <a href="{{ path('bet_instinct_type2choix_index') }}" class="btn btn-secondary">retour</a>
     </div>
     {{include('end.html.twig')}}
 

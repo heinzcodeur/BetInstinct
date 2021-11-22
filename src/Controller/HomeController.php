@@ -17,14 +17,16 @@ class HomeController extends AbstractController
      */
     public function index(AfficheRepository $afficheRepository, EntityManagerInterface $entityManager): Response
     {
-        //dump($this->getUser());
 
+        //on recupere toutes les affiches
         $affiches=$afficheRepository->findAll();
 
         $b=$afficheRepository->find(135);
          dump(get_class($b));
 
             Service::Archivage($affiches,$entityManager);
+
+            $matchs = Service::filterIndex($entityManager, Affiche::class);
 
         /*foreach ($affiches as $a) {
             $s=strtotime($a->getSchedule()->format('d-m-Y'));
@@ -48,23 +50,18 @@ class HomeController extends AbstractController
         }*/
 
 
-        $queryBuilder = $entityManager->createQueryBuilder();
+        /*$queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('a')
             ->from(Affiche::class, 'a')
             ->where('a.archived = 0')
             ->orderBy('a.schedule','DESC');
-        // ->where('u.prenom LIKE :prenom')
-        //->andWhere('u.nom = :nom')
-        //->setParameter('prenom', 'cedric')
-        //->setParameter('nom', 'booster');
-
-        $query = $queryBuilder->getQuery();
+        $query = $queryBuilder->getQuery();*/
        // $matchs = $afficheRepository->findAll();
 
         //return new Response('toto');
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'matchs'=>$query->getResult()
+            'matchs'=>$matchs
        ]);
     }
 
