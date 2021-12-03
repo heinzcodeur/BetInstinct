@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Jeu index{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
     <h1>Jeu index</h1>
@@ -8,20 +6,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>parieur</th>
+                <th>affiche</th>
+                <th>pronostic</th>
                 <th>Mise</th>
-                <th>actions</th>
+                <th>formule</th>
             </tr>
         </thead>
         <tbody>
         {% for jeu in jeus %}
-            <tr>
-                <td>{{ jeu.id }}</td>
-                <td>{{ jeu.mise }}</td>
-                <td>
-                    <a href="{{ path('bet_instinct_jeu_show', {'id': jeu.id}) }}">show</a>
-                    <a href="{{ path('bet_instinct_jeu_edit', {'id': jeu.id}) }}">edit</a>
-                </td>
+            <tr onclick="document.location='{{ path('bet_instinct_jeu_show', {'id': jeu.id}) }}'" class="cursor">
+                <td>{{ jeu.parieur }}</td>
+                <td>{{ jeu.pronostic.bet.affiche }}</td>
+                <td>{{ jeu.pronostic.bet.TypedePari }}/{{ jeu.pronostic }}</td>
+                <td>{{ jeu.mise }} €</td>
+                <td>{{ jeu.formule }}</td>
+
             </tr>
         {% else %}
             <tr>

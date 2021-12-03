@@ -14,6 +14,7 @@ class PaysType extends AbstractType
         $builder
             ->add('name')
             ->add('shortcut')
+            ->add('zone')
         ;
     }
 

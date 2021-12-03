@@ -1,10 +1,11 @@
 {{include('head.html.twig')}}
 {% block body %}
-    <h1>Create new Tournoi</h1>
+    <h1 class="text-center">Nouveau Tournoi</h1>
+
+    {% for i in app.flashes('info') %} <div class="alert alert-info text-center"> {{ i }} </div>{% endfor %}
 
     {{ include('bet_instinct/tournoi/_form.html.twig') }}
 
     <a href="{{ path('bet_instinct_tournoi_index') }}" class="btn btn-primary">retour</a>
 
-    {{ include('end.html.twig') }}
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity\BetInstinct;
 
+use App\Entity\BetInstinct\Document;
 use App\Repository\BetInstinct\AthleteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,7 +30,7 @@ class Athlete
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
 
@@ -100,12 +101,29 @@ class Athlete
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipe::class, mappedBy="joueurs")
+     */
+    private $equipes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="athete")
+     */
+    private $documents;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, columnDefinition="ENUM('homme','dame')")
+     */
+    private $genre;
+
 
     public function __construct()
     {
         $this->affiches_favori = new ArrayCollection();
         $this->affiches_challenger = new ArrayCollection();
         $this->titres = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     public function __toString()
@@ -354,6 +372,75 @@ class Athlete
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->addJoueur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            $equipe->removeJoueur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setAthete($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->removeElement($document)) {
+            // set the owning side to null (unless already changed)
+            if ($document->getAthete() === $this) {
+                $document->setAthete(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?string $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }

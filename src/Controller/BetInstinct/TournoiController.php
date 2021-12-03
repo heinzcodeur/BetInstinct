@@ -2,9 +2,11 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Tournoi;
 use App\Form\BetInstinct\TournoiType;
 use App\Repository\BetInstinct\TournoiRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +20,17 @@ class TournoiController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_tournoi_index", methods={"GET"})
      */
-    public function index(TournoiRepository $tournoiRepository): Response
+    public function index(TournoiRepository $tournoiRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryB=$entityManager->createQueryBuilder();
+        $query=$queryB->select('t')
+            ->from(Tournoi::class, 't')
+            ->orderBy('t.id','DESC');
+
+        $queryF = $query->getQuery();
+
         return $this->render('bet_instinct/tournoi/index.html.twig', [
-            'tournois' => $tournoiRepository->findAll(),
+            'tournois' => $queryF->getResult()
         ]);
     }
 
@@ -35,6 +44,15 @@ class TournoiController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($tournoi->getName()==null){$tournoi->setName($tournoi->getCity()->getName());}
+            if($tournoi->getSport()==null) {
+                $this->addFlash('info', 'choisissez un sport pour votre tournoi');
+                return $this->renderForm('bet_instinct/tournoi/new.html.twig', [
+                    'tournoi' => $tournoi,
+                    'form' => $form,
+                ]);
+            }
+            //dd($tournoi);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tournoi);
             $entityManager->flush();
@@ -53,6 +71,10 @@ class TournoiController extends AbstractController
      */
     public function show(Tournoi $tournoi): Response
     {
+        foreach($tournoi->getAffiches() as $a){
+            dump($a);
+        }
+
         return $this->render('bet_instinct/tournoi/show.html.twig', [
             'tournoi' => $tournoi,
         ]);

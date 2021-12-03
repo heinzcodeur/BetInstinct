@@ -2,7 +2,6 @@
 
 {% block body %}
     <h1>modifier {{ type2choix.name }} - {{ type2choix.sport }} </h1>
-{{ dump(type2choix) }}
     {{ include('bet_instinct/type2choix/_form.html.twig', {'button_label': 'modifier'}) }}
 
     <a href="{{ path('bet_instinct_type2choix_index') }}" class="btn btn-secondary">retour</a>

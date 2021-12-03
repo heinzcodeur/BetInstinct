@@ -13,16 +13,21 @@ class TournoiType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
             ->add('debut',DateType::class,[                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('fin',DateType::class,[                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('date_creation',DateType::class,[                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('siteweb')
             ->add('dotation')
             ->add('city')
             ->add('surface')
+            ->add('sport')
             ->add('tenant_titre')
         ;
     }

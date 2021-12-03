@@ -19,6 +19,7 @@ class TransactionType extends AbstractType
                     ]
             ])
             ->add('montant')
+            ->add('jeu')
             //->add('date')
            // ->add('created_at')
            // ->add('auteur')

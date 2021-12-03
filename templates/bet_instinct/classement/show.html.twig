@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Classement</h1>
-
+{{ dump(classement) }}
     <table class="table">
         <tbody>
             <tr>
@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>joueur</th>
-                <td>{{ classement.joueur }}</td>
+                <td onclick="document.location='{{ path('bet_instinct_athlete_show',{'id':classement.joueur.id}) }}'" class="cursor">{{ classement.joueur|upper }}</td>
             </tr>
         </tbody>
     </table>
@@ -27,9 +27,9 @@
     <a href="{{ path('bet_instinct_classement_index') }}" class="btn btn-primary">retour</a>
 
     <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">modifier</a>
-
+{% if classement.joueur is not defined %}
     <a href="{{ path('bet_instinct_athlete_new',{'ranking':classement.ranking}) }}" class="btn btn-success">add player</a>
-
+{% endif %}
     {{include('end.html.twig')}}
 
 {% endblock %}

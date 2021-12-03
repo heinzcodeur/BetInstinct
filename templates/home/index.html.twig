@@ -10,7 +10,7 @@
     {{ include('head.html.twig') }}
 
 <h2 class="text-center">affiches</h2>
-
+<a class="btn btn-outline-primary" href="{{ path('bet_instinct_affiche_new') }}">new</a>
     <table class="table table-striped">
         <thead>
         <th>tournoi</th>
@@ -19,19 +19,30 @@
         <th>cote2</th>
         <th>outsider</th>
         <th>date</th>
-        <th>score</th>
         </thead>
         <tbody>
         {% for m in matchs %}
             <tr onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':m.id}) }}'">
                 <td>{{ m.tournoi }}</td>
+                {% if m.tournoi.sport=='Football' %}
+                    <td>{{ m.equipeA.name }}</td>
+                    <td class="bg-success">{{ m.coteFavorite }}</td>
+                    <td class="bg-danger">{{ m.coteOutsider }}</td>
+                    <td>{{ m.EquipeB.name }}</td>
+                {% else %}
                 <td>{{ m.favori|upper }}</td>
-                <td class="bg-success">{{ m.coteFavorite }}</td>
-                <td class="bg-danger">{{ m.coteOutsider }}</td>
-                <td>{{ m.challenger|upper }}</td>
-                <td>{{ m.schedule|date('d-m-Y')}}</td>
-                <td>{{ m.score ? m.score:'???' }}</td>
-            </tr>
+                    <td class="bg-success">{{ m.coteFavorite }}</td>
+                    <td class="bg-danger">{{ m.coteOutsider }}</td>
+                    <td>{{ m.challenger|upper }}</td>
+                    {% endif %}
+                {% set d =(( m.schedule.timestamp - date().timestamp)) %}
+                {% set minutes =(( m.schedule.timestamp - date().timestamp)/60) %}
+                {% set heures =(( m.schedule.timestamp - date().timestamp)/60/60) %}
+                {{ dump(d|round) }}
+                 {% if (d|round) >0 %} <td>  dans {{ d|round }} minutes</td>{% else %}
+                <td>dépassé</td>
+            {% endif %}
+             </tr>
 
         {% endfor %}
         </tbody>

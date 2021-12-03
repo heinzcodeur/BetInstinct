@@ -39,6 +39,16 @@ class Sport
      */
     private $associations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="sport", orphanRemoval=true)
+     */
+    private $equipes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tournoi::class, mappedBy="sport")
+     */
+    private $tournois;
+
 
     public function __toString()
     {
@@ -49,6 +59,8 @@ return $this->name;
     {
         $this->type2choix = new ArrayCollection();
         $this->associations = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
+        $this->tournois = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,6 +146,66 @@ return $this->name;
             // set the owning side to null (unless already changed)
             if ($association->getSport() === $this) {
                 $association->setSport(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->setSport($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            // set the owning side to null (unless already changed)
+            if ($equipe->getSport() === $this) {
+                $equipe->setSport(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tournoi[]
+     */
+    public function getTournois(): Collection
+    {
+        return $this->tournois;
+    }
+
+    public function addTournoi(Tournoi $tournoi): self
+    {
+        if (!$this->tournois->contains($tournoi)) {
+            $this->tournois[] = $tournoi;
+            $tournoi->setSport($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTournoi(Tournoi $tournoi): self
+    {
+        if ($this->tournois->removeElement($tournoi)) {
+            // set the owning side to null (unless already changed)
+            if ($tournoi->getSport() === $this) {
+                $tournoi->setSport(null);
             }
         }
 

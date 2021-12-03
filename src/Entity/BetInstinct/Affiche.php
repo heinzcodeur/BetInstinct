@@ -92,6 +92,31 @@ class Affiche
      */
     private $archived;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Pronostic::class, mappedBy="affiche")
+     */
+    private $pronostics;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="affiches")
+     */
+    private $equipeA;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="affiches")
+     */
+    private $EquipeB;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $Cote_match_null;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, columnDefinition="ENUM('1','2','3','4')")
+     */
+    private $niveau;
+
 
     public function __construct()
     {
@@ -101,11 +126,12 @@ class Affiche
         $this->nombre2sets = new ArrayCollection();
         $this->les2joueursWin1sets = new ArrayCollection();
         $this->bet = new ArrayCollection();
+        $this->pronostics = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->favori.' '.$this->challenger;
+        return $this->favori.' VS '.$this->challenger;
     }
 
     public function getId(): ?int
@@ -385,6 +411,84 @@ class Affiche
     public function setArchived(?bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pronostic[]
+     */
+    public function getPronostics(): Collection
+    {
+        return $this->pronostics;
+    }
+
+    public function addPronostic(Pronostic $pronostic): self
+    {
+        if (!$this->pronostics->contains($pronostic)) {
+            $this->pronostics[] = $pronostic;
+            $pronostic->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removePronostic(Pronostic $pronostic): self
+    {
+        if ($this->pronostics->removeElement($pronostic)) {
+            // set the owning side to null (unless already changed)
+            if ($pronostic->getAffiche() === $this) {
+                $pronostic->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEquipeA(): ?Equipe
+    {
+        return $this->equipeA;
+    }
+
+    public function setEquipeA(?Equipe $equipeA): self
+    {
+        $this->equipeA = $equipeA;
+
+        return $this;
+    }
+
+    public function getEquipeB(): ?Equipe
+    {
+        return $this->EquipeB;
+    }
+
+    public function setEquipeB(?Equipe $EquipeB): self
+    {
+        $this->EquipeB = $EquipeB;
+
+        return $this;
+    }
+
+    public function getCoteMatchNull(): ?float
+    {
+        return $this->Cote_match_null;
+    }
+
+    public function setCoteMatchNull(?float $Cote_match_null): self
+    {
+        $this->Cote_match_null = $Cote_match_null;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?string
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?string $niveau): self
+    {
+        $this->niveau = $niveau;
 
         return $this;
     }

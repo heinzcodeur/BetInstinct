@@ -4,9 +4,12 @@
 {% block body %}
     <h1>Nouvel Athlete</h1>
 
+    {% for d in app.flashes('danger') %}
+    <div class="alert alert-danger text-center">{{ d }}</div>
+    {% endfor %}
     {{ include('bet_instinct/athlete/_form.html.twig') }}
 
-    <a href="{{ path('bet_instinct_athlete_index') }}" class="btn btn-primary mb-2">retour</a>
+    <a href="{{ path('bet_instinct_athlete_index') }}" class="btn btn-primary">retour</a>
 </div>
     {{include('end.html.twig')}}
 

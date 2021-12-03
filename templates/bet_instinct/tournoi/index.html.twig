@@ -17,7 +17,7 @@
         <tbody>
         {% for tournoi in tournois %}
             <tr>
-                <td><b>{{ tournoi.city.name }}</b></td>
+                <td><b>{{ tournoi.name?tournoi.name:tournoi.city }}</b></td>
                 <td>{{ tournoi.debut ? tournoi.debut|date('d-m-Y') : '' }}</td>
                 <td>{{ tournoi.fin ? tournoi.fin|date('d-m-Y') : '' }}</td>
                 <td>{{ tournoi.dateCreation ? tournoi.dateCreation|date('Y') : '' }}</td>

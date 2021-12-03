@@ -1,0 +1,10 @@
+{{include('head.html.twig')}}
+
+{% block body %}
+    <h2 class="text-center">Modifier Game {{ game.name }}</h2>
+    {{ include('bet_instinct/game/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bet_instinct_game_index') }}" class="btn btn-secondary">retour</a>
+</div>
+
+{% endblock %}

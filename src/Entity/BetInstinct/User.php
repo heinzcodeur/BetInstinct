@@ -89,16 +89,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $pronostics;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Jeu::class, mappedBy="parieur")
+     */
+    private $jeux;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="parieur")
+     */
+    private $games;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->paris = new ArrayCollection();
         $this->pronostics = new ArrayCollection();
+        $this->jeux = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->nom;
+        return $this->nickname;
     }
 
     public function getId(): ?int
@@ -358,6 +370,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($pronostic->getAuthor() === $this) {
                 $pronostic->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Jeu[]
+     */
+    public function getJeux(): Collection
+    {
+        return $this->jeux;
+    }
+
+    public function addJeux(Jeu $jeux): self
+    {
+        if (!$this->jeux->contains($jeux)) {
+            $this->jeux[] = $jeux;
+            $jeux->setParieur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJeux(Jeu $jeux): self
+    {
+        if ($this->jeux->removeElement($jeux)) {
+            // set the owning side to null (unless already changed)
+            if ($jeux->getParieur() === $this) {
+                $jeux->setParieur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Game[]
+     */
+    public function getGames(): Collection
+    {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self
+    {
+        if (!$this->games->contains($game)) {
+            $this->games[] = $game;
+            $game->setParieur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame(Game $game): self
+    {
+        if ($this->games->removeElement($game)) {
+            // set the owning side to null (unless already changed)
+            if ($game->getParieur() === $this) {
+                $game->setParieur(null);
             }
         }
 

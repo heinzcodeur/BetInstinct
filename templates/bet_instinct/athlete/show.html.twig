@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
             <div class="col-md-4 mt-4">
                 <img src="{{ asset('/images/athletes/'~athlete.avatar) }}" alt="{{ athlete.nom }}" style="max-height: 100%;max-width: 100%;">
             </div>
             <div class="col-md-8 bg-light mt-4 rounded-bottom rounded-top mb-4" style="overflow-x: scroll">
                 <h1>Athlete</h1>
-
                 <table class="table">
                     <tbody>
                     <tr>
@@ -30,6 +29,18 @@
                     <tr>
                         <th>ranking</th>
                         <td>{{ athlete.ranking.association.name }} {{ athlete.ranking.ranking }}  </td>
+                    </tr>
+<tr>
+                        <th>genre</th>
+                        <td>{{ athlete.genre }}  </td>
+                    </tr>
+<tr>
+                        <th>nationalité</th>
+                        <td>{{ athlete.pays }}  </td>
+                    </tr>
+<tr>
+                        <th>age</th>
+                        <td>{{ ((date().timestamp - athlete.birthdate.timestamp )/60/60/24/365)|round }}  </td>
                     </tr>
 
                     </tbody>

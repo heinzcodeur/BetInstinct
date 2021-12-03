@@ -20,6 +20,11 @@ class Tournoi
     private $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $debut;
@@ -31,7 +36,7 @@ class Tournoi
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="tournois")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $city;
 
@@ -66,14 +71,26 @@ class Tournoi
      */
     private $tenant_titre;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="tournois")
+     */
+    private $sport;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="tournoi")
+     */
+    private $equipes;
+
     public function __construct()
     {
         $this->affiches = new ArrayCollection();
+        $this->equipes = new ArrayCollection();
     }
 
     public function __toString()
     {
-return $this->city->getName();
+        if($this->name!=null){return $this->name;}
+        return $this->city->getName();
     }
 
     public function getId(): ?int
@@ -203,6 +220,66 @@ return $this->city->getName();
     public function setTenantTitre(?Athlete $tenant_titre): self
     {
         $this->tenant_titre = $tenant_titre;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Tournoi
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getSport(): ?Sport
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?Sport $sport): self
+    {
+        $this->sport = $sport;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Equipe[]
+     */
+    public function getEquipes(): Collection
+    {
+        return $this->equipes;
+    }
+
+    public function addEquipe(Equipe $equipe): self
+    {
+        if (!$this->equipes->contains($equipe)) {
+            $this->equipes[] = $equipe;
+            $equipe->setTournoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipe(Equipe $equipe): self
+    {
+        if ($this->equipes->removeElement($equipe)) {
+            // set the owning side to null (unless already changed)
+            if ($equipe->getTournoi() === $this) {
+                $equipe->setTournoi(null);
+            }
+        }
 
         return $this;
     }

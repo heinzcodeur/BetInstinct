@@ -1,0 +1,47 @@
+{{include ('head.html.twig')}}
+
+{% block body %}
+    <h2 class="text-center">Liste des équipes</h2>
+
+    {% for i in app.flashes('success')%} <div class="alert alert-success" class="text-center">{{ i }}</div>{% endfor  %}
+
+    <div class="col text-center">
+        <a href="{{ path('bet_instinct_equipe_new') }}" class="btn btn-primary">nouvelle équipe</a></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>league</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipe in equipes %}
+            <tr>
+                <td>{{ equipe.id }}</td>
+                <td>{{ equipe.name }}</td>
+                {% if equipe.tournoi is not null %}
+                <td>
+
+                    <a class="btn btn-primary" href="{{ path("bet_instinct_tournoi_show",{'id':equipe.tournoi.id}) }}">{{ equipe.tournoi }}</a>
+                    </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-primary" href=""></a>
+                    {{ equipe.tournoi }}</td>
+                    {% endif %}
+                <td>
+
+                    <a href="{{ path('bet_instinct_equipe_show', {'id': equipe.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('bet_instinct_equipe_edit', {'id': equipe.id}) }}" class="btn btn-secondary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

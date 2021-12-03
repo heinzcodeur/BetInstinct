@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit TypedePari{% endblock %}
+{{include('head.html.twig')}}
 
 {% block body %}
-    <h1>Edit TypedePari</h1>
+    <h1>modifier TypedePari</h1>
 
-    {{ include('bet_instinct_typede_pari/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bet_instinct/typede_pari/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('bet_instinct_typede_pari_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_typede_pari_index') }}">retour</a>
 
-    {{ include('bet_instinct_typede_pari/_delete_form.html.twig') }}
 {% endblock %}

@@ -2,9 +2,11 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Bet;
 use App\Form\BetInstinct\BetType;
 use App\Repository\BetInstinct\BetRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,20 +20,30 @@ class BetController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_bet_index", methods={"GET"})
      */
-    public function index(BetRepository $betRepository): Response
+    public function index(BetRepository $betRepository, EntityManagerInterface $entityManager): Response
     {
-        $bets=$betRepository->findAll();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('b')
+            ->from(Bet::class, 'b')
+            //->where('a.archived = 0')
+            ->orderBy('b.id','DESC');
+
+        //$bets=$betRepository->findAll();
+        $query = $queryBuilder->getQuery();
         return $this->render('bet_instinct/bet/index.html.twig', [
-            'bets' => $betRepository->findAll(),
+            'bets' => $query->getResult(),
         ]);
     }
 
     /**
-     * @Route("/new", name="bet_instinct_bet_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="bet_instinct_bet_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new($id=null,Affiche $affiche, Request $request): Response
     {
+        dump($affiche);
         $bet = new Bet();
+        $bet->setAffiche($affiche);
         $form = $this->createForm(BetType::class, $bet);
         $form->handleRequest($request);
 
@@ -46,6 +58,7 @@ class BetController extends AbstractController
         return $this->renderForm('bet_instinct/bet/new.html.twig', [
             'bet' => $bet,
             'form' => $form,
+            'affiche'=>$affiche
         ]);
     }
 
@@ -55,6 +68,7 @@ class BetController extends AbstractController
     public function show(Bet $bet): Response
     {
         //return new Response($bet->getTypedePari()->getType2choix());
+       // dd($bet);
 
         return $this->render('bet_instinct/bet/show.html.twig', [
             'bet' => $bet,

@@ -12,9 +12,15 @@ class PronosticType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('affiche')
+            //->add('affiche')
             ->add('bet')
             ->add('choix')
+            ->add('game3')
+            ->add('affiche')
+            ->add('isValid')
+            ->add('isConfirm')
+            ->add('pronoExact')
+
         ;
     }
 

@@ -13,7 +13,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>Birthdate</th>
+                <th>ranking</th>
                 <th>Taille</th>
                 <th>actions</th>
             </tr>
@@ -22,9 +22,10 @@
         {% for athlete in athletes %}
             <tr>
                 <td>{{ athlete.id }}</td>
-                <td>{{ athlete.nom }}</td>
-                <td>{{ athlete.prenom }}</td>
-                <td>{{ athlete.birthdate ? athlete.birthdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="font-weight-bold">{{ athlete.nom|upper }}</td>
+                <td>{{ athlete.prenom|capitalize }}</td>
+                <td>{{ athlete.ranking }}</td>
+                <!--<td>{{ athlete.birthdate ? athlete.birthdate|date('Y-m-d H:i:s') : '' }}</td>-->
                 <td>{{ athlete.taille }}</td>
                 <td>
                     <a href="{{ path('bet_instinct_athlete_show', {'id': athlete.id}) }}" class="btn btn-info">show</a>

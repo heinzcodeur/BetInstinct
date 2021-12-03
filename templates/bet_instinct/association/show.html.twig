@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Association{% endblock %}
+{{ include('head.html.twig')}}
 
 {% block body %}
     <h1>Association</h1>
@@ -16,6 +14,7 @@
                 <th>Name</th>
                 <td>{{ association.name }}</td>
             </tr>
+
         </tbody>
     </table>
 

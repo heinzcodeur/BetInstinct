@@ -2,10 +2,12 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Affiche;
 use App\Entity\BetInstinct\Athlete;
 use App\Entity\BetInstinct\Classement;
 use App\Form\BetInstinct\ClassementType;
 use App\Repository\BetInstinct\ClassementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,24 +21,44 @@ class ClassementController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_classement_index", methods={"GET"})
      */
-    public function index(ClassementRepository $classementRepository): Response
+    public function index(ClassementRepository $classementRepository, EntityManagerInterface $entityManager): Response
     {
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('c')
+            ->from(Classement::class, 'c')
+            ->orderBy('c.id','DESC');
+
+        $query = $queryBuilder->getQuery();
         return $this->render('bet_instinct/classement/index.html.twig', [
-            'classements' => $classementRepository->findAll(),
+            'classements' => $query->getResult(),
         ]);
     }
 
     /**
-     * @Route("/new/", name="bet_instinct_classement_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="bet_instinct_classement_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new($id = null, Request $request): Response
     {
+        if ($id != null) {
+            $athlete = $this->getDoctrine()->getRepository(Athlete::class)->find($id);
+        }
         $classement = new Classement();
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($classement);
+            $checkranking=$this->getDoctrine()->getRepository(Classement::class)->findBy(['ranking'=>$classement->getRanking(),'association'=>$classement->getAssociation()]);
+            if(is_array($checkranking) && count($checkranking)>0){
+                $this->addFlash('danger','ranking indisponible');
+                return $this->renderForm('bet_instinct/classement/new.html.twig', [
+                        'classement' => $classement,
+                        'form' => $form]
+                );
+            }
+            if(isset($athlete)){
+                if ($classement->getJoueur() == null) {
+                    $classement->setJoueur($athlete);
+                }
+            }//dd($classement);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($classement);
             $entityManager->flush();
@@ -69,7 +91,7 @@ class ClassementController extends AbstractController
         //$classement->getJoueur()->setRanking($rankingTemp);
         $form = $this->createForm(ClassementType::class, $classement);
         $form->handleRequest($request);
-        $joueur=$classement->getJoueur();
+        $joueur = $classement->getJoueur();
         if ($form->isSubmitted() && $form->isValid()) {
             $classement->setJoueur($joueur);
             //dd($classement);
@@ -89,7 +111,7 @@ class ClassementController extends AbstractController
      */
     public function delete(Request $request, Classement $classement): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$classement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $classement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($classement);
             $entityManager->flush();

@@ -1,0 +1,245 @@
+{{ include('head.html.twig') }}
+
+{% block body %}
+
+    {% for a in app.flashes('info') %}
+        <div class="alert alert-info">{{ a }}</div>{% endfor %}
+    {% for s in app.flashes('success') %}
+        <div class="alert alert-success">{{ s }}</div>{% endfor %}
+    {% for d in app.flashes('danger') %}
+        <div class="alert alert-danger">{{ d }}</div>{% endfor %}
+
+    <h2 class="text-center">Pari "{{ game.name }}" {{ game.formule }} de {{ app.user.nickname|capitalize }}</h2>
+
+    {{ dump(game) }}
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>cote totale</th>
+            <td>{{ game.coteTotale }}</td>
+        </tr>
+        <tr>
+            <th>mise</th>
+            <td>{{ game.mise }} €</td>
+        </tr>
+        {% if game.resultat =='en attente' %}
+        <tr>
+            <th>gains potentiels</th>
+            <td class="text-primary">{{ (game.mise * game.coteTotale)|round }} €</td>
+        </tr>
+            {% elseif game.resultat == 'gagnant' %}
+            <tr>
+                <th>gains </th>
+                <td class="text-success">{{ (game.mise * game.coteTotale)|round }} € </td>
+            </tr>
+        {% else %}
+            <tr>
+            <th>gains</th>
+            <td class="text-danger">0 €</td>
+        </tr>
+        {% endif %}
+        {% if game.formule.id != 3 and game.parent==null %}
+            <tr>
+                <th>nombre pronostic</th>
+                <td>{{ game.pronos|length }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <th>nombre pronostics3</th>
+                <td>{{ game.pronos|length }}</td>
+            </tr>
+            {% if game.parent is not null %}
+            <tr>
+                <th>parent</th>
+                <td onclick="document.location='{{ path('bet_instinct_game_show',{'id':game.parent.id}) }}'" class="cursor">{{ game.parent }}</td>
+            </tr>
+                {% endif %}
+        {% endif %}
+
+        {% if game.formule.id == 3 %}
+
+            {#{% for u in game.undergames %}
+
+            {% endfor %}#}
+            <tr>
+                <th>nb sous paris</th>
+                <td>{{ game.undergames|length }}</td>
+            </tr>
+        {% endif %}
+
+        {% if game.gain!=null %}
+            <tr>
+                <th>gain</th>
+                <td class="text-success font-weight-bold">{{ game.gain|round }} €</td>
+            </tr>
+        {% endif %}
+
+        {% if game.formule.id != 3 and game.parent==null %}
+
+            {% for p in game.pronos %}
+                        {% if p.isChecked == 0 %}
+                        <tr class="bg-secondary cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>{% endif %}
+                        {% if p.isValid == 0 and p.isChecked == 1 %}
+                        <tr class="bg-danger cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>{% endif %} {% if p.isValid == 1 and p.isChecked == 1 %}
+                        <tr class="bg-success cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>{% endif %}
+                        <tr onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':p.affiche.id}) }}'" class="cursor">
+                            <th>affiche</th>
+                            <td><i></i> {{ p.bet.affiche|upper }} -
+                                <b><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche.tournoi }}</b></td>
+                        </tr>
+
+                        <tr>
+                            <th>type de pari</th>
+                            <td>{{ p.bet.TypedePari }}</td>
+                        </tr>
+                        <tr>
+                            <th>cote</th>
+                            <td>{{ p.cote }}</td>
+                        </tr>
+                        <tr>
+                            <th>choix</th>
+                            <td>{{ p.choix }}</td>
+                        </tr><tr>
+            <th>bon pronostic</th>
+            <td>{{ p.pronoExact }}</td>
+        </tr>
+
+
+            <tr>
+                            <th>resultat</th>
+                            {% if p.isValid is null %}
+                                <td class="font-weight-bold text-primary">en attente</td>
+                            {% elseif p.isValid == true %}
+                                <td class="font-weight-bold text-success">gagnant</td>
+                            {% else %}
+                                <td class="font-weight-bold text-danger">perdant</td>
+                            {% endif %}
+                        </tr>
+
+                            {% if p.isChecked is null and game.resultat !='perdant'%}
+                                <script>
+                                    function score(v, p) {
+                                        var id=p;
+                                        alert(id);
+                                        var name = prompt('score?');
+                                        var rightprono = prompt('prono exact?');
+                                        var url = '/bet/instinct/pronostic/checkin/' + id + '/' + name + '/' + v + '/'+rightprono;
+                                        alert(url);
+                                        console.log(id);
+                                        document.location = url;
+                                    }
+                                    {% set score = 9 %}
+                                </script>
+
+                                <tr>
+                                    <td><button class="btn btn-success" onclick="score(1,{{ p.id }})">winner {{ p.id }}</button></td>
+                                    <td><button class="btn btn-danger" onclick="score(0,{{ p.id }})">loser</button></td>
+                                </tr>
+                            {% endif %}
+            {% endfor %}
+
+        {% else %}
+            {% for p in game.pronos %}
+                        {% if p.isValid is null %}
+                        <tr class="bg-secondary cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>
+                    {% elseif p.isValid==1 %}
+                        <tr class="bg-success cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>
+                    {% else %}
+                        <tr class="bg-danger cursor"
+                            onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
+                            <th>pronostic</th>
+                            <td>{{ p.id }}</td>
+                        </tr>
+                    {% endif %}
+                        <tr>
+                <th>affiche</th>
+                <td><i>{{ p.bet.affiche.schedule|date('d-m-Y H:i:s') }}</i> {{ p.bet.affiche|upper }} - <b>{{ p.bet.affiche.tournoi }}</b></td>
+                        </tr>
+
+            <tr>
+                <th>type de pari</th>
+                <td>{{ p.bet.TypedePari }}</td>
+            </tr>
+            <tr>
+                <th>cote</th>
+                <td>{{ p.cote }}</td>
+            </tr>
+            <tr>
+                <th>choix</th>
+                <td>{{ p.choix }}</td>
+            </tr>
+            <tr>
+                <th>resultat</th>
+                {% if p.isValid is null %}
+                    <td class="font-weight-bold text-primary">en attente</td>
+                {% elseif p.isValid == true %}
+                    <td class="font-weight-bold text-success">gagnant</td>
+                {% else %}
+                    <td class="font-weight-bold text-danger">perdant</td>
+                {% endif %}
+            </tr>
+        {% if p.isChecked == false %}
+            <script>
+                function score(v = 0) {
+                    var id ={{ p.id }}
+                    var name = prompt('score?');
+                    var url = '/bet/instinct/pronostic/checkin/' + id + '/' + name + '/' + v + '/';
+                    alert(url);
+                    document.location = url;
+                }
+                {% set score = 9 %}
+            </script>
+
+            <tr>
+                <td>
+                    <button class="btn btn-success" onclick="score(1)">winner</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="score()">loser</button>
+                </td>
+            </tr>
+        {% endif %}
+
+            {% endfor %}
+
+        {% endif %}
+
+        {% for ug in game.underGames %}
+            <tr class="bg-warning">
+                <th>sous pari 1</th>
+                <td onclick="document.location='{{ path('bet_instinct_game_show',{'id':ug.id}) }}'"
+                    class="cursor">{{ ug.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="col text-center mt-4">
+        <a href="{{ path('bet_instinct_game_index') }}" class="btn btn-secondary">retour</a>
+            <a href="{{ path('bet_instinct_game_edit', {'id': game.id}) }}" class="btn btn-info">edit</a>
+            <a href="{{ path('bet_instinct_game_validate', {'id': game.id}) }}"
+               onclick="return(confirm('vous validez ce game?'))" class="btn btn-primary">valider</a>
+            <a onclick="return(confirm('archiver?'))" href="{{ path('bet_instinct_game_archive',{'id':game.id}) }}"
+               class="btn btn-danger">archiver</a>
+    </div>
+{% endblock %}

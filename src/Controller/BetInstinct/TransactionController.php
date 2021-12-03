@@ -3,9 +3,11 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\Bankroll;
+use App\Entity\BetInstinct\Game;
 use App\Entity\BetInstinct\Transaction;
 use App\Form\BetInstinct\TransactionType;
 use App\Repository\BetInstinct\TransactionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +22,17 @@ class TransactionController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_transaction_index", methods={"GET"})
      */
-    public function index(TransactionRepository $transactionRepository): Response
+    public function index(TransactionRepository $transactionRepository, EntityManagerInterface $em): Response
     {
+        $query=$em->createQueryBuilder();
+        $query->select('t')
+            ->from(Transaction::class,'t')
+            ->orderBy('t.id','DESC');
+        $transacs= $query->getQuery()->getResult();
+
+
         return $this->render('bet_instinct/transaction/index.html.twig', [
-            'transactions' => $transactionRepository->findAll(),
+            'transactions' => $transacs,
         ]);
     }
 
@@ -67,6 +76,7 @@ class TransactionController extends AbstractController
      */
     public function show(Transaction $transaction): Response
     {
+        dump($transaction);
         return $this->render('bet_instinct/transaction/show.html.twig', [
             'transaction' => $transaction,
         ]);

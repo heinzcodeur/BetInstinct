@@ -14,9 +14,24 @@
         {% block stylesheets %}
             <style>
 
+                .mt-8{
+                    margin-top:5rem!important
+                }
+
             .cursor{
                 cursor: pointer
             }
+
+            .bg-tercery{
+                background:antiquewhite;
+            }
+                .inline{
+                    display: inline;
+                }
+
+                .mt-4{
+                    margin-top: 2.5rem!important;
+                }
             </style>
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -26,7 +41,7 @@
         {% endblock %}
     </head>
     <body style="background: #5e07a0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-dark fixed-top">
         <a class="navbar-brand" href="{{ path('home') }}">BetInstinct</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,10 +63,26 @@
                     <a class="nav-link" href="{{ path('bet_instinct_classement_index') }}">classement <span class="sr-only">(current)</span></a>
                 </li>
 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bet_instinct_bankroll_index') }}">bankroll<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('bet_instinct_game_index') }}">game<span class="sr-only">(current)</span></a>
                 </li>
 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bet_instinct_transaction_index') }}">transaction<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('bet_instinct_typede_pari_index') }}">gestion_bet<span class="sr-only">(current)</span></a>
+                </li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bet_instinct_equipe_index') }}">équipes<span class="sr-only">(current)</span></a>
+                </li>
+</li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bet_instinct_pronostic_index') }}">pronostics<span class="sr-only">(current)</span></a>
+                </li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('indexdesparis') }}">index<span class="sr-only">(current)</span></a>
+                </li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bet_instinct_bet_index') }}">bet<span class="sr-only">(current)</span></a>
+                </li>
+<li class="nav-item active">
+                    <a class="nav-link" href="{{ path('tester') }}">test<span class="sr-only">(current)</span></a>
                 </li>
 
                 <!--<li class="nav-item">
@@ -76,7 +107,7 @@
                 <!--<input class="form-control mr-sm-2" type="search"  aria-label="Search">-->
                 <!--<a onclick="return(confirm('déconnexion?'))" style="text-decoration: none;color: white" href="{{ path('app_logout') }}">{{app.user.nickname|capitalize}}</a>-->
 
-                <a style="text-decoration: none;color: white" href="{{ path('bet_instinct_user_show',{'id':app.user.id}) }}">{{app.user.nickname|capitalize}}  {{ app.user.solde.balance }} €</a>
+                <a style="text-decoration: none;color: white" href="{{ path('bet_instinct_user_show',{'id':app.user.id}) }}">{{app.user.nickname|capitalize}}  {{ app.user.solde.balance|round }} €</a>
                 {% else %}
                 <a href="{{ path('app_login') }}" style="color: white">connexion</a>
                 <!--<a href="{{ path('app_register') }}" style="color: white">inscription</a>-->

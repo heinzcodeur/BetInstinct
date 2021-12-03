@@ -1,39 +1,328 @@
-{{include('head.html.twig')}}
-
-
+{% extends 'base.html.twig' %}
 {% block body %}
-    <h3 class="text-center">          {{ bet.TypedePari.type2choix }}
-    </h3>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ bet.id }}</td>
-            </tr>
+<div class="container mt-8">
+    <div class="row">
+        <div class="col-md-3 bg-warning">
+            {% for p in bet.pronostics %}
+                {% for g in p.game3 %}
+                    <p onclick="document.location='{{ path('bet_instinct_game_show',{'id':g.id}) }}'" class="cursor">
+                <span>game {{ g.id }} </span><span>par {{ g.parieur|upper }}</span>
+                    </p>
+                    {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-md-9 bg-light">
+            <h3 class="text-center cursor" onclick="document.location='{{ path("bet_instinct_affiche_show",{"id":bet.affiche.id}) }}'" >           {{ bet.affiche }}
+            </h3>
+            <h4 class="text-center">{{ bet.TypedePari.type2choix }}</h4>
+            {% for d in app.flashes('danger') %} <div class="alert alert-danger"> {{ d}} </div>{% endfor %}
+            {{ dump(bet) }}
+            {#{% for p in bet.pronostics %}{{ dump(p) }}{% endfor %}#}
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ bet.id }}</td>
+                </tr>
 
-            <tr>
-                <th>match</th>
-                <td>{{ bet.affiche}}</td>
-            </tr>
+               <!-- <tr>
+                    <th>match</th>
+                    <td>{{ bet.affiche}}</td>
+                </tr>-->
+                <script>
+                    function jeuSimple(choix,cote){
+                        var modifcote = confirm('modifier la cote?')
+                        if(modifcote){cote=prompt('cote:');}
+                        var typejeu = confirm('jeu simple?');
+                        var choix = choix;
+                        var bet = {{ bet.id }};
+                        var cote = parseFloat(cote);
+                        var url = '/bet/instinct/pronostic/new/'+bet+'/'+choix+'/'+cote;
+                        if(typejeu===true) {
+                            var pourcentage = prompt('pourcentage?');
+                            //alert('{{ bet.TypedePari.type2choix.choix1}}');
 
-                    <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}'">
-                        <td>{{ bet.TypedePari.type2choix.choix1 }}</td>
-                        <td style="color: green">{{ bet.cote1 }}</td>
+                             url = '/bet/instinct/pronostic/new/' + bet + '/' + choix+ '/' + cote + '/' + typejeu+'/'+pourcentage;
+                            console.log(url);
+                        }
+                        console.log(url);
+                        document.location=url;
+                    }
+                </script>
+                <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix1}}','{{ bet.cote1 }}')">
+                    <!--<td></td>--> {#{% if(bet.TypedePari.type2choix.id==31) %}#} {#{{ bet.affiche.challenger }}#}
+                  {# {% else %}#}
+                    <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix1 }} pour {{ bet.affiche.favori|upper }}</td>
+                    {#{% endif %}#}
+                    <td>
+                        <button class="btn btn-success">{{ bet.cote1 }} </button></td>
+{#{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix1,'cote':bet.cote1}) }}#}
+                </tr>
+
+                <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix2}}','{{ bet.cote2 }}')">
+                    {% if(bet.TypedePari.type2choix.id==31) %} <td>{{ bet.affiche.favori }}</td>
+                    {% else  %}
+                    <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix2 }}</td>{% endif %}
+                    <td style="color: red">
+                        <button class="btn btn-success"> {{ bet.cote2 }}</button>
+                    </td>
+                </tr>
+
+                {% if bet.cote3 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix3}}','{{ bet.cote3 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix3 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote3 }}</button>
+                            </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote4 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix4}}','{{ bet.cote4 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix4 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote4 }}</button>
+                        </td>
                     </tr>
 
-                    <tr class="mt-2 cursor" onclick="document.location='{{ path("bet_instinct_pronostic_new",{'bet':bet.id,'choix':bet.TypedePari.type2choix.choix2,'cote':bet.cote2}) }}'">
-                        <td>{{ bet.TypedePari.type2choix.choix2 }}</td>
-                        <td style="color: red">{{ bet.cote2 }}</td>
+                {% endif %}
+                {% if bet.cote5 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix5}}','{{ bet.cote5 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix5 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote5 }}</button>
+                        </td>
                     </tr>
+                {% endif %}
+                {% if bet.cote6 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix6}}','{{ bet.cote6 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix6 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote6 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote7 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix7}}','{{ bet.cote7 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix7 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote7 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote8 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix8}}','{{ bet.cote8 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix8 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote8 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if bet.cote9 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix9}}','{{ bet.cote9 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix9 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote9 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote10 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix10}}','{{ bet.cote10 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix10 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote10 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote11 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix11}}','{{ bet.cote11 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix11 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote11 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote12 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix12}}','{{ bet.cote12 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix12 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote12 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote13 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix13}}','{{ bet.cote13 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix13 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote13 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote14 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix14}}','{{ bet.cote14 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix14 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote14 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote15 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix15}}','{{ bet.cote15 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix15 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote15 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote16 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix16}}','{{ bet.cote16 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix16 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote16 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote17 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix17}}','{{ bet.cote17 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix17 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote17 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote18 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix18}}','{{ bet.cote18 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix18 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote18 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote19 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix19}}','{{ bet.cote19 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix19 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote19 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote20 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix20}}','{{ bet.cote20 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix20 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote20 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote21  %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix21}}','{{ bet.cote21 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix21 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote21 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote22 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix22}}','{{ bet.cote22 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix22 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote22 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote23 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix23}}','{{ bet.cote23 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix23 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote23 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote24 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix24}}','{{ bet.cote24 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix24 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote24 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote25 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix25}}','{{ bet.cote25 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix25 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote25 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote26 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix26}}','{{ bet.cote26 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix26 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote26 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote27 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix27}}','{{ bet.cote27 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix27 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote27 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote28 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix28}}','{{ bet.cote28 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix28 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote28 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote29 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix29}}','{{ bet.cote29 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix29 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote29 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote30 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix30}}','{{ bet.cote30 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix30 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote30 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote31 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix31}}','{{ bet.cote31 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix31 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote31 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote32 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix32 }}','{{ bet.cote32 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix32 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote32 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote33 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix33}}','{{ bet.cote33 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix33 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote33 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote34 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix34}}','{{ bet.cote34 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix34 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote34 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote35 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix35}}','{{ bet.cote35 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix35 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote35 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if bet.cote36 %}
+                    <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix36}}','{{ bet.cote36 }}')">
+                        <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix36 }}</td>
+                        <td><button class="btn btn-success">{{ bet.cote36 }}</button>
+                        </td>
+                    </tr>
+                {% endif %}
 
 
-        </tbody>
-    </table>
 
+                </tbody>
+            </table>
+            <div class="col text-center">
+                <a href="{{ path('bet_instinct_affiche_show',{'id':bet.affiche.id}) }}" class="btn btn-secondary">retour</a>
 
-    <a href="{{ path('bet_instinct_bet_index') }}" class="btn btn-secondary">back to list</a>
+                <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}" class="btn btn-success disabled">edit</a>
+            </div>
 
-    <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}">edit</a>
+        </div>
+    </div>
+</div>
+
 
     {{include('end.html.twig')}}
 

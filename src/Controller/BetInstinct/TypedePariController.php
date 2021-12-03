@@ -2,6 +2,7 @@
 
 namespace App\Controller\BetInstinct;
 
+use App\Entity\BetInstinct\Type2choix;
 use App\Entity\BetInstinct\TypedePari;
 use App\Form\BetInstinct\TypedePariType;
 use App\Repository\BetInstinct\TypedePariRepository;
@@ -35,6 +36,14 @@ class TypedePariController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $t = $this->getDoctrine()->getRepository(TypedePari::class)->findBy(['type2choix' => $typedePari->getType2choix()]);
+            if (count($t) > 0) {
+                $this->addFlash('danger', 'type de Pari déjà enregistré!');
+                return $this->renderForm('bet_instinct/typede_pari/new.html.twig', [
+                    'typedepari' => $typedePari,
+                    'form' => $form,
+                ]);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($typedePari);
             $entityManager->flush();

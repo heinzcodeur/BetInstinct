@@ -4,6 +4,7 @@
 {% block body %}
     <h1>Bet index</h1>
 
+
     <table class="table">
         <thead>
             <tr>
@@ -14,14 +15,16 @@
         </thead>
         <tbody>
         {% for bet in bets %}
+            {% if bet.TypedePari is not null %}
             <tr>
                 <td>{{ bet.TypedePari.type2choix }}</td>
-                <td style="cursor: pointer" onclick="document.location='{{ path('bet_instinct_affiche_show',{'id':bet.affiche.id}) }}'">{{ bet.affiche}}</td>
+                <td style="cursor: pointer">{{ bet.affiche}}</td>
                 <td>
                     <a href="{{ path('bet_instinct_bet_show', {'id': bet.id}) }}">show</a>
                     <a href="{{ path('bet_instinct_bet_edit', {'id': bet.id}) }}">edit</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="2">no records found</td>

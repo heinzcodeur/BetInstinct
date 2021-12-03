@@ -12,7 +12,7 @@ class BetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('affiche')
+           // ->add('affiche')
             ->add('TypedePari')
             ->add('cote1')
             ->add('cote2')
@@ -28,6 +28,28 @@ class BetType extends AbstractType
             ->add('cote12')
             ->add('cote13')
             ->add('cote14')
+            ->add('cote15')
+            ->add('cote16')
+            ->add('cote17')
+            ->add('cote18')
+            ->add('cote19')
+            ->add('cote20')
+            ->add('cote21')
+            ->add('cote22')
+            ->add('cote23')
+            ->add('cote24')
+            ->add('cote25')
+            ->add('cote26')
+            ->add('cote27')
+            ->add('cote28')
+            ->add('cote29')
+            ->add('cote30')
+            ->add('cote31')
+            ->add('cote32')
+            ->add('cote33')
+            ->add('cote34')
+            ->add('cote35')
+            ->add('cote36')
         ;
     }
 

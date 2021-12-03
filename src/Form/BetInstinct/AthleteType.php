@@ -6,6 +6,7 @@ use App\Entity\BetInstinct\Athlete;
 use App\Entity\BetInstinct\Classement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +22,11 @@ class AthleteType extends AbstractType
             ->add('birthdate', DateType::class,['widget' => 'single_text'])
             ->add('birth_place')
             ->add('taille')
+            ->add('genre',ChoiceType::class,[
+                'choices'=>[
+                    'dame'=>'dame','homme'=>'homme'
+                ]
+            ])
             ->add('pays')
             ->add('origine')
             ->add('ranking')

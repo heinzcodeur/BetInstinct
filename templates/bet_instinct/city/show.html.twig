@@ -13,12 +13,17 @@
                 <th>Name</th>
                 <td>{{ city.name }}</td>
             </tr>
+            <tr>
+                <th>pays</th>
+                <td>{{ city.country }}</td>
+            </tr>
         </tbody>
     </table>
+<div class="col text-center">
 
-    <a href="{{ path('bet_instinct_city_index') }}">back to list</a>
+    <a href="{{ path('bet_instinct_city_index') }}" class="btn btn-secondary">retour</a>
 
-    <a href="{{ path('bet_instinct_city_edit', {'id': city.id}) }}">edit</a>
+    <a href="{{ path('bet_instinct_city_edit', {'id': city.id}) }}" class="btn btn-success">edit</a>
 
 
     {{ include('end.html.twig') }}

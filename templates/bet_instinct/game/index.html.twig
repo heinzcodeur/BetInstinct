@@ -1,0 +1,44 @@
+{{ include('head.html.twig') }}
+
+{% block body %}
+    <div class="row">
+        <h2 class="text-center">les games de {{ app.user.nickname|capitalize }}</h2>
+        <div class="col text-center mt-2 mb-3">
+            <a href="{{ path('bet_instinct_game_new') }}" class="btn btn-primary">nouveau</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'en attente'}) }}" class="btn btn-secondary">en cours</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'gagnant'}) }}" class="btn btn-success">winner</a>
+            <a href="{{ path('bet_instinct_game_index',{'value':'perdant'}) }}" class="btn btn-danger">loser</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <!--<th>id</th>-->
+            <th>pronostic</th>
+            <th>formule</th>
+            <!--<th>validé?</th>-->
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr {% if game.resultat=="en attente" %}class="bg-info"{% endif %}>
+            {% if game.resultat=='gagnant' %}<tr class="bg-success">
+            {% elseif game.resultat=='perdant' %} <tr class="bg-danger">{% endif %}
+                <!--<td>{{ game.id }}</td>-->
+                {% if game.formule is not null  %}<td>{% for p in game.pronos %}{{  p }}<br>{% endfor %}</td>
+                {% else %}  <td>{{ game.name }}</td>    {% endif %}
+                <td>{{ game.formule }}</td>
+            <!--<td>{{ game.isConfirm }}</td>-->
+                <td>
+                    <a href="{{ path('bet_instinct_game_show', {'id': game.id}) }}" class="btn btn-info">show</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bet_instinct_game_new') }}">Create new</a>
+{% endblock %}

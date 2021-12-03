@@ -3,12 +3,12 @@
 {% block body %}
     <h1>Classement index</h1>
     <a href="{{ path('bet_instinct_classement_new') }}" class="btn btn-primary">nouveau</a>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Ranking</th>
                 <th>Association</th>
+                <th>athlete</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,6 +17,7 @@
             <tr>
                 <td>{{ classement.ranking }}</td>
                 <td>{{ classement.association.name }}</td>
+                <td>{{ classement.joueur}}</td>
                 <td>
                     <a href="{{ path('bet_instinct_classement_show', {'id': classement.id}) }}" class="btn btn-info">show</a>
                     <a href="{{ path('bet_instinct_classement_edit', {'id': classement.id}) }}" class="btn btn-success">edit</a>
