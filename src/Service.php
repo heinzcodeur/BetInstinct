@@ -511,7 +511,7 @@ class Service extends AbstractController
         }
         return $check;
     }
-
+    //[2, 5, 7, 9]
     public static function makeTriple($tab)
     {
         $arr = [];
@@ -523,7 +523,10 @@ class Service extends AbstractController
                             $text = $tab[$i] . '-' . $tab[$j] . '-' . $tab[$k];
                             foreach ($arr as $a) {
                                 if (count($arr) > 0) {
-                                    self::occurencs($text,$a);
+                                    //$$
+                                    //if(!self::occurencs($text,$a)){
+                                    //    $arr[]=$text;
+                                    //}
                             }
                             }
                         }
@@ -532,6 +535,7 @@ class Service extends AbstractController
                 }
             }
         }
+
     }
 }
 
