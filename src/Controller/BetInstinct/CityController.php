@@ -3,6 +3,7 @@
 namespace App\Controller\BetInstinct;
 
 use App\Entity\BetInstinct\City;
+use App\Entity\BetInstinct\Tournoi;
 use App\Form\BetInstinct\CityType;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,10 +27,14 @@ class CityController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bet_instinct_city_new", methods={"GET","POST"})
+     * @Route("/new/{tournoiId}", name="bet_instinct_city_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, $tournoiId=null): Response
     {
+        $tournoi=null;
+        if($tournoiId!=null){
+            $tournoi = $this->getDoctrine()->getRepository(Tournoi::class)->find($tournoiId);
+        }
         $city = new City();
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
@@ -38,7 +43,7 @@ class CityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($city);
             $entityManager->flush();
-
+            $tournoi->setCity($city);
             return $this->redirectToRoute('bet_instinct_city_index', [], Response::HTTP_SEE_OTHER);
         }
 

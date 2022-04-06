@@ -38,7 +38,6 @@
                 {% set d =(( m.schedule.timestamp - date().timestamp)) %}
                 {% set minutes =(( m.schedule.timestamp - date().timestamp)/60) %}
                 {% set heures =(( m.schedule.timestamp - date().timestamp)/60/60) %}
-                {{ dump(d|round) }}
                  {% if (d|round) >0 %} <td>  dans {{ d|round }} minutes</td>{% else %}
                 <td>dépassé</td>
             {% endif %}

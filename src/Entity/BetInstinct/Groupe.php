@@ -2,15 +2,15 @@
 
 namespace App\Entity\BetInstinct;
 
-use App\Repository\BetInstinct\BankrollRepository;
+use App\Repository\BetInstinct\GroupeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=BankrollRepository::class)
+ * @ORM\Entity(repositoryClass=GroupeRepository::class)
  */
-class Bankroll
+class Groupe
 {
     /**
      * @ORM\Id
@@ -20,22 +20,14 @@ class Bankroll
     private $id;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $balance;
+    private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owner;
-
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="solde")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="groupe")
      */
     private $users;
-
-
 
     public function __construct()
     {
@@ -47,31 +39,17 @@ class Bankroll
         return $this->id;
     }
 
-    public function getBalance(): ?float
+    public function getName(): ?string
     {
-        return $this->balance;
+        return $this->name;
     }
 
-    public function setBalance(?float $balance): self
+    public function setName(string $name): self
     {
-        $this->balance = $balance;
+        $this->name = $name;
 
         return $this;
     }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-
 
     /**
      * @return Collection|User[]
@@ -85,7 +63,7 @@ class Bankroll
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setSolde($this);
+            $user->setGroupe($this);
         }
 
         return $this;
@@ -95,8 +73,8 @@ class Bankroll
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getSolde() === $this) {
-                $user->setSolde(null);
+            if ($user->getGroupe() === $this) {
+                $user->setGroupe(null);
             }
         }
 

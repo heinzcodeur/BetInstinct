@@ -27,15 +27,15 @@ class GameController extends AbstractController
         Service::Archivage($gameRepository->findAll(),$entityManager);
         //Service::filterIndex($entityManager,Game::class,'where','resultat','=','perdant');
         $queryBuilder = $entityManager->createQueryBuilder();
-        //dd($value);
         $queryBuilder->select('g')
             ->from(Game::class, 'g')
             ->where('g.resultat=:r')
-            ->andWhere('g.isArchived = 0')
+            //->andWhere('g.isArchived = 0')
             ->orderBy('g.id', 'DESC')
-            ->setParameter('r',$value);
+            ->setParameter('r',$value)
+            ->setMaxResults(99)
+        ;
         $games = $queryBuilder->getQuery()->getResult();
-
         return $this->render('bet_instinct/game/index.html.twig', [
             'games' => $games,
         ]);

@@ -79,18 +79,18 @@
 
             {% for p in game.pronos %}
                         {% if p.isChecked == 0 %}
-                        <tr class="bg-secondary cursor"
+                        <tr class="bg-secondary cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
                         </tr>{% endif %}
                         {% if p.isValid == 0 and p.isChecked == 1 %}
-                        <tr class="bg-danger cursor"
+                        <tr class="bg-danger cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
                         </tr>{% endif %} {% if p.isValid == 1 and p.isChecked == 1 %}
-                        <tr class="bg-success cursor"
+                        <tr class="bg-success cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
@@ -154,19 +154,19 @@
         {% else %}
             {% for p in game.pronos %}
                         {% if p.isValid is null %}
-                        <tr class="bg-secondary cursor"
+                        <tr class="bg-secondary cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
                         </tr>
                     {% elseif p.isValid==1 %}
-                        <tr class="bg-success cursor"
+                        <tr class="bg-success cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>
                         </tr>
                     {% else %}
-                        <tr class="bg-danger cursor"
+                        <tr class="bg-danger cursor text-light"
                             onclick="document.location='{{ path('bet_instinct_pronostic_show',{'id':p.id}) }}'">
                             <th>pronostic</th>
                             <td>{{ p.id }}</td>

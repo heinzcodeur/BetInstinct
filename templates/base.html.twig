@@ -107,7 +107,7 @@
                 <!--<input class="form-control mr-sm-2" type="search"  aria-label="Search">-->
                 <!--<a onclick="return(confirm('déconnexion?'))" style="text-decoration: none;color: white" href="{{ path('app_logout') }}">{{app.user.nickname|capitalize}}</a>-->
 
-                <a style="text-decoration: none;color: white" href="{{ path('bet_instinct_user_show',{'id':app.user.id}) }}">{{app.user.nickname|capitalize}}  {{ app.user.solde.balance|round }} €</a>
+                <a style="text-decoration: none;color: white" href="{{ path('bet_instinct_user_show',{'id':app.user.id}) }}">{{app.user.nickname|capitalize}}  {{ app.user.solde.balance }} €</a>
                 {% else %}
                 <a href="{{ path('app_login') }}" style="color: white">connexion</a>
                 <!--<a href="{{ path('app_register') }}" style="color: white">inscription</a>-->

@@ -21,19 +21,17 @@ class AthleteController extends AbstractController
     /**
      * @Route("/", name="bet_instinct_athlete_index", methods={"GET"})
      */
-    public function index(AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
+    public function index(AthleteRepository $athleteRepository, EntityManagerInterface $em): Response
     {
-
         $athletes=$athleteRepository->findAll();
         foreach($athletes as $athlete){
             if($athlete->getRanking()==NULL) {
                 $ranking=new Classement();
-                Service::createRanking($athlete,1,$ranking, $entityManager);
-                dump($athlete);
+                Service::createRanking($athlete,1,$em);
             }
         }
 
-        $queryBuilder=$entityManager->createQueryBuilder();
+        $queryBuilder=$em->createQueryBuilder();
         $queryBuilder->select('a')
                     ->from(Athlete::class,'a')
                     //->where('a.ranking.association.name')
@@ -104,15 +102,20 @@ class AthleteController extends AbstractController
     {
         $form = $this->createForm(AthleteType::class, $athlete);
         $form->handleRequest($request);
-
+        $avatar=$athlete->getAvatar();
+        dump($athlete->getAvatar());
         if ($form->isSubmitted() && $form->isValid()) {
+            dump($athlete);
+            //dd($form->get('avatar')->getData());
             if ($form->get('avatar')->getData() != null) {
-
                 $avatar = $form->get('avatar')->getData();//dd($avatar);
                 // dd($avatar->guessExtension());
                 $fichier = md5(uniqid()) . '.' . $avatar->guessExtension();
                 $avatar->move($this->getParameter('images_athletes'), $fichier);
                 $athlete->setAvatar($fichier);
+            }else{
+
+                $athlete->setAvatar($avatar);
             }
                 $em = $this->getDoctrine()->getManager('betInstinct');
                 $em->persist($athlete);

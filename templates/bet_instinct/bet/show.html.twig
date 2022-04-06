@@ -16,7 +16,6 @@
             </h3>
             <h4 class="text-center">{{ bet.TypedePari.type2choix }}</h4>
             {% for d in app.flashes('danger') %} <div class="alert alert-danger"> {{ d}} </div>{% endfor %}
-            {{ dump(bet) }}
             {#{% for p in bet.pronostics %}{{ dump(p) }}{% endfor %}#}
             <table class="table">
                 <tbody>
@@ -62,7 +61,7 @@
                 <tr class="mt-2 cursor" onclick="jeuSimple('{{ bet.TypedePari.type2choix.choix2}}','{{ bet.cote2 }}')">
                     {% if(bet.TypedePari.type2choix.id==31) %} <td>{{ bet.affiche.favori }}</td>
                     {% else  %}
-                    <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix2 }}</td>{% endif %}
+                    <td class="font-weight-bold">{{ bet.TypedePari.type2choix.choix2 }} pour {{ bet.affiche.challenger|upper }}</td>{% endif %}
                     <td style="color: red">
                         <button class="btn btn-success"> {{ bet.cote2 }}</button>
                     </td>

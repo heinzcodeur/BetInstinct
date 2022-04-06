@@ -99,6 +99,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $games;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Groupe::class, inversedBy="users")
+     */
+    private $groupe;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -432,6 +437,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $game->setParieur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Groupe $groupe): self
+    {
+        $this->groupe = $groupe;
 
         return $this;
     }

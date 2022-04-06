@@ -19,7 +19,7 @@ class UserType extends AbstractType
             //->add('isVerified')
             ->add('nom')
             ->add('prenom')
-            ->add('birth_date',DateType::class,['widget'=>'single_text'])
+            ->add('birth_date',DateType::class,['widget'=>'single_text','required'=>false])
             ->add('profession')
             ->add('nickname')
             ->add('solde')

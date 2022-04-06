@@ -52,12 +52,14 @@ class TournoiController extends AbstractController
                     'form' => $form,
                 ]);
             }
-            //dd($tournoi);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tournoi);
             $entityManager->flush();
+            if($tournoi->getCity()==null){
+               return $this->redirectToRoute('bet_instinct_city_new',['tournoiId' => $tournoi->getId()]);
+            }
 
-            return $this->redirectToRoute('bet_instinct_tournoi_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bet_instinct_tournoi_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('bet_instinct/tournoi/new.html.twig', [
